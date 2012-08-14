@@ -2,10 +2,6 @@
 name = asterisk
 datastorage = "postgresql://asterisk:proformatique@localhost/asterisk?charset=utf8"
 
-[ctibus]
-bindaddr = 127.0.0.1
-port = 5004
-
 [autoprov]
 host = 127.0.0.1
 port = 8666
