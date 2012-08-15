@@ -36,6 +36,8 @@ CREATE TYPE "call_exit_type" AS ENUM (
   'timeout'
 );
 
+ALTER TABLE stat_call_on_queue ADD COLUMN status call_exit_type NOT NULL;
+
 -- Remove unused columns rerouted{guide,number}
 ALTER TABLE stat_queue_periodic DROP COLUMN IF EXISTS reroutedguide;
 ALTER TABLE stat_queue_periodic DROP COLUMN IF EXISTS reroutednumber;
