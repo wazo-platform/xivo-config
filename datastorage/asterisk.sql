@@ -2423,8 +2423,8 @@ CREATE TYPE "call_exit_type" AS ENUM (
   'closed',
   'joinempty',
   'leaveempty',
-  'reroutedguide',
-  'reroutednumber',
+  'divert_ca_ratio',
+  'divert_waittime',
   'answered',
   'abandoned',
   'timeout'
