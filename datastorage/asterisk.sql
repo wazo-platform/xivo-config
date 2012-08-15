@@ -2780,6 +2780,26 @@ CREATE TYPE "queue_statistics" AS (
     mean_hold_time integer
 );
 
+DROP FUNCTION IF EXISTS "fill_saturated_calls" (text, text);
+CREATE FUNCTION "fill_saturated_calls"(period_start text, period_end text)
+  RETURNS void AS
+$$
+  -- Insert full, divert_ca_ratio, divert_waittime into stat_call_on_queue
+  INSERT INTO "stat_call_on_queue" (callid, "time", queue_id, status)
+    SELECT
+      callid,
+      CAST ("time" AS TIMESTAMP) as "time",
+      (SELECT id FROM stat_queue WHERE name=queuename) as queue_id,
+      CASE WHEN event = 'FULL' THEN 'full'::call_exit_type
+           WHEN event = 'DIVERT_CA_RATIO' THEN 'divert_ca_ratio'
+           WHEN event = 'DIVERT_HOLDTIME' THEN 'divert_waittime'
+      END as status
+    FROM queue_log
+    WHERE event = 'FULL' OR event LIKE 'DIVERT_%' AND
+          "time" BETWEEN $1 AND $2;
+$$
+LANGUAGE SQL;
+
 
 DROP FUNCTION IF EXISTS "get_queue_statistics" (text, int, int);
 CREATE FUNCTION "get_queue_statistics" (queue_name text, in_window int, xqos int)
