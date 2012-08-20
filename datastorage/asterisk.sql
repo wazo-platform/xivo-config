@@ -2464,8 +2464,8 @@ CREATE TABLE "stat_queue_periodic" (
  "closed" INTEGER NOT NULL DEFAULT 0,
  "joinempty" INTEGER NOT NULL DEFAULT 0,
  "leaveempty" INTEGER NOT NULL DEFAULT 0,
- "reroutedguide" INTEGER NOT NULL DEFAULT 0,
- "reroutednumber" INTEGER NOT NULL DEFAULT 0,
+ "divert_ca_ratio" INTEGER NOT NULL DEFAULT 0,
+ "divert_waittime" INTEGER NOT NULL DEFAULT 0,
  "timeout" INTEGER NOT NULL DEFAULT 0,
  "queue_id" INTEGER REFERENCES stat_queue (id)
 );
