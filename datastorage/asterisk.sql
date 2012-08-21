@@ -2804,11 +2804,10 @@ $$
 $$
 LANGUAGE SQL;
 
-DROP FUNCTION IF EXISTS "fill_saturated_calls" (text, text);
-CREATE FUNCTION "fill_saturated_calls"(period_start text, period_end text)
+DROP FUNCTION IF EXISTS "fill_simple_calls" (text, text);
+CREATE FUNCTION "fill_simple_calls"(period_start text, period_end text)
   RETURNS void AS
 $$
-  -- Insert full, divert_ca_ratio, divert_waittime into stat_call_on_queue
   INSERT INTO "stat_call_on_queue" (callid, "time", queue_id, status)
     SELECT
       callid,
@@ -2817,13 +2816,14 @@ $$
       CASE WHEN event = 'FULL' THEN 'full'::call_exit_type
            WHEN event = 'DIVERT_CA_RATIO' THEN 'divert_ca_ratio'
            WHEN event = 'DIVERT_HOLDTIME' THEN 'divert_waittime'
+           WHEN event = 'CLOSED' THEN 'closed'
+           WHEN event = 'JOINEMPTY' THEN 'joinempty'
       END as status
     FROM queue_log
-    WHERE event = 'FULL' OR event LIKE 'DIVERT_%' AND
+    WHERE event IN ('FULL', 'DIVERT_CA_RATIO', 'DIVERT_HOLDTIME', 'CLOSED', 'JOINEMPTY') AND
           "time" BETWEEN $1 AND $2;
 $$
 LANGUAGE SQL;
-
 
 DROP FUNCTION IF EXISTS "get_queue_statistics" (text, int, int);
 CREATE FUNCTION "get_queue_statistics" (queue_name text, in_window int, xqos int)
