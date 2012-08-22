@@ -2825,6 +2825,29 @@ $$
 $$
 LANGUAGE SQL;
 
+DROP FUNCTION IF EXISTS "fill_leaveempty_calls" (text, text);
+CREATE OR REPLACE FUNCTION "fill_leaveempty_calls" (period_start text, period_end text)
+  RETURNS void AS
+$$
+INSERT INTO stat_call_on_queue (callid, time, waittime, queue_id, status)
+SELECT
+  callid,
+  enter_time as time,
+  EXTRACT(EPOCH FROM (leave_time - enter_time))::INTEGER as waittime,
+  queue_id,
+  'leaveempty' AS status
+FROM (SELECT
+        CAST (time AS TIMESTAMP) AS enter_time,
+        (select CAST (time AS TIMESTAMP) from queue_log where callid=main.callid AND event='LEAVEEMPTY') AS leave_time,
+        callid,
+        (SELECT id FROM stat_queue WHERE name=queuename) AS queue_id
+      FROM queue_log AS main
+      WHERE callid IN (SELECT callid FROM queue_log WHERE event = 'LEAVEEMPTY')
+            AND event = 'ENTERQUEUE'
+            AND time BETWEEN $1 AND $2) AS first;
+$$
+LANGUAGE SQL;
+
 DROP FUNCTION IF EXISTS "get_queue_statistics" (text, int, int);
 CREATE FUNCTION "get_queue_statistics" (queue_name text, in_window int, xqos int)
   RETURNS "queue_statistics" AS
@@ -2850,7 +2873,6 @@ $$
         queue_name = $1 and call_time_t > $2;
 $$
 LANGUAGE SQL;
-
 
 -- grant all rights to asterisk
 GRANT ALL ON ALL TABLES IN SCHEMA public TO asterisk;
