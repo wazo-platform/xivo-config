@@ -28,4 +28,7 @@ CREATE TABLE "stat_agent_periodic" (
 CREATE INDEX "stat_agent_periodic__idx__time" ON "stat_agent_periodic"("time");
 CREATE INDEX "stat_agent_periodic__idx__agent_id" ON "stat_agent_periodic"("agent_id");
 
+GRANT ALL ON "stat_agent_periodic" TO "asterisk";
+GRANT ALL ON "stat_agent_periodic_id_seq" TO "asterisk";
+
 COMMIT;
