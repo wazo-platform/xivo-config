@@ -2433,6 +2433,19 @@ CREATE TABLE "stat_agent" (
 );
 CREATE INDEX stat_agent__idx_name ON stat_agent("name");
 
+
+DROP TABLE IF EXISTS "stat_agent_periodic";
+CREATE TABLE "stat_agent_periodic" (
+ "id" SERIAL PRIMARY KEY,
+ "time" timestamp NOT NULL,
+ "login_time" INTERVAL NOT NULL DEFAULT '00:00:00',
+ "agent_id" INTEGER REFERENCES stat_agent (id)
+);
+
+CREATE INDEX "stat_agent_periodic__idx__time" ON "stat_agent_periodic"("time");
+CREATE INDEX "stat_agent_periodic__idx__agent_id" ON "stat_agent_periodic"("agent_id");
+
+
 DROP TABLE IF EXISTS "stat_queue";
 CREATE TABLE "stat_queue" (
  "id" SERIAL PRIMARY KEY,
