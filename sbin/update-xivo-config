@@ -1,7 +1,7 @@
 #!/bin/bash
 #
 
-BASE_TEMPLATE_DIR=/usr/share/pf-xivo-base-config/templates
+BASE_TEMPLATE_DIR=/usr/share/xivo-config/templates
 CUSTOM_TEMPLATE_DIR=/etc/pf-xivo/custom-templates
 
 set -o allexport

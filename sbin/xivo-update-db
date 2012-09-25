@@ -256,10 +256,10 @@ def _new_argument_parser():
                         default='/var/lib/xivo-update-db',
                         help='state directory')
     parser.add_argument('--datastorage-dir', action='store',
-                        default='/usr/share/pf-xivo-base-config/datastorage',
+                        default='/usr/share/xivo-config/datastorage',
                         help='datastorage directory')
     parser.add_argument('--migration-dir', action='store',
-                        default='/usr/share/pf-xivo-base-config/migration',
+                        default='/usr/share/xivo-config/migration',
                         help='migration directory')
     return parser
 
