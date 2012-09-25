@@ -2439,6 +2439,7 @@ CREATE TABLE "stat_agent_periodic" (
  "id" SERIAL PRIMARY KEY,
  "time" timestamp NOT NULL,
  "login_time" INTERVAL NOT NULL DEFAULT '00:00:00',
+ "pause_time" INTERVAL NOT NULL DEFAULT '00:00:00',
  "agent_id" INTEGER REFERENCES stat_agent (id)
 );
 
