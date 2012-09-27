@@ -2748,13 +2748,17 @@ INSERT INTO "agentglobalparams" VALUES (DEFAULT,'agents','savecallsin','');
 INSERT INTO "agentglobalparams" VALUES (DEFAULT,'agents','custom_beep','beep');
 
 
-DROP TABLE IF EXISTS "sccpgeneral";
-CREATE TABLE "sccpgeneral" (
-    "id"          SERIAL,
-    "name"        varchar(80) NOT NULL,
-    "value"       varchar(80) NOT NULL,
+DROP TABLE IF EXISTS "sccpgeneralsettings";
+CREATE TABLE "sccpgeneralsettings" (
+    "id"                SERIAL,
+    "option_name"       varchar(80) NOT NULL,
+    "option_value"      varchar(80) NOT NULL,
     PRIMARY KEY("id")
 );
+
+INSERT INTO "sccpgeneralsettings" VALUES (DEFAULT, 'directmedia', 'no');
+INSERT INTO "sccpgeneralsettings" VALUES (DEFAULT, 'dialtimeout', '5');
+INSERT INTO "sccpgeneralsettings" VALUES (DEFAULT, 'language', 'en_US');
 
 
 DROP TABLE IF EXISTS "sccpline";
