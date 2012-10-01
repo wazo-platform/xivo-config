@@ -204,6 +204,7 @@ CREATE TABLE "cel" (
 );
 
 CREATE INDEX "cel__idx__uniqueid" ON "cel"("uniqueid");
+CREATE INDEX "cel__idx__eventtime" ON "cel"("eventtime");
 
 
 DROP TABLE IF EXISTS "context";
