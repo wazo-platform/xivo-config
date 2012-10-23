@@ -144,8 +144,6 @@ CREATE TYPE "netiface_family" AS ENUM ('inet','inet6');
 CREATE TYPE "netiface_method" AS ENUM ('static','dhcp','manual');
 CREATE TABLE "netiface" ( 
  "id" SERIAL,
- "uuid" varchar(64) NOT NULL,
- "name" varchar(64) NOT NULL DEFAULT '',
  "ifname" varchar(64) NOT NULL DEFAULT '',
  "hwtypeid" INTEGER NOT NULL DEFAULT 65534,
  "networktype" netiface_networktype NOT NULL,
@@ -179,7 +177,7 @@ CREATE INDEX "netiface__idx__mtu" ON "netiface"("mtu");
 CREATE INDEX "netiface__idx__vlanrawdevice" ON "netiface"("vlanrawdevice");
 CREATE INDEX "netiface__idx__vlanid" ON "netiface"("vlanid");
 CREATE INDEX "netiface__idx__disable" ON "netiface"("disable");
-CREATE UNIQUE INDEX "netiface__uidx__ifname" ON "netiface"("uuid","ifname");
+CREATE UNIQUE INDEX "netiface__uidx__ifname" ON "netiface"("ifname");
 
 
 DROP TABLE IF EXISTS "resolvconf";
