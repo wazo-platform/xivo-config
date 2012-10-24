@@ -20,4 +20,8 @@ BEGIN;
 
 ALTER TABLE "queuemember" ADD COLUMN "order" INTEGER NOT NULL DEFAULT 0;
 
+CREATE TEMPORARY SEQUENCE "queuemember_increment_order";
+UPDATE "queuemember" SET "order" = nextval('queuemember_increment_order');
+DROP SEQUENCE "queuemember_increment_order";
+
 COMMIT;
