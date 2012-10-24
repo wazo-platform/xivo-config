@@ -1360,6 +1360,7 @@ CREATE TABLE "queuemember" (
  "category" queue_category NOT NULL,
  "skills" VARCHAR(64) NOT NULL DEFAULT '',
  "state_interface" VARCHAR(128) NOT NULL DEFAULT '',
+ "order" INTEGER NOT NULL DEFAULT 0,
  PRIMARY KEY("queue_name","interface")
 );
 
