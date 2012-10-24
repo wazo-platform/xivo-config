@@ -37,7 +37,7 @@ server {
 
     location /dlbackup/ {
         internal;
-        alias /var/backups/pf-xivo/;
+        alias /var/backups/xivo/;
     }
 
     location ^~ /extra-libs/jquery/        { alias /usr/share/javascript/jquery/; }

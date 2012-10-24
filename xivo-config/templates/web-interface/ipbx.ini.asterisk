@@ -7,7 +7,7 @@ host = 127.0.0.1
 port = 8666
 
 [backupfiles]
-path = /var/backups/pf-xivo
+path = /var/backups/xivo
 
 [configfiles]
 path = /etc/asterisk/extensions_extra.d
