@@ -18,10 +18,10 @@
 
 BEGIN;
 
-ALTER TABLE "queuemember" ADD COLUMN "order" INTEGER NOT NULL DEFAULT 0;
+ALTER TABLE "queuemember" ADD COLUMN "position" INTEGER NOT NULL DEFAULT 0;
 
-CREATE TEMPORARY SEQUENCE "queuemember_increment_order";
-UPDATE "queuemember" SET "order" = nextval('queuemember_increment_order');
-DROP SEQUENCE "queuemember_increment_order";
+CREATE TEMPORARY SEQUENCE "queuemember_increment_position";
+UPDATE "queuemember" SET "position" = nextval('queuemember_increment_position');
+DROP SEQUENCE "queuemember_increment_position";
 
 COMMIT;
