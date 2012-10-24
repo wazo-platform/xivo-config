@@ -18,7 +18,7 @@
 
 BEGIN;
 
-ALTER TABLE "netiface" DROP COLUMN "uuid";
+ALTER TABLE "netiface" DROP COLUMN IF EXISTS "uuid";
 CREATE UNIQUE INDEX "netiface__uidx__ifname" ON "netiface" USING btree ("ifname");
 
 COMMIT;
