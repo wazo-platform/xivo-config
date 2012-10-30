@@ -18,6 +18,7 @@
 
 BEGIN;
 
+DELETE FROM "netiface" where uuid <> (select uuid from netiface order by id desc limit 1);
 ALTER TABLE "netiface" DROP COLUMN IF EXISTS "uuid";
 DROP INDEX IF EXISTS "netiface__uidx__ifname";
 CREATE UNIQUE INDEX "netiface__uidx__ifname" ON "netiface" USING btree ("ifname");
