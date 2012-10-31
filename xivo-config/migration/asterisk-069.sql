@@ -18,9 +18,10 @@
 
 BEGIN;
 
-DELETE FROM "netiface" where uuid <> (select uuid from netiface order by id desc limit 1);
-ALTER TABLE "netiface" DROP COLUMN IF EXISTS "uuid";
-DROP INDEX IF EXISTS "netiface__uidx__ifname";
-CREATE UNIQUE INDEX "netiface__uidx__ifname" ON "netiface" USING btree ("ifname");
+ALTER TABLE "queuemember" ADD COLUMN "position" INTEGER NOT NULL DEFAULT 0;
+
+CREATE TEMPORARY SEQUENCE "queuemember_increment_position";
+UPDATE "queuemember" SET "position" = nextval('queuemember_increment_position');
+DROP SEQUENCE "queuemember_increment_position";
 
 COMMIT;

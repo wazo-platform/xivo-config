@@ -1230,7 +1230,6 @@ CREATE INDEX "phonefunckey__idx__typeextenumbersright_typevalextenumbersright" O
 
 
 DROP TABLE IF EXISTS "queue";
-DROP TABLE IF EXISTS "queuemember";
 DROP TYPE  IF EXISTS "queue_monitor_type";
 DROP TYPE  IF EXISTS "queue_category";
 
@@ -1360,6 +1359,7 @@ CREATE TABLE "queuemember" (
  "category" queue_category NOT NULL,
  "skills" VARCHAR(64) NOT NULL DEFAULT '',
  "state_interface" VARCHAR(128) NOT NULL DEFAULT '',
+ "position" INTEGER NOT NULL DEFAULT 0,
  PRIMARY KEY("queue_name","interface")
 );
 
