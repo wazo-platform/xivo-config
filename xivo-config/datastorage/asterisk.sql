@@ -2736,7 +2736,7 @@ CREATE TABLE "agentglobalparams" (
  PRIMARY KEY("id")
 );
 
-INSERT INTO "agentglobalparams" VALUES (DEFAULT,'general','multiplelogin','yes');
+INSERT INTO "agentglobalparams" VALUES (DEFAULT,'general','multiplelogin','no');
 INSERT INTO "agentglobalparams" VALUES (DEFAULT,'general','persistentagents','yes');
 INSERT INTO "agentglobalparams" VALUES (DEFAULT,'agents','recordagentcalls','no');
 INSERT INTO "agentglobalparams" VALUES (DEFAULT,'agents','recordformat','wav');
