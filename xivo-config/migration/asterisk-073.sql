@@ -27,4 +27,12 @@ DELETE FROM "agentglobalparams" WHERE "option_name" = 'custom_beep';
 
 DELETE FROM "agentglobalparams" WHERE "option_name" = 'goodbye';
 
+DELETE FROM "agentglobalparams" WHERE "option_name" = 'recordagentcalls';
+
+DELETE FROM "agentglobalparams" WHERE "option_name" = 'recordformat';
+
+DELETE FROM "agentglobalparams" WHERE "option_name" = 'urlprefix';
+
+DELETE FROM "agentglobalparams" WHERE "option_name" = 'savecallsin';
+
 COMMIT;
