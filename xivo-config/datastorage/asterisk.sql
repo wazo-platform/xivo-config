@@ -60,7 +60,6 @@ CREATE TABLE "agentfeatures" (
  "passwd" VARCHAR(128) NOT NULL,
  "context" VARCHAR(39) NOT NULL,
  "language" VARCHAR(20) NOT NULL,
- "silent" INTEGER NOT NULL DEFAULT 0, -- BOOLEAN
  -- features
  "autologoff" INTEGER DEFAULT NULL,
  "ackcall" agentfeatures_ackcall NOT NULL DEFAULT 'no',
