@@ -27,4 +27,6 @@ ALTER TABLE "agentfeatures" DROP COLUMN IF EXISTS "acceptdtmf";
 
 ALTER TABLE "agentfeatures" DROP COLUMN IF EXISTS "enddtmf";
 
+ALTER TABLE "agentfeatures" DROP COLUMN IF EXISTS "musiconhold";
+
 COMMIT;

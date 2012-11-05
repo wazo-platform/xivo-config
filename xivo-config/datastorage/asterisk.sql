@@ -61,7 +61,6 @@ CREATE TABLE "agentfeatures" (
  -- features
  "autologoff" INTEGER DEFAULT NULL,
  "wrapuptime" INTEGER DEFAULT NULL,
- "musiconhold" VARCHAR(80) DEFAULT NULL,
  "group" VARCHAR(255) DEFAULT NULL,
  "commented" INTEGER NOT NULL DEFAULT 0, -- BOOLEAN
  "description" text NOT NULL,
