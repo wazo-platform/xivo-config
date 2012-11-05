@@ -2741,7 +2741,7 @@ INSERT INTO "agentglobalparams" VALUES (DEFAULT,'general','persistentagents','ye
 INSERT INTO "agentglobalparams" VALUES (DEFAULT,'agents','recordagentcalls','no');
 INSERT INTO "agentglobalparams" VALUES (DEFAULT,'agents','recordformat','wav');
 INSERT INTO "agentglobalparams" VALUES (DEFAULT,'agents','autologoffunavail','no');
-INSERT INTO "agentglobalparams" VALUES (DEFAULT,'agents','maxlogintries','0');
+INSERT INTO "agentglobalparams" VALUES (DEFAULT,'agents','maxlogintries','3');
 INSERT INTO "agentglobalparams" VALUES (DEFAULT,'agents','goodbye','vm-goodbye');
 INSERT INTO "agentglobalparams" VALUES (DEFAULT,'agents','urlprefix','');
 INSERT INTO "agentglobalparams" VALUES (DEFAULT,'agents','savecallsin','');
