@@ -18,6 +18,7 @@
 
 BEGIN;
 
-UPDATE "agentglobalparams" SET "option_value" = 'no' WHERE "option_name" = 'multiplelogin';
+DELETE FROM "agentglobalparams" WHERE "option_name" = 'multiplelogin';
+INSERT INTO "agentglobalparams" VALUES (DEFAULT,'general','multiplelogin','no');
 
 COMMIT;
