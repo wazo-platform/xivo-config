@@ -23,4 +23,8 @@ DELETE FROM "agentglobalparams" WHERE "option_name" = 'endcall';
 DELETE FROM "agentglobalparams" WHERE "option_name" = 'maxlogintries';
 INSERT INTO "agentglobalparams" VALUES (DEFAULT,'agents','maxlogintries','3');
 
+DELETE FROM "agentglobalparams" WHERE "option_name" = 'custom_beep';
+
+DELETE FROM "agentglobalparams" WHERE "option_name" = 'goodbye';
+
 COMMIT;
