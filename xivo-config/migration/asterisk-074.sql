@@ -20,4 +20,11 @@ BEGIN;
 
 ALTER TABLE "agentfeatures" DROP COLUMN IF EXISTS "silent";
 
+ALTER TABLE "agentfeatures" DROP COLUMN IF EXISTS "ackcall";
+DROP TYPE IF EXISTS "agentfeatures_ackcall";
+
+ALTER TABLE "agentfeatures" DROP COLUMN IF EXISTS "acceptdtmf";
+
+ALTER TABLE "agentfeatures" DROP COLUMN IF EXISTS "enddtmf";
+
 COMMIT;
