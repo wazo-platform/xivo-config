@@ -1980,7 +1980,6 @@ CREATE TABLE "userfeatures" (
  "ringgroup" VARCHAR(64),
  "ringforward" VARCHAR(64),
  "rightcallcode" VARCHAR(16),
- "alarmclock" VARCHAR(5) NOT NULL DEFAULT '',
  "commented" INTEGER NOT NULL DEFAULT 0, -- BOOLEAN
  "description" text NOT NULL,
  PRIMARY KEY("id")
