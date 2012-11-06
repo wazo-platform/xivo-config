@@ -651,7 +651,6 @@ CREATE TABLE "extensions" (
 CREATE INDEX "extensions__idx__context_exten_priority" ON "extensions"("context","exten","priority");
 CREATE INDEX "extensions__idx__name" ON "extensions"("name");
 
-INSERT INTO "extensions" VALUES (DEFAULT,0,'xivo-features','_*33.',1,'GoSub','agentdynamiclogin,s,1(${EXTEN:3})','agentdynamiclogin');
 INSERT INTO "extensions" VALUES (DEFAULT,0,'xivo-features','_*31.',1,'GoSub','agentstaticlogin,s,1(${EXTEN:3})','agentstaticlogin');
 INSERT INTO "extensions" VALUES (DEFAULT,0,'xivo-features','_*32.',1,'GoSub','agentstaticlogoff,s,1(${EXTEN:3})','agentstaticlogoff');
 INSERT INTO "extensions" VALUES (DEFAULT,0,'xivo-features','_*30.',1,'GoSub','agentstaticlogtoggle,s,1(${EXTEN:3})','agentstaticlogtoggle');
@@ -722,7 +721,6 @@ INSERT INTO "extenumbers" VALUES (DEFAULT,'*0','e914c907ff6d7a8ffefae72fe4736372
 INSERT INTO "extenumbers" VALUES (DEFAULT,'*1','8e04e82b8798d3979eded4ca2afdda3bebcb963d','','featuremap','blindxfer');
 INSERT INTO "extenumbers" VALUES (DEFAULT,'*2','6951109c8ca021277336cc2c8f6ac7f47d3b30e9','','featuremap','atxfer');
 INSERT INTO "extenumbers" VALUES (DEFAULT,'*3','68631b4b53ba2a27a969ca63bdcdc00805c2c258','','featuremap','automon');
-INSERT INTO "extenumbers" VALUES (DEFAULT,'_*33.','269371911e5bac9176919fa42e66814882c496e1','','extenfeatures','agentdynamiclogin');
 INSERT INTO "extenumbers" VALUES (DEFAULT,'_*31.','678fe23ee0d6aa64460584bebbed210e270d662f','','extenfeatures','agentstaticlogin');
 INSERT INTO "extenumbers" VALUES (DEFAULT,'_*32.','3ae0f1ff0ef4907faa2dad5da7bb891c9dbf45ad','','extenfeatures','agentstaticlogoff');
 INSERT INTO "extenumbers" VALUES (DEFAULT,'_*30.','7758898081b262cc0e42aed23cf601fba8969b08','','extenfeatures','agentstaticlogtoggle');
