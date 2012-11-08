@@ -75,7 +75,6 @@ def populate_data_agent(firtname, lastname, number):
                     "number": number,
                     "numgroup": 1,
                     "autologoff": 0,
-                    "wrapuptime": 0,
                 },
             "agentoptions":
                 {

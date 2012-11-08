@@ -60,7 +60,6 @@ CREATE TABLE "agentfeatures" (
  "language" VARCHAR(20) NOT NULL,
  -- features
  "autologoff" INTEGER DEFAULT NULL,
- "wrapuptime" INTEGER DEFAULT NULL,
  "group" VARCHAR(255) DEFAULT NULL,
  "commented" INTEGER NOT NULL DEFAULT 0, -- BOOLEAN
  "description" text NOT NULL,
