@@ -59,8 +59,8 @@ CREATE TABLE "agentfeatures" (
  "context" VARCHAR(39) NOT NULL,
  "language" VARCHAR(20) NOT NULL,
  -- features
- "autologoff" INTEGER DEFAULT NULL,
- "group" VARCHAR(255) DEFAULT NULL,
+ "autologoff" INTEGER,
+ "group" VARCHAR(255),
  "commented" INTEGER NOT NULL DEFAULT 0, -- BOOLEAN
  "description" text NOT NULL,
  PRIMARY KEY("id")
@@ -609,8 +609,8 @@ CREATE TABLE "dialaction" (
  "category" dialaction_category,
  "categoryval" VARCHAR(128) NOT NULL DEFAULT '',
  "action" dialaction_action NOT NULL,
- "actionarg1" VARCHAR(255) DEFAULT NULL,
- "actionarg2" VARCHAR(255) DEFAULT NULL,
+ "actionarg1" VARCHAR(255),
+ "actionarg2" VARCHAR(255),
  "linked" INTEGER NOT NULL DEFAULT 0, -- BOOLEAN
  PRIMARY KEY("event","category","categoryval")
 );
@@ -841,13 +841,13 @@ CREATE TABLE "parkinglot" (
  "extension"     VARCHAR(40) NOT NULL,
  "positions"     INTEGER NOT NULL,           -- NUMBER OF POSITIONS, (positions starts at extension + 1)
  "next"          INTEGER NOT NULL DEFAULT 1, -- BOOLEAN
- "duration"      INTEGER DEFAULT NULL,
+ "duration"      INTEGER,
  
- "calltransfers" VARCHAR(8) DEFAULT NULL,
- "callreparking" VARCHAR(8) DEFAULT NULL,
- "callhangup"    VARCHAR(8) DEFAULT NULL,
- "callrecording" VARCHAR(8) DEFAULT NULL,
- "musicclass"    VARCHAR(255) DEFAULT NULL,
+ "calltransfers" VARCHAR(8),
+ "callreparking" VARCHAR(8),
+ "callhangup"    VARCHAR(8),
+ "callrecording" VARCHAR(8),
+ "musicclass"    VARCHAR(255),
  "hints"         INTEGER    NOT NULL DEFAULT 0, -- BOOLEAN
 
  "commented"     INTEGER NOT NULL DEFAULT 0, -- BOOLEAN
@@ -1275,7 +1275,7 @@ CREATE TABLE "queue" (
  "random-periodic-announce" INTEGER NOT NULL DEFAULT 0, -- BOOLEAN
  "announce-position" VARCHAR(1024) NOT NULL DEFAULT 'yes',
  "announce-position-limit" INTEGER NOT NULL DEFAULT 5,
- "defaultrule" VARCHAR(1024) DEFAULT NULL,
+ "defaultrule" VARCHAR(1024),
  PRIMARY KEY("name")
 );
 
@@ -1321,8 +1321,8 @@ CREATE TABLE "queuefeatures" (
  "preprocess_subroutine" VARCHAR(39),
  "announce_holdtime" INTEGER NOT NULL DEFAULT 0, -- BOOLEAN
  -- DIVERSIONS
- "waittime"    INTEGER  DEFAULT NULL,
- "waitratio"   FLOAT DEFAULT NULL,
+ "waittime"    INTEGER,
+ "waitratio"   FLOAT,
  PRIMARY KEY("id")
 );
 
@@ -1377,10 +1377,10 @@ CREATE TYPE  "queuepenaltychange_sign" AS ENUM ('=','+','-');
 CREATE TABLE "queuepenaltychange" (
  "queuepenalty_id" INTEGER NOT NULL,
  "seconds" INTEGER NOT NULL DEFAULT 0,
- "maxp_sign" queuepenaltychange_sign DEFAULT NULL,
- "maxp_value" INTEGER DEFAULT NULL,
- "minp_sign" queuepenaltychange_sign DEFAULT NULL,
- "minp_value" INTEGER DEFAULT NULL,
+ "maxp_sign" queuepenaltychange_sign,
+ "maxp_value" INTEGER,
+ "minp_sign" queuepenaltychange_sign,
+ "minp_value" INTEGER,
  PRIMARY KEY("queuepenalty_id", "seconds")
 );
 
@@ -1431,11 +1431,11 @@ DROP TABLE IF EXISTS "schedule";
 CREATE TABLE "schedule" (
  "id" SERIAL,
  "name" VARCHAR(255) NOT NULL DEFAULT '',
- "timezone" VARCHAR(128) DEFAULT NULL, 
+ "timezone" VARCHAR(128),
  "fallback_action"  dialaction_action NOT NULL DEFAULT 'none',
- "fallback_actionid"   VARCHAR(255) DEFAULT NULL,
- "fallback_actionargs" VARCHAR(255) DEFAULT NULL,
- "description" TEXT DEFAULT NULL,
+ "fallback_actionid"   VARCHAR(255),
+ "fallback_actionargs" VARCHAR(255),
+ "description" TEXT,
  "commented"   INTEGER NOT NULL DEFAULT 0, -- BOOLEAN
  PRIMARY KEY("id")
 );
@@ -1449,7 +1449,7 @@ CREATE TABLE "schedule_path" (
  "schedule_id"   INTEGER NOT NULL,
 
  "path"  schedule_path_type NOT NULL,
- "pathid" INTEGER DEFAULT NULL, 
+ "pathid" INTEGER,
  "order" INTEGER NOT NULL,
  PRIMARY KEY("schedule_id","path","pathid")
 );
@@ -1465,14 +1465,14 @@ CREATE TABLE "schedule_time" (
  "id" SERIAL,
  "schedule_id" INTEGER,
  "mode" schedule_time_mode NOT NULL DEFAULT 'opened',
- "hours"    VARCHAR(512) DEFAULT NULL,
- "weekdays" VARCHAR(512) DEFAULT NULL,
- "monthdays"   VARCHAR(512) DEFAULT NULL,
- "months"   VARCHAR(512) DEFAULT NULL,
+ "hours"    VARCHAR(512),
+ "weekdays" VARCHAR(512),
+ "monthdays"   VARCHAR(512),
+ "months"   VARCHAR(512),
  -- only when mode == 'closed'
- "action"   dialaction_action DEFAULT NULL,
- "actionid" VARCHAR(255) DEFAULT NULL,
- "actionargs"  VARCHAR(255) DEFAULT NULL,
+ "action"   dialaction_action,
+ "actionid" VARCHAR(255),
+ "actionargs"  VARCHAR(255),
 
  "commented"   INTEGER NOT NULL DEFAULT 0, -- BOOLEAN
  PRIMARY KEY("id")
@@ -2033,8 +2033,8 @@ CREATE TABLE "useriax" (
  "cid_number" VARCHAR(80), -- user / peer --
  "trunk" INTEGER NOT NULL DEFAULT 0, -- BOOLEAN -- user / peer --
  "auth" useriax_auth NOT NULL DEFAULT 'plaintext,md5', -- user / peer --
- "encryption" useriax_encryption DEFAULT NULL, -- user / peer --
- "forceencryption" useriax_encryption DEFAULT NULL,
+ "encryption" useriax_encryption, -- user / peer --
+ "forceencryption" useriax_encryption,
  "maxauthreq" INTEGER, -- general / user --
  "inkeys" VARCHAR(80), -- user / peer --
  "outkey" VARCHAR(80), -- peer --
@@ -2065,9 +2065,9 @@ CREATE TABLE "useriax" (
  "peercontext" VARCHAR(80), -- peer --
  "ipaddr" VARCHAR(255) NOT NULL DEFAULT '',
  "regseconds" INTEGER NOT NULL DEFAULT 0,
- "immediate" INTEGER DEFAULT NULL, -- BOOLEAN
- "keyrotate" INTEGER DEFAULT NULL, -- BOOLEAN
- "parkinglot" INTEGER DEFAULT NULL,
+ "immediate" INTEGER, -- BOOLEAN
+ "keyrotate" INTEGER, -- BOOLEAN
+ "parkinglot" INTEGER,
  "protocol" "trunk_protocol" NOT NULL DEFAULT 'iax',
  "category" useriax_category NOT NULL,
  "commented" INTEGER NOT NULL DEFAULT 0, -- BOOLEAN
@@ -2129,7 +2129,7 @@ CREATE TABLE "usersip" (
  "nat" usersip_nat, -- general / user / peer --
  "promiscredir" INTEGER, -- BOOLEAN -- general / user / peer --
  "usereqphone" INTEGER, -- BOOLEAN -- general / peer --
- "videosupport" usersip_videosupport DEFAULT NULL, -- general / user / peer --
+ "videosupport" usersip_videosupport, -- general / user / peer --
  "trustrpid" INTEGER, -- BOOLEAN -- general / user / peer --
  "sendrpid" VARCHAR(16),
 
@@ -2168,37 +2168,37 @@ CREATE TABLE "usersip" (
  "regseconds" INTEGER NOT NULL DEFAULT 0,
  "regserver" VARCHAR(20),
  "lastms" VARCHAR(15) NOT NULL DEFAULT '',
- "parkinglot" INTEGER DEFAULT NULL,
+ "parkinglot" INTEGER,
  "protocol" "trunk_protocol" NOT NULL DEFAULT 'sip',
  "category" useriax_category NOT NULL,
 
  "outboundproxy" VARCHAR(1024),
 	-- asterisk 1.8 new values
- "transport" VARCHAR(255) DEFAULT NULL,
- "remotesecret" VARCHAR(255) DEFAULT NULL,
- "directmedia" usersip_directmedia DEFAULT NULL,
- "callcounter" INTEGER DEFAULT NULL, -- BOOLEAN
- "busylevel" INTEGER DEFAULT NULL,
- "ignoresdpversion" INTEGER DEFAULT NULL, -- BOOLEAN
- "session-timers" usersip_session_timers DEFAULT NULL,
- "session-expires" INTEGER DEFAULT NULL,
- "session-minse" INTEGER DEFAULT NULL,
- "session-refresher" usersip_session_refresher DEFAULT NULL,
- "callbackextension" VARCHAR(255) DEFAULT NULL,
- "registertrying" INTEGER DEFAULT NULL, -- BOOLEAN
- "timert1" INTEGER DEFAULT NULL,
- "timerb" INTEGER DEFAULT NULL,
+ "transport" VARCHAR(255),
+ "remotesecret" VARCHAR(255),
+ "directmedia" usersip_directmedia,
+ "callcounter" INTEGER, -- BOOLEAN
+ "busylevel" INTEGER,
+ "ignoresdpversion" INTEGER, -- BOOLEAN
+ "session-timers" usersip_session_timers,
+ "session-expires" INTEGER,
+ "session-minse" INTEGER,
+ "session-refresher" usersip_session_refresher,
+ "callbackextension" VARCHAR(255),
+ "registertrying" INTEGER, -- BOOLEAN
+ "timert1" INTEGER,
+ "timerb" INTEGER,
  
- "qualifyfreq" INTEGER DEFAULT NULL,
- "contactpermit" VARCHAR(1024) DEFAULT NULL,
- "contactdeny" VARCHAR(1024) DEFAULT NULL,
- "unsolicited_mailbox" VARCHAR(1024) DEFAULT NULL,
- "use_q850_reason" INTEGER DEFAULT NULL, -- BOOLEAN
- "encryption" INTEGER DEFAULT NULL, -- BOOLEAN
- "snom_aoc_enabled" INTEGER DEFAULT NULL, -- BOOLEAN
- "maxforwards" INTEGER DEFAULT NULL,
- "disallowed_methods" VARCHAR(1024) DEFAULT NULL,
- "textsupport" INTEGER DEFAULT NULL, -- BOOLEAN
+ "qualifyfreq" INTEGER,
+ "contactpermit" VARCHAR(1024),
+ "contactdeny" VARCHAR(1024),
+ "unsolicited_mailbox" VARCHAR(1024),
+ "use_q850_reason" INTEGER, -- BOOLEAN
+ "encryption" INTEGER, -- BOOLEAN
+ "snom_aoc_enabled" INTEGER, -- BOOLEAN
+ "maxforwards" INTEGER,
+ "disallowed_methods" VARCHAR(1024),
+ "textsupport" INTEGER, -- BOOLEAN
  "commented" INTEGER NOT NULL DEFAULT 0, -- BOOLEAN -- user / peer --
  PRIMARY KEY("id")
 );
@@ -2250,15 +2250,15 @@ CREATE TABLE "voicemail" (
  "attachfmt" VARCHAR(1024),
  "serveremail" VARCHAR(1024),
  "locale" VARCHAR(1024),
- "tempgreetwarn" INTEGER DEFAULT NULL, -- BOOLEAN
- "messagewrap" INTEGER DEFAULT NULL, -- BOOLEAN
- "moveheard" INTEGER DEFAULT NULL, -- BOOLEAN
- "minsecs" INTEGER DEFAULT NULL,
- "maxsecs" INTEGER DEFAULT NULL,
- "nextaftercmd" INTEGER DEFAULT NULL, -- BOOLEAN
- "backupdeleted" INTEGER DEFAULT NULL,
- "volgain" float DEFAULT NULL,
- "passwordlocation" voicemail_passwordlocation DEFAULT NULL,
+ "tempgreetwarn" INTEGER, -- BOOLEAN
+ "messagewrap" INTEGER, -- BOOLEAN
+ "moveheard" INTEGER, -- BOOLEAN
+ "minsecs" INTEGER,
+ "maxsecs" INTEGER,
+ "nextaftercmd" INTEGER, -- BOOLEAN
+ "backupdeleted" INTEGER,
+ "volgain" float,
+ "passwordlocation" voicemail_passwordlocation,
  "commented" INTEGER NOT NULL DEFAULT 0, -- BOOLEAN
  PRIMARY KEY("uniqueid")
 );
@@ -2346,8 +2346,8 @@ CREATE TABLE "general"
 (
  "id" SERIAL,
  "timezone"         VARCHAR(128),
- "exchange_trunkid" INTEGER DEFAULT NULL,
- "exchange_exten"   VARCHAR(128) DEFAULT NULL,
+ "exchange_trunkid" INTEGER,
+ "exchange_exten"   VARCHAR(128),
  "dundi"            INTEGER NOT NULL DEFAULT 0, -- boolean
  PRIMARY KEY("id")
 );
@@ -2503,22 +2503,22 @@ CREATE TABLE "pickupmember" (
 DROP TABLE IF EXISTS "dundi";
 CREATE TABLE "dundi" (
  "id"            SERIAL,
- "department"    VARCHAR(255) DEFAULT NULL,
- "organization"  VARCHAR(255) DEFAULT NULL,
- "locality"      VARCHAR(255) DEFAULT NULL,
- "stateprov"     VARCHAR(255) DEFAULT NULL,
- "country"       VARCHAR(3)   DEFAULT NULL,
- "email"         VARCHAR(255) DEFAULT NULL,
- "phone"         VARCHAR(40)  DEFAULT NULL,
+ "department"    VARCHAR(255),
+ "organization"  VARCHAR(255),
+ "locality"      VARCHAR(255),
+ "stateprov"     VARCHAR(255),
+ "country"       VARCHAR(3),
+ "email"         VARCHAR(255),
+ "phone"         VARCHAR(40),
 
  "bindaddr"      VARCHAR(40)  DEFAULT '0.0.0.0',
  "port"          INTEGER      DEFAULT 4520,
- "tos"           VARCHAR(4)   DEFAULT NULL,
- "entityid"      VARCHAR(20)  DEFAULT NULL,
+ "tos"           VARCHAR(4),
+ "entityid"      VARCHAR(20),
  "cachetime"     INTEGER      DEFAULT 5,
  "ttl"           INTEGER      DEFAULT 2,
  "autokill"      VARCHAR(16)  NOT NULL DEFAULT 'yes',
- "secretpath"    VARCHAR(64)  DEFAULT NULL,
+ "secretpath"    VARCHAR(64),
  "storehistory"  INTEGER      DEFAULT 0, -- boolean
  PRIMARY KEY("id")
 );
@@ -2532,8 +2532,8 @@ CREATE TABLE "dundi_mapping" (
  "name"            VARCHAR(255) NOT NULL,
  "context"         VARCHAR(39)  NOT NULL,
  "weight"          VARCHAR(64)  NOT NULL DEFAULT '0',
- "trunk"           INTEGER      DEFAULT NULL, 
- "number"          VARCHAR(64)  DEFAULT NULL,
+ "trunk"           INTEGER,
+ "number"          VARCHAR(64),
 
  -- options
  "nounsolicited"   INTEGER      NOT NULL DEFAULT 0, -- boolean
@@ -2555,15 +2555,15 @@ CREATE TABLE "dundi_peer" (
  "macaddr"       VARCHAR(64)  NOT NULL,
  "model"         VARCHAR(16)  NOT NULL,
  "host"          VARCHAR(256) NOT NULL,
- "inkey"         VARCHAR(64)  DEFAULT NULL,
- "outkey"        VARCHAR(64)  DEFAULT NULL,
- "include"       VARCHAR(64)  DEFAULT NULL,
- "noinclude"     VARCHAR(64)  DEFAULT NULL,
- "permit"        VARCHAR(64)  DEFAULT NULL,
- "deny"          VARCHAR(64)  DEFAULT NULL,
+ "inkey"         VARCHAR(64),
+ "outkey"        VARCHAR(64),
+ "include"       VARCHAR(64),
+ "noinclude"     VARCHAR(64),
+ "permit"        VARCHAR(64),
+ "deny"          VARCHAR(64),
  "qualify"       VARCHAR(16)  NOT NULL DEFAULT 'yes',
- "order"         VARCHAR(16)  DEFAULT NULL,
- "precache"      VARCHAR(16)  DEFAULT NULL,
+ "order"         VARCHAR(16),
+ "precache"      VARCHAR(16),
  "commented"     INTEGER      NOT NULL DEFAULT 0, -- boolean
  "description"   TEXT         NOT NULL,
  PRIMARY KEY("id")
@@ -2573,23 +2573,23 @@ CREATE TABLE "dundi_peer" (
 DROP TABLE IF EXISTS "dahdi_general";
 CREATE TABLE "dahdi_general" (
  "id"                  SERIAL,
- "context"             VARCHAR(255) DEFAULT NULL,
- "language"            VARCHAR(16) DEFAULT NULL,
- "usecallerid"         INTEGER DEFAULT NULL, -- BOOLEAN
- "hidecallerid"        INTEGER DEFAULT NULL, -- BOOLEAN
- "callerid"            VARCHAR(64) DEFAULT NULL,
- "restrictcid"         INTEGER DEFAULT NULL, -- BOOLEAN
- "usecallingpres"      INTEGER DEFAULT NULL, -- BOOLEAN
- "pridialplan"         VARCHAR(64) DEFAULT NULL,
- "prilocaldialplan"    VARCHAR(64) DEFAULT NULL,
- "priindication"       VARCHAR(64) DEFAULT NULL,
- "nationalprefix"      VARCHAR(64) DEFAULT NULL,
- "internationalprefix" VARCHAR(64) DEFAULT NULL,
- "threewaycalling"     INTEGER DEFAULT NULL, -- BOOLEAN
- "transfer"            INTEGER DEFAULT NULL, -- BOOLEAN
- "echocancel"          INTEGER DEFAULT NULL, -- BOOLEAN
- "echotraining"        INTEGER DEFAULT NULL, -- BOOLEAN
- "relaxdtmf"           INTEGER DEFAULT NULL, -- BOOLEAN
+ "context"             VARCHAR(255),
+ "language"            VARCHAR(16),
+ "usecallerid"         INTEGER, -- BOOLEAN
+ "hidecallerid"        INTEGER, -- BOOLEAN
+ "callerid"            VARCHAR(64),
+ "restrictcid"         INTEGER, -- BOOLEAN
+ "usecallingpres"      INTEGER, -- BOOLEAN
+ "pridialplan"         VARCHAR(64),
+ "prilocaldialplan"    VARCHAR(64),
+ "priindication"       VARCHAR(64),
+ "nationalprefix"      VARCHAR(64),
+ "internationalprefix" VARCHAR(64),
+ "threewaycalling"     INTEGER, -- BOOLEAN
+ "transfer"            INTEGER, -- BOOLEAN
+ "echocancel"          INTEGER, -- BOOLEAN
+ "echotraining"        INTEGER, -- BOOLEAN
+ "relaxdtmf"           INTEGER, -- BOOLEAN
 
  PRIMARY KEY ("id")
 );
@@ -2621,8 +2621,8 @@ CREATE TABLE "dahdi_group" (
 DROP TABLE IF EXISTS "callcenter_campaigns_general";
 CREATE TABLE "callcenter_campaigns_general" (
 	"id"                        SERIAL,
-	"records_path"              VARCHAR(2038) DEFAULT NULL,
-	"records_announce"          VARCHAR(255) DEFAULT NULL,
+	"records_path"              VARCHAR(2038),
+	"records_announce"          VARCHAR(255),
 
 	"purge_syst_tagged_delay"   INTEGER DEFAULT 15552000, -- 6 months
 	"purge_syst_tagged_at"      VARCHAR(5) DEFAULT '00:00',
@@ -2651,7 +2651,7 @@ CREATE TABLE "callcenter_campaigns_campaign" (
 	"id"               SERIAL,
 	"name"             VARCHAR(255) UNIQUE NOT NULL,
 	"start"            VARCHAR(255) NOT NULL,
-	"end"              VARCHAR(255) DEFAULT NULL,
+	"end"              VARCHAR(255),
 	"created_at"       VARCHAR(255),
 	PRIMARY KEY ("id")
 );
