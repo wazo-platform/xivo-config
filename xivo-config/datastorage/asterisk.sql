@@ -2729,6 +2729,7 @@ INSERT INTO "agentglobalparams" VALUES (DEFAULT,'general','multiplelogin','no');
 INSERT INTO "agentglobalparams" VALUES (DEFAULT,'general','persistentagents','yes');
 INSERT INTO "agentglobalparams" VALUES (DEFAULT,'agents','autologoffunavail','no');
 INSERT INTO "agentglobalparams" VALUES (DEFAULT,'agents','maxlogintries','3');
+INSERT INTO "agentglobalparams" VALUES (DEFAULT,'agents','endcall','no');
 
 
 DROP TABLE IF EXISTS "sccpgeneralsettings";
