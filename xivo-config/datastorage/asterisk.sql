@@ -2780,6 +2780,14 @@ CREATE TYPE "queue_statistics" AS (
     mean_hold_time integer
 );
 
+DROP TABLE IF EXISTS "agent_login_status";
+CREATE TABLE "agent_login_status" (
+    "agent_id"        INTEGER      PRIMARY KEY,
+    "interface"       VARCHAR(128) NOT NULL  UNIQUE,
+    "login_at"        TIMESTAMP    NOT NULL  DEFAULT NOW()
+);
+
+
 DROP FUNCTION IF EXISTS "fill_answered_calls" (text, text);
 CREATE FUNCTION "fill_answered_calls"(period_start text, period_end text)
   RETURNS void AS
