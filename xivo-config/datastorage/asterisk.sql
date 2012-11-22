@@ -2783,8 +2783,10 @@ CREATE TYPE "queue_statistics" AS (
 DROP TABLE IF EXISTS "agent_login_status";
 CREATE TABLE "agent_login_status" (
     "agent_id"        INTEGER      PRIMARY KEY,
-    "interface"       VARCHAR(128) NOT NULL  UNIQUE,
-    "login_at"        TIMESTAMP    NOT NULL  DEFAULT NOW()
+    "extension"       VARCHAR(80)  NOT NULL,
+    "context"         VARCHAR(80)  NOT NULL,
+    "login_at"        TIMESTAMP    NOT NULL  DEFAULT NOW(),
+    UNIQUE ("extension", "context")
 );
 
 
