@@ -400,7 +400,7 @@ CREATE TABLE "cti_profile_xlet" (
        "movable" BOOLEAN DEFAULT TRUE,
        "floating" BOOLEAN DEFAULT TRUE,
        "scrollable" BOOLEAN DEFAULT TRUE,
-       "order" INTEGER DEFAULT 0,
+       "order" INTEGER,
        PRIMARY KEY("xlet_id", "profile_id")
 );
 
