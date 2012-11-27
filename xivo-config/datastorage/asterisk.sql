@@ -283,6 +283,242 @@ INSERT INTO "contexttype" VALUES(DEFAULT, 'services', 0, 0, '');
 INSERT INTO "contexttype" VALUES(DEFAULT, 'others', 0, 0, '');
 
 
+DROP TABLE IF EXISTS "cti_service" CASCADE;
+CREATE TABLE "cti_service" (
+ "id" SERIAL PRIMARY KEY,
+ "key" VARCHAR(255) NOT NULL
+);
+
+INSERT INTO "cti_service" VALUES (DEFAULT, 'enablevm');
+INSERT INTO "cti_service" VALUES (DEFAULT, 'callrecord');
+INSERT INTO "cti_service" VALUES (DEFAULT, 'incallrec');
+INSERT INTO "cti_service" VALUES (DEFAULT, 'incallfilter');
+INSERT INTO "cti_service" VALUES (DEFAULT, 'enablednd');
+INSERT INTO "cti_service" VALUES (DEFAULT, 'fwdunc');
+INSERT INTO "cti_service" VALUES (DEFAULT, 'fwdbusy');
+INSERT INTO "cti_service" VALUES (DEFAULT, 'fwdrna');
+
+
+DROP TABLE IF EXISTS "cti_preference" CASCADE;
+CREATE TABLE "cti_preference" (
+ "id" SERIAL PRIMARY KEY,
+ "option" VARCHAR(255) NOT NULL
+);
+
+INSERT INTO "cti_preference" VALUES (DEFAULT, 'loginwindow.url');
+INSERT INTO "cti_preference" VALUES (DEFAULT, 'xlet.identity.logagent');
+INSERT INTO "cti_preference" VALUES (DEFAULT, 'xlet.identity.pauseagent');
+INSERT INTO "cti_preference" VALUES (DEFAULT, 'xlet.agentdetails.noqueueaction');
+INSERT INTO "cti_preference" VALUES (DEFAULT, 'xlet.agentdetails.hideastid');
+INSERT INTO "cti_preference" VALUES (DEFAULT, 'xlet.agentdetails.hidecontext');
+INSERT INTO "cti_preference" VALUES (DEFAULT, 'xlet.agents.fontname');
+INSERT INTO "cti_preference" VALUES (DEFAULT, 'xlet.agents.fontsize');
+INSERT INTO "cti_preference" VALUES (DEFAULT, 'xlet.agents.iconsize');
+INSERT INTO "cti_preference" VALUES (DEFAULT, 'xlet.queues.statsfetchperiod');
+INSERT INTO "cti_preference" VALUES (DEFAULT, 'presence.autochangestate');
+
+DROP TABLE IF EXISTS "cti_xlet" CASCADE;
+CREATE TABLE "cti_xlet" (
+ "id" SERIAL PRIMARY KEY,
+ "plugin_name" VARCHAR(40) NOT NULL
+);
+
+INSERT INTO "cti_xlet" VALUES (DEFAULT, 'identity');
+INSERT INTO "cti_xlet" VALUES (DEFAULT, 'dial');
+INSERT INTO "cti_xlet" VALUES (DEFAULT, 'history');
+INSERT INTO "cti_xlet" VALUES (DEFAULT, 'search');
+INSERT INTO "cti_xlet" VALUES (DEFAULT, 'directory');
+INSERT INTO "cti_xlet" VALUES (DEFAULT, 'fax');
+INSERT INTO "cti_xlet" VALUES (DEFAULT, 'features');
+INSERT INTO "cti_xlet" VALUES (DEFAULT, 'conference');
+INSERT INTO "cti_xlet" VALUES (DEFAULT, 'datetime');
+INSERT INTO "cti_xlet" VALUES (DEFAULT, 'tabber');
+INSERT INTO "cti_xlet" VALUES (DEFAULT, 'mylocaldir');
+INSERT INTO "cti_xlet" VALUES (DEFAULT, 'customerinfo');
+INSERT INTO "cti_xlet" VALUES (DEFAULT, 'agents');
+INSERT INTO "cti_xlet" VALUES (DEFAULT, 'agentdetails');
+INSERT INTO "cti_xlet" VALUES (DEFAULT, 'queues');
+INSERT INTO "cti_xlet" VALUES (DEFAULT, 'queuemembers');
+INSERT INTO "cti_xlet" VALUES (DEFAULT, 'queueentrydetails');
+INSERT INTO "cti_xlet" VALUES (DEFAULT, 'switchboard');
+
+DROP TABLE IF EXISTS "cti_xlet_layout" CASCADE;
+CREATE TABLE "cti_xlet_layout" (
+ "id" SERIAL PRIMARY KEY,
+ "name" VARCHAR(255) NOT NULL
+);
+
+INSERT INTO "cti_xlet_layout" VALUES (DEFAULT, 'dock');
+INSERT INTO "cti_xlet_layout" VALUES (DEFAULT, 'grid');
+INSERT INTO "cti_xlet_layout" VALUES (DEFAULT, 'tab');
+
+
+DROP TABLE IF EXISTS "ctiphonehintsgroup" CASCADE;
+CREATE TABLE "ctiphonehintsgroup" (
+ "id" SERIAL,
+ "name" VARCHAR(255),
+ "description" VARCHAR(255),
+ "deletable" INTEGER, -- BOOLEAN
+ PRIMARY KEY("id")
+);
+
+INSERT INTO "ctiphonehintsgroup" VALUES(DEFAULT,'xivo','De base non supprimable',0);
+
+
+DROP TABLE IF EXISTS "ctipresences" CASCADE;
+CREATE TABLE "ctipresences" (
+ "id" SERIAL,
+ "name" VARCHAR(255),
+ "description" VARCHAR(255),
+ "deletable" INTEGER, -- BOOLEAN
+ PRIMARY KEY("id")
+);
+
+INSERT INTO "ctipresences" VALUES(DEFAULT,'xivo','De base non supprimable',0);
+
+
+DROP TABLE IF EXISTS "cti_profile" CASCADE;
+CREATE TABLE "cti_profile" (
+       "id" SERIAL PRIMARY KEY,
+       "name" VARCHAR(255),
+       "presence_id" INTEGER REFERENCES "ctipresences"("id") ON DELETE RESTRICT,
+       "phonehints_id" INTEGER REFERENCES "ctiphonehintsgroup"("id") ON DELETE RESTRICT
+);
+
+INSERT INTO "cti_profile" VALUES (DEFAULT, 'agentsup', 1, 1);
+INSERT INTO "cti_profile" VALUES (DEFAULT, 'agent', 1, 1);
+INSERT INTO "cti_profile" VALUES (DEFAULT, 'client', 1, 1);
+INSERT INTO "cti_profile" VALUES (DEFAULT, 'switchboard', 1, 1);
+
+
+DROP TABLE IF EXISTS "cti_profile_xlet" CASCADE;
+CREATE TABLE "cti_profile_xlet" (
+       "xlet_id" INTEGER REFERENCES cti_xlet("id") ON DELETE CASCADE,
+       "profile_id" INTEGER REFERENCES cti_profile("id") ON DELETE CASCADE,
+       "layout_id" INTEGER REFERENCES cti_xlet_layout("id") ON DELETE RESTRICT,
+       "closable" BOOLEAN DEFAULT TRUE,
+       "movable" BOOLEAN DEFAULT TRUE,
+       "floating" BOOLEAN DEFAULT TRUE,
+       "scrollable" BOOLEAN DEFAULT TRUE,
+       "order" INTEGER DEFAULT 0,
+       PRIMARY KEY("xlet_id", "profile_id")
+);
+
+/* agentsup */
+INSERT INTO "cti_profile_xlet" VALUES ((SELECT "id" FROM "cti_xlet" WHERE "plugin_name" = 'identity'),
+                                       (SELECT "id" FROM "cti_profile" WHERE "name" = 'agentsup'),
+                                       (SELECT "id" FROM "cti_xlet_layout" WHERE "name" = 'grid'),
+                                       TRUE, TRUE, TRUE, TRUE, 0);
+INSERT INTO "cti_profile_xlet" VALUES ((SELECT "id" FROM "cti_xlet" WHERE "plugin_name" = 'queues'),
+                                       (SELECT "id" FROM "cti_profile" WHERE "name" = 'agentsup'),
+                                       (SELECT "id" FROM "cti_xlet_layout" WHERE "name" = 'dock'));
+INSERT INTO "cti_profile_xlet" VALUES ((SELECT "id" FROM "cti_xlet" WHERE "plugin_name" = 'queuemembers'),
+                                       (SELECT "id" FROM "cti_profile" WHERE "name" = 'agentsup'),
+                                       (SELECT "id" FROM "cti_xlet_layout" WHERE "name" = 'dock'));
+INSERT INTO "cti_profile_xlet" VALUES ((SELECT "id" FROM "cti_xlet" WHERE "plugin_name" = 'queueentrydetails'),
+                                       (SELECT "id" FROM "cti_profile" WHERE "name" = 'agentsup'),
+                                       (SELECT "id" FROM "cti_xlet_layout" WHERE "name" = 'dock'));
+INSERT INTO "cti_profile_xlet" VALUES ((SELECT "id" FROM "cti_xlet" WHERE "plugin_name" = 'agents'),
+                                       (SELECT "id" FROM "cti_profile" WHERE "name" = 'agentsup'),
+                                       (SELECT "id" FROM "cti_xlet_layout" WHERE "name" = 'dock'));
+INSERT INTO "cti_profile_xlet" VALUES ((SELECT "id" FROM "cti_xlet" WHERE "plugin_name" = 'agentdetails'),
+                                       (SELECT "id" FROM "cti_profile" WHERE "name" = 'agentsup'),
+                                       (SELECT "id" FROM "cti_xlet_layout" WHERE "name" = 'dock'));
+INSERT INTO "cti_profile_xlet" VALUES ((SELECT "id" FROM "cti_xlet" WHERE "plugin_name" = 'conference'),
+                                       (SELECT "id" FROM "cti_profile" WHERE "name" = 'agentsup'),
+                                       (SELECT "id" FROM "cti_xlet_layout" WHERE "name" = 'dock'));
+
+/* agent */
+INSERT INTO "cti_profile_xlet" VALUES ((SELECT "id" FROM "cti_xlet" WHERE "plugin_name" = 'identity'),
+                                       (SELECT "id" FROM "cti_profile" WHERE "name" = 'agent'),
+                                       (SELECT "id" FROM "cti_xlet_layout" WHERE "name" = 'grid'),
+                                       TRUE, TRUE, TRUE, TRUE, 0);
+INSERT INTO "cti_profile_xlet" VALUES ((SELECT "id" FROM "cti_xlet" WHERE "plugin_name" = 'queues'),
+                                       (SELECT "id" FROM "cti_profile" WHERE "name" = 'agent'),
+                                       (SELECT "id" FROM "cti_xlet_layout" WHERE "name" = 'dock'));
+INSERT INTO "cti_profile_xlet" VALUES ((SELECT "id" FROM "cti_xlet" WHERE "plugin_name" = 'customerinfo'),
+                                       (SELECT "id" FROM "cti_profile" WHERE "name" = 'agent'),
+                                       (SELECT "id" FROM "cti_xlet_layout" WHERE "name" = 'dock'));
+INSERT INTO "cti_profile_xlet" VALUES ((SELECT "id" FROM "cti_xlet" WHERE "plugin_name" = 'agentdetails'),
+                                       (SELECT "id" FROM "cti_profile" WHERE "name" = 'agent'),
+                                       (SELECT "id" FROM "cti_xlet_layout" WHERE "name" = 'dock'));
+
+/* client */
+INSERT INTO "cti_profile_xlet" VALUES ((SELECT "id" FROM "cti_xlet" WHERE "plugin_name" = 'identity'),
+                                       (SELECT "id" FROM "cti_profile" WHERE "name" = 'client'),
+                                       (SELECT "id" FROM "cti_xlet_layout" WHERE "name" = 'grid'),
+                                       TRUE, TRUE, TRUE, TRUE, 0);
+INSERT INTO "cti_profile_xlet" VALUES ((SELECT "id" FROM "cti_xlet" WHERE "plugin_name" = 'tabber'),
+                                       (SELECT "id" FROM "cti_profile" WHERE "name" = 'client'),
+                                       (SELECT "id" FROM "cti_xlet_layout" WHERE "name" = 'grid'),
+                                       TRUE, TRUE, TRUE, TRUE, 1);
+INSERT INTO "cti_profile_xlet" VALUES ((SELECT "id" FROM "cti_xlet" WHERE "plugin_name" = 'dial'),
+                                       (SELECT "id" FROM "cti_profile" WHERE "name" = 'client'),
+                                       (SELECT "id" FROM "cti_xlet_layout" WHERE "name" = 'grid'),
+                                       TRUE, TRUE, TRUE, TRUE, 2);
+INSERT INTO "cti_profile_xlet" VALUES ((SELECT "id" FROM "cti_xlet" WHERE "plugin_name" = 'search'),
+                                       (SELECT "id" FROM "cti_profile" WHERE "name" = 'client'),
+                                       (SELECT "id" FROM "cti_xlet_layout" WHERE "name" = 'tab'));
+INSERT INTO "cti_profile_xlet" VALUES ((SELECT "id" FROM "cti_xlet" WHERE "plugin_name" = 'customerinfo'),
+                                       (SELECT "id" FROM "cti_profile" WHERE "name" = 'client'),
+                                       (SELECT "id" FROM "cti_xlet_layout" WHERE "name" = 'tab'));
+INSERT INTO "cti_profile_xlet" VALUES ((SELECT "id" FROM "cti_xlet" WHERE "plugin_name" = 'fax'),
+                                       (SELECT "id" FROM "cti_profile" WHERE "name" = 'client'),
+                                       (SELECT "id" FROM "cti_xlet_layout" WHERE "name" = 'tab'));
+INSERT INTO "cti_profile_xlet" VALUES ((SELECT "id" FROM "cti_xlet" WHERE "plugin_name" = 'history'),
+                                       (SELECT "id" FROM "cti_profile" WHERE "name" = 'client'),
+                                       (SELECT "id" FROM "cti_xlet_layout" WHERE "name" = 'tab'));
+INSERT INTO "cti_profile_xlet" VALUES ((SELECT "id" FROM "cti_xlet" WHERE "plugin_name" = 'directory'),
+                                       (SELECT "id" FROM "cti_profile" WHERE "name" = 'client'),
+                                       (SELECT "id" FROM "cti_xlet_layout" WHERE "name" = 'tab'));
+INSERT INTO "cti_profile_xlet" VALUES ((SELECT "id" FROM "cti_xlet" WHERE "plugin_name" = 'features'),
+                                       (SELECT "id" FROM "cti_profile" WHERE "name" = 'client'),
+                                       (SELECT "id" FROM "cti_xlet_layout" WHERE "name" = 'tab'));
+INSERT INTO "cti_profile_xlet" VALUES ((SELECT "id" FROM "cti_xlet" WHERE "plugin_name" = 'mylocaldir'),
+                                       (SELECT "id" FROM "cti_profile" WHERE "name" = 'client'),
+                                       (SELECT "id" FROM "cti_xlet_layout" WHERE "name" = 'tab'));
+INSERT INTO "cti_profile_xlet" VALUES ((SELECT "id" FROM "cti_xlet" WHERE "plugin_name" = 'conference'),
+                                       (SELECT "id" FROM "cti_profile" WHERE "name" = 'client'),
+                                       (SELECT "id" FROM "cti_xlet_layout" WHERE "name" = 'tab'));
+
+/* switchboard */
+INSERT INTO "cti_profile_xlet" VALUES ((SELECT "id" FROM "cti_xlet" WHERE "plugin_name" = 'identity'),
+                                       (SELECT "id" FROM "cti_profile" WHERE "name" = 'switchboard'),
+                                       (SELECT "id" FROM "cti_xlet_layout" WHERE "name" = 'grid'),
+                                       TRUE, TRUE, TRUE, TRUE, 0);
+INSERT INTO "cti_profile_xlet" VALUES ((SELECT "id" FROM "cti_xlet" WHERE "plugin_name" = 'switchboard'),
+                                       (SELECT "id" FROM "cti_profile" WHERE "name" = 'switchboard'),
+                                       (SELECT "id" FROM "cti_xlet_layout" WHERE "name" = 'grid'),
+                                       TRUE, TRUE, TRUE, TRUE, 1);
+
+
+DROP TABLE IF EXISTS "cti_profile_preference" CASCADE;
+CREATE TABLE "cti_profile_preference" (
+       "profile_id" INTEGER REFERENCES "cti_profile"("id") ON DELETE CASCADE,
+       "preference_id" INTEGER REFERENCES "cti_preference"("id") ON DELETE CASCADE,
+       "value" VARCHAR(255),
+       PRIMARY KEY("profile_id", "preference_id")
+);
+
+
+DROP TABLE IF EXISTS "cti_profile_service" CASCADE;
+CREATE TABLE "cti_profile_service" (
+       "profile_id" INTEGER REFERENCES "cti_profile"("id") ON DELETE CASCADE,
+       "service_id" INTEGER REFERENCES "cti_service"("id") ON DELETE CASCADE,
+       PRIMARY KEY("profile_id", "service_id")
+);
+
+/* client */
+INSERT INTO "cti_profile_service" VALUES ((SELECT "id" FROM "cti_profile" WHERE "name" = 'client'),
+                                          (SELECT "id" FROM "cti_service" WHERE "key" = 'enablednd'));
+INSERT INTO "cti_profile_service" VALUES ((SELECT "id" FROM "cti_profile" WHERE "name" = 'client'),
+                                          (SELECT "id" FROM "cti_service" WHERE "key" = 'fwdunc'));
+INSERT INTO "cti_profile_service" VALUES ((SELECT "id" FROM "cti_profile" WHERE "name" = 'client'),
+                                          (SELECT "id" FROM "cti_service" WHERE "key" = 'fwdbusy'));
+INSERT INTO "cti_profile_service" VALUES ((SELECT "id" FROM "cti_profile" WHERE "name" = 'client'),
+                                          (SELECT "id" FROM "cti_service" WHERE "key" = 'fwdrna'));
+
+
 DROP TABLE IF EXISTS "ctilog" CASCADE;
 CREATE TABLE "ctilog" (
  "id" SERIAL,
@@ -414,53 +650,6 @@ INSERT INTO "ctiphonehints" VALUES(DEFAULT,1,'4','Indisponible','#FFFFFF');
 INSERT INTO "ctiphonehints" VALUES(DEFAULT,1,'8','Sonne','#1B0AFF');
 INSERT INTO "ctiphonehints" VALUES(DEFAULT,1,'9','(En Ligne OU Appelle) ET Sonne','#FF0526');
 INSERT INTO "ctiphonehints" VALUES(DEFAULT,1,'16','En Attente','#F7FF05');
-
-
-DROP TABLE IF EXISTS "ctiphonehintsgroup";
-CREATE TABLE "ctiphonehintsgroup" (
- "id" SERIAL,
- "name" VARCHAR(255),
- "description" VARCHAR(255),
- "deletable" INTEGER, -- BOOLEAN
- PRIMARY KEY("id")
-);
-
-INSERT INTO "ctiphonehintsgroup" VALUES(DEFAULT,'xivo','De base non supprimable',0);
-
-
-DROP TABLE IF EXISTS "ctipresences";
-CREATE TABLE "ctipresences" (
- "id" SERIAL,
- "name" VARCHAR(255),
- "description" VARCHAR(255),
- "deletable" INTEGER, -- BOOLEAN
- PRIMARY KEY("id")
-);
-
-INSERT INTO "ctipresences" VALUES(DEFAULT,'xivo','De base non supprimable',0);
-
-
-DROP TABLE IF EXISTS "ctiprofiles";
-CREATE TABLE "ctiprofiles" (
- "id" SERIAL,
- "xlets" text,
- "maxgui" INTEGER,
- "appliname" VARCHAR(255),
- "name" VARCHAR(40) unique,
- "presence" VARCHAR(255),
- "phonehints" VARCHAR(255),
- "services" VARCHAR(255),
- "preferences" VARCHAR(2048),
- "deletable" INTEGER, -- BOOLEAN
- PRIMARY KEY("id")
-);
-
-INSERT INTO "ctiprofiles" VALUES(DEFAULT,'[[ "queues", "dock", "fms", "N/A" ],[ "queuemembers", "dock", "fms", "N/A" ],[ "queueentrydetails", "dock", "fcms", "N/A" ],[ "agents", "dock", "fcms", "N/A" ],[ "agentdetails", "dock", "fcms", "N/A" ],[ "identity", "grid", "fcms", "0" ],[ "conference", "dock", "fcm", "N/A" ]]',-1,'Superviseur','agentsup','xivo','xivo','','',1);
-INSERT INTO "ctiprofiles" VALUES(DEFAULT,'[[ "queues", "dock", "ms", "N/A" ],[ "identity", "grid", "fcms", "0" ],[ "customerinfo", "dock", "cms", "N/A" ],[ "agentdetails", "dock", "cms", "N/A" ]]',-1,'Agent','agent','xivo','xivo','','',1);
-INSERT INTO "ctiprofiles" VALUES(DEFAULT,'[[ "tabber", "grid", "fcms", "1" ],[ "dial", "grid", "fcms", "2" ],[ "search", "tab", "fcms", "0" ],[ "customerinfo", "tab", "fcms", "4" ],[ "identity", "grid", "fcms", "0" ],[ "fax", "tab", "fcms", "N/A" ],[ "history", "tab", "fcms", "N/A" ],[ "directory", "tab", "fcms", "N/A" ],[ "features", "tab", "fcms", "N/A" ],[ "mylocaldir", "tab", "fcms", "N/A" ],[ "conference", "tab", "fcms", "N/A" ]]',-1,'Client','client','xivo','xivo','enablednd,fwdunc,fwdbusy,fwdrna','',1);
-INSERT INTO "ctiprofiles" VALUES(DEFAULT,'[[ "datetime", "dock", "fm", "N/A" ]]',-1,'Horloge','clock','xivo','xivo','','',1);
-INSERT INTO "ctiprofiles" VALUES(DEFAULT,'[[ "dial", "dock", "fm", "N/A" ],[ "operator", "dock", "fcm", "N/A" ],[ "datetime", "dock", "fcm", "N/A" ],[ "identity", "grid", "fcms", "0" ],[ "calls", "dock", "fcm", "N/A" ]]',-1,'Opérateur','oper','xivo','xivo','','',1);
-INSERT INTO "ctiprofiles" VALUES(DEFAULT,'[[ "search", "dock", "fcms", "N/A" ],[ "calls", "dock", "fcms", "N/A" ],[ "customerinfo", "dock", "fcms", "N/A" ],[ "datetime", "dock", "fcms", "N/A" ],[ "dial", "dock", "fcms", "N/A" ],[ "identity", "grid", "fcms", "0" ],[ "operator", "dock", "fcms", "N/A" ]]',-1,'Switchboard','switchboard','xivo','xivo','','',1);
 
 
 DROP TABLE IF EXISTS "ctireversedirectories" CASCADE;
