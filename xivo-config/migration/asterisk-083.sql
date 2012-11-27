@@ -1,10 +1,10 @@
 
 /*
- * XiVO Base-Config
+ * XiVO BASe-Config
  * Copyright (C) 2012  Avencall
  *
  * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
+ * it under the terms of the GNU General Public License AS published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
@@ -18,10 +18,6 @@
  */
 
 BEGIN;
-
-DELETE FROM "ctiprofiles" WHERE "name" = 'switchboard';
-DELETE FROM "ctiprofiles" WHERE "name" = 'oper';
-DELETE FROM "ctiprofiles" WHERE "name" = 'clock';
 
 DROP TABLE IF EXISTS "cti_service" CASCADE;
 CREATE TABLE "cti_service" (
@@ -48,7 +44,7 @@ INSERT INTO "cti_preference"("option") VALUES ('loginwindow.url');
 INSERT INTO "cti_preference"("option") VALUES ('xlet.identity.logagent');
 INSERT INTO "cti_preference"("option") VALUES ('xlet.identity.pauseagent');
 INSERT INTO "cti_preference"("option") VALUES ('xlet.agentdetails.noqueueaction');
-INSERT INTO "cti_preference"("option") VALUES ('xlet.agentdetails.hideastid');
+INSERT INTO "cti_preference"("option") VALUES ('xlet.agentdetails.hideAStid');
 INSERT INTO "cti_preference"("option") VALUES ('xlet.agentdetails.hidecontext');
 INSERT INTO "cti_preference"("option") VALUES ('xlet.agents.fontname');
 INSERT INTO "cti_preference"("option") VALUES ('xlet.agents.fontsize');
@@ -80,6 +76,9 @@ INSERT INTO "cti_xlet"("plugin_name") VALUES ('queues');
 INSERT INTO "cti_xlet"("plugin_name") VALUES ('queuemembers');
 INSERT INTO "cti_xlet"("plugin_name") VALUES ('queueentrydetails');
 INSERT INTO "cti_xlet"("plugin_name") VALUES ('switchboard');
+INSERT INTO "cti_xlet"("plugin_name") VALUES ('calls');
+INSERT INTO "cti_xlet"("plugin_name") VALUES ('callcampaign');
+INSERT INTO "cti_xlet"("plugin_name") VALUES ('operator');
 
 DROP TABLE IF EXISTS "cti_xlet_layout" CASCADE;
 CREATE TABLE "cti_xlet_layout" (
@@ -115,31 +114,33 @@ CREATE TABLE "cti_profile_xlet" (
        "movable" BOOLEAN DEFAULT TRUE,
        "floating" BOOLEAN DEFAULT TRUE,
        "scrollable" BOOLEAN DEFAULT TRUE,
-       "order" INTEGER,
+       "order" INTEGER DEFAULT 0,
        PRIMARY KEY("xlet_id", "profile_id")
 );
 INSERT INTO "cti_profile_xlet" (
 SELECT DISTINCT ON ("xlet_id", "profile_id") *
 FROM (
   SELECT (SELECT "cti_xlet"."id" FROM "cti_xlet" WHERE "cti_xlet"."plugin_name" = "cti_profile_step_two"."name") AS "xlet_id",
-         "id" AS "profile_id",
+         (SELECT "cti_profile"."id" FROM "cti_profile" WHERE "cti_profile"."name" = "cti_profile_step_two"."profile_name") AS "profile_id",
          (SELECT "cti_xlet_layout"."id" FROM "cti_xlet_layout" WHERE "cti_xlet_layout"."name" = "cti_profile_step_two"."layout") AS "layout_id",
-         strpos(properties, 'c') <> 0 as "closable",
-         strpos(properties, 'm') <> 0 as "movable",
-         strpos(properties, 'f') <> 0 as "floating",
-         strpos(properties, 's') <> 0 as "scrollable",
+         strpos(properties, 'c') <> 0 AS "closable",
+         strpos(properties, 'm') <> 0 AS "movable",
+         strpos(properties, 'f') <> 0 AS "floating",
+         strpos(properties, 's') <> 0 AS "scrollable",
          CASE WHEN "number" = 'N/A' THEN NULL
               ELSE CAST("number" AS INTEGER)
               END AS "order"
   FROM (
     SELECT "id",
-           trim(both '"' from trim(both ' ' from xlet[1])) as "name",
-           trim(both '"' from trim(both ' ' from xlet[2])) as "layout",
-           xlet[3] as "properties",
-           trim(both '"' from trim(both ' ' from xlet[4])) as "number"
+           "name" AS "profile_name",
+           trim(both '"' FROM trim(both ' ' FROM xlet[1])) AS "name",
+           trim(both '"' FROM trim(both ' ' FROM xlet[2])) AS "layout",
+           xlet[3] AS "properties",
+           trim(both '"' FROM trim(both ' ' FROM xlet[4])) AS "number"
     FROM (
       SELECT "id",
-             regexp_split_to_array(trim(trailing ']' from trim(leading '[' from regexp_split_to_table(xlets, '],'))), ',') as xlet
+             "name",
+             regexp_split_to_array(trim(trailing ']' FROM trim(leading '[' FROM regexp_split_to_table(xlets, '],'))), ',') AS "xlet"
       FROM "ctiprofiles"
       WHERE "xlets" <> '[]'
     ) AS "cti_profile_step_one"
@@ -158,13 +159,13 @@ CREATE TABLE "cti_profile_preference" (
 INSERT INTO "cti_profile_preference" (
   SELECT
     "profile_id",
-    (SELECT cti_preference."id" from cti_preference where cti_preference."option" = "preference_name") AS "preference_id",
+    (SELECT cti_preference."id" FROM cti_preference where cti_preference."option" = "preference_name") AS "preference_id",
     "value"
   FROM (
    SELECT
      id AS "profile_id",
-     trim(both '"' from trim(both ' ' from pref[1])) as "preference_name",
-     trim(both '"' from trim(both ' ' from pref[2])) as "value"
+     trim(both '"' FROM trim(both ' ' FROM pref[1])) AS "preference_name",
+     trim(both '"' FROM trim(both ' ' FROM pref[2])) AS "value"
    FROM (
      SELECT id,
        regexp_split_to_array(trim(trailing '}' FROM trim(leading '{' FROM regexp_split_to_table("preferences", ','))), ':') AS "pref"
@@ -193,8 +194,16 @@ FROM (
 ) AS "service"
 );
 
+DELETE FROM "cti_profile" WHERE "name" = 'oper';
+DELETE FROM "cti_profile" WHERE "name" = 'clock';
+
+DELETE FROM "cti_xlet" WHERE "plugin_name" = 'operator';
+DELETE FROM "cti_xlet" WHERE "plugin_name" = 'calls';
+DELETE FROM "cti_xlet" WHERE "plugin_name" = 'callcampaign';
+
 DROP TABLE "ctiprofiles";
 
+DELETE FROM "cti_profile" WHERE "name" = 'switchboard';
 INSERT INTO "cti_profile" VALUES (DEFAULT, 'switchboard', 1, 1);
 
 /* switchboard */
@@ -206,6 +215,7 @@ INSERT INTO "cti_profile_xlet" VALUES ((SELECT "id" FROM "cti_xlet" WHERE "plugi
                                        (SELECT "id" FROM "cti_profile" WHERE "name" = 'switchboard'),
                                        (SELECT "id" FROM "cti_xlet_layout" WHERE "name" = 'grid'),
                                        TRUE, TRUE, TRUE, TRUE, 1);
+
 
 GRANT ALL ON ALL SEQUENCES IN SCHEMA public to asterisk;
 GRANT ALL ON ALL TABLES IN SCHEMA public TO asterisk;
