@@ -16,7 +16,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-COMMIT;
+BEGIN;
 
 DROP TABLE IF EXISTS "callcenter_campaigns_general" CASCADE;
 DROP TABLE IF EXISTS "callcenter_campaigns_campaign" CASCADE;
