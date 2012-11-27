@@ -27,11 +27,11 @@ BEGIN;
 DROP TYPE  IF EXISTS "generic_bsfilter" CASCADE;
 CREATE TYPE "generic_bsfilter" AS ENUM ('no', 'boss', 'secretary');
 
-DROP TYPE IF EXISTS "trunk_protocol";
+DROP TYPE IF EXISTS "trunk_protocol" CASCADE;
 CREATE TYPE "trunk_protocol" AS ENUM ('sip', 'iax', 'sccp', 'custom');
 
 
-DROP TABLE IF EXISTS "accessfeatures";
+DROP TABLE IF EXISTS "accessfeatures" CASCADE;
 DROP TYPE  IF EXISTS "accessfeatures_feature";
 
 CREATE TYPE "accessfeatures_feature" AS ENUM ('phonebook');
@@ -47,7 +47,7 @@ CREATE TABLE "accessfeatures" (
 CREATE UNIQUE INDEX "accessfeatures__uidx__host_feature" ON "accessfeatures"("host","feature");
 
 
-DROP TABLE IF EXISTS "agentfeatures";
+DROP TABLE IF EXISTS "agentfeatures" CASCADE;
 
 CREATE TABLE "agentfeatures" (
  "id" SERIAL,
@@ -69,7 +69,7 @@ CREATE TABLE "agentfeatures" (
 CREATE UNIQUE INDEX "agentfeatures__uidx__number" ON "agentfeatures"("number");
 
 
-DROP TABLE IF EXISTS "agentgroup";
+DROP TABLE IF EXISTS "agentgroup" CASCADE;
 CREATE TABLE "agentgroup" (
  "id" SERIAL,
  "groupid" INTEGER NOT NULL,
@@ -84,7 +84,7 @@ CREATE TABLE "agentgroup" (
 INSERT INTO "agentgroup" VALUES (DEFAULT,1,'default','',0,0,'');
 
 
-DROP TABLE IF EXISTS "agentqueueskill";
+DROP TABLE IF EXISTS "agentqueueskill" CASCADE;
 CREATE TABLE "agentqueueskill" (
  "agentid" INTEGER,
  "skillid" INTEGER,
@@ -93,7 +93,7 @@ CREATE TABLE "agentqueueskill" (
 );
 
 
-DROP TABLE IF EXISTS "attachment";
+DROP TABLE IF EXISTS "attachment" CASCADE;
 CREATE TABLE "attachment" (
  "id" SERIAL,
  "name" VARCHAR(64) NOT NULL,
@@ -107,7 +107,7 @@ CREATE TABLE "attachment" (
 CREATE UNIQUE INDEX "attachment__uidx__object_type__object_id" ON "attachment"("object_type","object_id");
 
 
-DROP TABLE IF EXISTS "callerid";
+DROP TABLE IF EXISTS "callerid" CASCADE;
 DROP TYPE  IF EXISTS "callerid_mode";
 DROP TYPE  IF EXISTS "callerid_type";
 
@@ -122,7 +122,7 @@ CREATE TABLE "callerid" (
 );
 
 
-DROP TABLE IF EXISTS "callfilter";
+DROP TABLE IF EXISTS "callfilter" CASCADE;
 DROP TYPE  IF EXISTS "callfilter_type";
 DROP TYPE  IF EXISTS "callfilter_bosssecretary";
 DROP TYPE  IF EXISTS "callfilter_callfrom";
@@ -147,9 +147,9 @@ CREATE TABLE "callfilter" (
 CREATE UNIQUE INDEX "callfilter__uidx__name" ON "callfilter"("name");
 
 
-DROP TABLE IF EXISTS "callfiltermember";
-DROP TYPE IF EXISTS "callfiltermember_type";
---DROP TYPE IF EXISTS "callfiltermember_bstype";
+DROP TABLE IF EXISTS "callfiltermember" CASCADE;
+DROP TYPE IF EXISTS "callfiltermember_type" CASCADE;
+--DROP TYPE IF EXISTS "callfiltermember_bstype" CASCADE;
 
 CREATE TYPE "callfiltermember_type" AS ENUM ('user');
 --CREATE TYPE "callfiltermember_bstype" AS ENUM ('boss', 'secretary');
@@ -169,7 +169,7 @@ CREATE TABLE "callfiltermember" (
 CREATE UNIQUE INDEX "callfiltermember__uidx__callfilterid_type_typeval" ON "callfiltermember"("callfilterid","type","typeval");
 
 
-DROP TABLE IF EXISTS "cel";
+DROP TABLE IF EXISTS "cel" CASCADE;
 CREATE TABLE "cel" (
  "id" serial , 
  "eventtype" VARCHAR (30) NOT NULL ,
@@ -199,7 +199,7 @@ CREATE INDEX "cel__idx__uniqueid" ON "cel"("uniqueid");
 CREATE INDEX "cel__idx__eventtime" ON "cel"("eventtime");
 
 
-DROP TABLE IF EXISTS "context";
+DROP TABLE IF EXISTS "context" CASCADE;
 CREATE TABLE "context" (
  "name" VARCHAR(39) NOT NULL,
  "displayname" VARCHAR(128) NOT NULL DEFAULT '',
@@ -211,7 +211,7 @@ CREATE TABLE "context" (
 );
 
 
-DROP TABLE IF EXISTS "contextinclude";
+DROP TABLE IF EXISTS "contextinclude" CASCADE;
 CREATE TABLE "contextinclude" (
  "context" VARCHAR(39) NOT NULL,
  "include" VARCHAR(39) NOT NULL,
@@ -220,7 +220,7 @@ CREATE TABLE "contextinclude" (
 );
 
 
-DROP TABLE IF EXISTS "contextmember";
+DROP TABLE IF EXISTS "contextmember" CASCADE;
 CREATE TABLE "contextmember" (
  "context" VARCHAR(39) NOT NULL,
  "type" VARCHAR(32) NOT NULL,
@@ -233,8 +233,8 @@ CREATE INDEX "contextmember__idx__context" ON "contextmember"("context");
 CREATE INDEX "contextmember__idx__context_type" ON "contextmember"("context","type");
 
 
-DROP TABLE IF EXISTS "contextnumbers";
-DROP TABLE IF EXISTS "contextnummember";
+DROP TABLE IF EXISTS "contextnumbers" CASCADE;
+DROP TABLE IF EXISTS "contextnummember" CASCADE;
 DROP TYPE  IF EXISTS "contextnumbers_type";
 
 -- WARNING: also used in contextnummember table
@@ -250,7 +250,7 @@ CREATE TABLE "contextnumbers" (
 );
 
 
-DROP TABLE IF EXISTS "contextnummember";
+DROP TABLE IF EXISTS "contextnummember" CASCADE;
 CREATE TABLE "contextnummember" (
  "context" VARCHAR(39) NOT NULL,
  "type" contextnumbers_type NOT NULL,
@@ -264,7 +264,7 @@ CREATE INDEX "contextnummember__idx__context_type" ON "contextnummember"("contex
 CREATE INDEX "contextnummember__idx__number" ON "contextnummember"("number");
 
 
-DROP TABLE IF EXISTS "contexttype";
+DROP TABLE IF EXISTS "contexttype" CASCADE;
 CREATE TABLE "contexttype" (
  "id" SERIAL,
  "name" VARCHAR(40) NOT NULL,
@@ -283,7 +283,7 @@ INSERT INTO "contexttype" VALUES(DEFAULT, 'services', 0, 0, '');
 INSERT INTO "contexttype" VALUES(DEFAULT, 'others', 0, 0, '');
 
 
-DROP TABLE IF EXISTS "ctilog";
+DROP TABLE IF EXISTS "ctilog" CASCADE;
 CREATE TABLE "ctilog" (
  "id" SERIAL,
  "eventdate" TIMESTAMP,
@@ -297,7 +297,7 @@ CREATE TABLE "ctilog" (
 );
 
 
-DROP TABLE IF EXISTS "cticontexts";
+DROP TABLE IF EXISTS "cticontexts" CASCADE;
 CREATE TABLE "cticontexts" (
  "id" SERIAL,
  "name" VARCHAR(50),
@@ -311,7 +311,7 @@ CREATE TABLE "cticontexts" (
 INSERT INTO "cticontexts" VALUES(DEFAULT,'default','xivodir,internal','Display','Contexte par défaut',1);
 
 
-DROP TABLE IF EXISTS "ctidirectories";
+DROP TABLE IF EXISTS "ctidirectories" CASCADE;
 CREATE TABLE "ctidirectories" (
  "id" SERIAL,
  "name" VARCHAR(255),
@@ -328,7 +328,7 @@ INSERT INTO "ctidirectories" VALUES(DEFAULT,'xivodir', 'phonebook', '', '["phone
 INSERT INTO "ctidirectories" VALUES(DEFAULT,'internal','internal','','["userfeatures.firstname","userfeatures.lastname"]','','Répertoire XiVO Interne',1);
 
 
-DROP TABLE IF EXISTS "ctidirectoryfields";
+DROP TABLE IF EXISTS "ctidirectoryfields" CASCADE;
 CREATE TABLE "ctidirectoryfields" (
  "dir_id" INTEGER,
  "fieldname" VARCHAR(255),
@@ -348,7 +348,7 @@ INSERT INTO "ctidirectoryfields" VALUES(2, 'lastname', 'userfeatures.lastname');
 INSERT INTO "ctidirectoryfields" VALUES(2, 'phone', 'linefeatures.number');
 
 
-DROP TABLE IF EXISTS "ctidisplays";
+DROP TABLE IF EXISTS "ctidisplays" CASCADE;
 CREATE TABLE "ctidisplays" (
  "id" SERIAL,
  "name" VARCHAR(50),
@@ -360,7 +360,7 @@ CREATE TABLE "ctidisplays" (
 
 INSERT INTO "ctidisplays" VALUES(DEFAULT,'Display','{"10": [ "Nom","","","{db-firstname} {db-lastname}" ],"20": [ "Numéro","phone","","{db-phone}" ],"30": [ "Entreprise","","Inconnue","{db-company}" ],"40": [ "E-mail","","","{db-mail}" ], "50": [ "Source","","","{xivo-directory}" ]}',1,'Affichage par défaut');
 
-DROP TABLE IF EXISTS "ctimain";
+DROP TABLE IF EXISTS "ctimain" CASCADE;
 CREATE TABLE "ctimain" (
  "id" SERIAL, 
  "commandset" VARCHAR(20),
@@ -395,7 +395,7 @@ CREATE TABLE "ctimain" (
 INSERT INTO "ctimain" VALUES(DEFAULT, 'xivocti', '127.0.0.1', 5038, 'xivo_cti_user', 'phaickbebs9', '0.0.0.0', 5003, 1, '0.0.0.0', 5013, 0, '127.0.0.1', 5004, 1, '127.0.0.1', 5005, 1, '127.0.0.1', 5006, 1, '', '', 10, 5, 0, 1);
 
 
-DROP TABLE IF EXISTS "ctiphonehints";
+DROP TABLE IF EXISTS "ctiphonehints" CASCADE;
 CREATE TABLE "ctiphonehints" (
  "id" SERIAL,
  "idgroup" INTEGER,
@@ -463,7 +463,7 @@ INSERT INTO "ctiprofiles" VALUES(DEFAULT,'[[ "dial", "dock", "fm", "N/A" ],[ "op
 INSERT INTO "ctiprofiles" VALUES(DEFAULT,'[[ "search", "dock", "fcms", "N/A" ],[ "calls", "dock", "fcms", "N/A" ],[ "customerinfo", "dock", "fcms", "N/A" ],[ "datetime", "dock", "fcms", "N/A" ],[ "dial", "dock", "fcms", "N/A" ],[ "identity", "grid", "fcms", "0" ],[ "operator", "dock", "fcms", "N/A" ]]',-1,'Switchboard','switchboard','xivo','xivo','','',1);
 
 
-DROP TABLE IF EXISTS "ctireversedirectories";
+DROP TABLE IF EXISTS "ctireversedirectories" CASCADE;
 CREATE TABLE "ctireversedirectories" (
  "id" SERIAL,
  "directories" text NOT NULL,
@@ -473,7 +473,7 @@ CREATE TABLE "ctireversedirectories" (
 INSERT INTO "ctireversedirectories" VALUES(DEFAULT,'["xivodir"]');
 
 
-DROP TABLE IF EXISTS "ctisheetactions";
+DROP TABLE IF EXISTS "ctisheetactions" CASCADE;
 CREATE TABLE "ctisheetactions" (
  "id" SERIAL,
  "name" VARCHAR(50),
@@ -494,7 +494,7 @@ CREATE TABLE "ctisheetactions" (
 INSERT INTO "ctisheetactions" VALUES(DEFAULT,'XiVO','Modèle de fiche de base.','[]','dest','[]','{"10": [ "Nom","title","","{xivo-calleridname}",0 ],"20": [ "Numéro","text","","{xivo-calleridnum}",0 ],"30": [ "Origine","text","","{xivo-origin}",0 ]}','{"10": [ "Nom","title","","{xivo-calledidname}" ],"20": [ "Numéro","body","","{xivo-calleridnum}" ],"30": [ "Origine","body","","{xivo-origin}" ]}','','{}',0,1,1);
 
 
-DROP TABLE IF EXISTS "ctisheetevents";
+DROP TABLE IF EXISTS "ctisheetevents" CASCADE;
 CREATE TABLE "ctisheetevents" (
  "id" SERIAL,
  "agentlinked" VARCHAR(50),
@@ -515,7 +515,7 @@ CREATE TABLE "ctisheetevents" (
 INSERT INTO "ctisheetevents" VALUES(DEFAULT,'','','','','','','','','XiVO','','','{"": ""}');
 
 
-DROP TABLE IF EXISTS "ctistatus";
+DROP TABLE IF EXISTS "ctistatus" CASCADE;
 CREATE TABLE "ctistatus" (
  "id" SERIAL,
  "presence_id" INTEGER,
@@ -538,7 +538,7 @@ INSERT INTO "ctistatus" VALUES(DEFAULT,1,'berightback','Bientôt de retour','ena
 INSERT INTO "ctistatus" VALUES(DEFAULT,1,'disconnected','Déconnecté','agentlogoff()','#202020','',0);
 
 
-DROP TABLE IF EXISTS "devicefeatures";
+DROP TABLE IF EXISTS "devicefeatures" CASCADE;
 CREATE TABLE "devicefeatures" (
  "id" SERIAL,
  "deviceid" VARCHAR(32) NOT NULL,
@@ -564,12 +564,12 @@ CREATE INDEX "devicefeatures__idx__plugin" ON "devicefeatures"("plugin");
 CREATE INDEX "devicefeatures__idx__config" ON "devicefeatures"("config");
 CREATE INDEX "devicefeatures__idx__deviceid" ON "devicefeatures"("deviceid");
 
-DROP TABLE IF EXISTS "dialaction";
-DROP TABLE IF EXISTS "schedule"; -- USE dialaction_action
-DROP TABLE IF EXISTS "schedule_time"; -- USE dialaction_action
-DROP TYPE IF EXISTS "dialaction_event";
-DROP TYPE IF EXISTS "dialaction_category";
-DROP TYPE IF EXISTS "dialaction_action";
+DROP TABLE IF EXISTS "dialaction" CASCADE;
+DROP TABLE IF EXISTS "schedule" CASCADE; -- USE dialaction_action
+DROP TABLE IF EXISTS "schedule_time" CASCADE; -- USE dialaction_action
+DROP TYPE IF EXISTS "dialaction_event" CASCADE;
+DROP TYPE IF EXISTS "dialaction_category" CASCADE;
+DROP TYPE IF EXISTS "dialaction_action" CASCADE;
 
 CREATE TYPE "dialaction_event" AS ENUM ('answer',
  'noanswer',
@@ -618,7 +618,7 @@ CREATE TABLE "dialaction" (
 CREATE INDEX "dialaction__idx__action_actionarg1" ON "dialaction"("action","actionarg1");
 
 
-DROP TABLE IF EXISTS "dialpattern";
+DROP TABLE IF EXISTS "dialpattern" CASCADE;
 CREATE TABLE "dialpattern" (
  "id" SERIAL,
  "type" VARCHAR(32) NOT NULL,
@@ -634,7 +634,7 @@ CREATE TABLE "dialpattern" (
 CREATE INDEX "dialpattern__idx__type_typeid" ON "dialpattern"("type","typeid");
 
 
-DROP TABLE IF EXISTS "extensions";
+DROP TABLE IF EXISTS "extensions" CASCADE;
 CREATE TABLE "extensions" (
  "id" SERIAL,
  "commented" INTEGER NOT NULL DEFAULT 0, -- BOOLEAN
@@ -684,7 +684,7 @@ INSERT INTO "extensions" VALUES (DEFAULT,0,'xivo-features','_*96.',1,'GoSub','vm
 INSERT INTO "extensions" VALUES (DEFAULT,0,'xivo-features','_*11.',1,'GoSub','paging,s,1(${EXTEN:3})','paging');
 
 
-DROP TABLE IF EXISTS "extenumbers";
+DROP TABLE IF EXISTS "extenumbers" CASCADE;
 DROP TYPE  IF EXISTS "extenumbers_type";
 
 CREATE TYPE "extenumbers_type" AS ENUM ('extenfeatures',
@@ -754,7 +754,7 @@ INSERT INTO "extenumbers" VALUES (DEFAULT,'_*96.','ac6c7ac899867fe0120fe20120fae
 INSERT INTO "extenumbers" VALUES (DEFAULT,'_*11.','0a038e5c4e6e33baee9f210b9a4f7e313f3e79fa','','extenfeatures','paging');
 
 
-DROP TABLE IF EXISTS "features";
+DROP TABLE IF EXISTS "features" CASCADE;
 CREATE TABLE "features" (
  "id" SERIAL,
  "cat_metric" INTEGER NOT NULL DEFAULT 0,
@@ -802,7 +802,7 @@ INSERT INTO "features" VALUES (DEFAULT,1,0,0,'features.conf','featuremap','autom
 INSERT INTO "features" VALUES (DEFAULT,1,0,0,'features.conf','featuremap','atxfer','*2');
 
 
-DROP TABLE IF EXISTS "paging";
+DROP TABLE IF EXISTS "paging" CASCADE;
 CREATE TABLE "paging" (
  "id"		 		SERIAL NOT NULL,
  "number" 			VARCHAR(32),
@@ -822,7 +822,7 @@ CREATE TABLE "paging" (
 
 CREATE UNIQUE INDEX "paging__uidx__number" ON "paging"("number");
 
-DROP TABLE IF EXISTS "paginguser";
+DROP TABLE IF EXISTS "paginguser" CASCADE;
 CREATE TABLE "paginguser" (
  "pagingid" 		INTEGER NOT NULL,
  "userfeaturesid" 	INTEGER NOT NULL,
@@ -833,7 +833,7 @@ CREATE TABLE "paginguser" (
 CREATE INDEX "paginguser__idx__pagingid" ON "paginguser"("pagingid");
 
 
-DROP TABLE IF EXISTS "parkinglot";
+DROP TABLE IF EXISTS "parkinglot" CASCADE;
 CREATE TABLE "parkinglot" (
  "id"            SERIAL,
  "name"          VARCHAR(255) NOT NULL,
@@ -858,7 +858,7 @@ CREATE TABLE "parkinglot" (
 CREATE UNIQUE INDEX "parkinglot__idx__name" ON "parkinglot"("name");
 
 
-DROP TABLE IF EXISTS "groupfeatures";
+DROP TABLE IF EXISTS "groupfeatures" CASCADE;
 CREATE TABLE "groupfeatures" (
  "id" SERIAL,
  "name" VARCHAR(128) NOT NULL,
@@ -879,7 +879,7 @@ CREATE INDEX "groupfeatures__idx__number" ON "groupfeatures"("number");
 CREATE INDEX "groupfeatures__idx__context" ON "groupfeatures"("context");
 
 
-DROP TABLE IF EXISTS "incall";
+DROP TABLE IF EXISTS "incall" CASCADE;
 CREATE TABLE "incall" (
  "id" SERIAL,
  "exten" VARCHAR(40) NOT NULL,
@@ -895,7 +895,7 @@ CREATE INDEX "incall__idx__context" ON "incall"("context");
 CREATE UNIQUE INDEX "incall__uidx__exten_context" ON "incall"("exten","context");
 
 
-DROP TABLE IF EXISTS "linefeatures";
+DROP TABLE IF EXISTS "linefeatures" CASCADE;
 CREATE TABLE "linefeatures" (
  "id" SERIAL,
  "protocol" "trunk_protocol" NOT NULL,
@@ -933,7 +933,7 @@ CREATE UNIQUE INDEX "linefeatures__uidx__name" ON "linefeatures"("name");
 CREATE UNIQUE INDEX "linefeatures__uidx__protocol_protocolid" ON "linefeatures"("protocol","protocolid");
 
 
-DROP TABLE IF EXISTS "ldapfilter";
+DROP TABLE IF EXISTS "ldapfilter" CASCADE;
 DROP TYPE  IF EXISTS "ldapfilter_additionaltype";
 
 CREATE TYPE "ldapfilter_additionaltype" AS ENUM ('office', 'home', 'mobile', 'fax', 'other', 'custom');
@@ -958,7 +958,7 @@ CREATE TABLE "ldapfilter" (
 CREATE UNIQUE INDEX "ldapfilter__uidx__name" ON "ldapfilter"("name");
 
 
-DROP TABLE IF EXISTS "meetmefeatures";
+DROP TABLE IF EXISTS "meetmefeatures" CASCADE;
 DROP TYPE  IF EXISTS "meetmefeatures_admin_typefrom";
 DROP TYPE  IF EXISTS "meetmefeatures_admin_identification";
 DROP TYPE  IF EXISTS "meetmefeatures_mode";
@@ -1028,7 +1028,7 @@ CREATE UNIQUE INDEX "meetmefeatures__uidx__meetmeid" ON "meetmefeatures"("meetme
 CREATE UNIQUE INDEX "meetmefeatures__uidx__name" ON "meetmefeatures"("name");
 
 
-DROP TABLE IF EXISTS "meetmeguest";
+DROP TABLE IF EXISTS "meetmeguest" CASCADE;
 CREATE TABLE "meetmeguest" (
  "id" SERIAL,
  "meetmefeaturesid" INTEGER NOT NULL,
@@ -1039,7 +1039,7 @@ CREATE TABLE "meetmeguest" (
 );
 
 
-DROP TABLE IF EXISTS "musiconhold";
+DROP TABLE IF EXISTS "musiconhold" CASCADE;
 CREATE TABLE "musiconhold" (
  "id" SERIAL,
  "cat_metric" INTEGER NOT NULL DEFAULT 0,
@@ -1060,7 +1060,7 @@ INSERT INTO "musiconhold" VALUES (DEFAULT,0,0,0,'musiconhold.conf','default','ra
 INSERT INTO "musiconhold" VALUES (DEFAULT,0,0,0,'musiconhold.conf','default','directory','/var/lib/pf-xivo/moh/default');
 
 
-DROP TABLE IF EXISTS "operator";
+DROP TABLE IF EXISTS "operator" CASCADE;
 CREATE TABLE "operator" (
  "id" SERIAL,
  "name" VARCHAR(64) NOT NULL,
@@ -1075,7 +1075,7 @@ CREATE TABLE "operator" (
 CREATE UNIQUE INDEX "operator__uidx__name" ON "operator"("name");
 
 
-DROP TABLE IF EXISTS "operator_destination";
+DROP TABLE IF EXISTS "operator_destination" CASCADE;
 CREATE TABLE "operator_destination" (
  "id" SERIAL,
  "operator_id" INTEGER NOT NULL,
@@ -1090,7 +1090,7 @@ CREATE TABLE "operator_destination" (
 CREATE UNIQUE INDEX "operator_destination__uidx__name" ON "operator_destination"("name");
 
 
-DROP TABLE IF EXISTS "operator_trunk";
+DROP TABLE IF EXISTS "operator_trunk" CASCADE;
 CREATE TABLE "operator_trunk" (
  "operator_id" INTEGER NOT NULL,
  "trunk_id" INTEGER NOT NULL,
@@ -1098,7 +1098,7 @@ CREATE TABLE "operator_trunk" (
 );
 
 
-DROP TABLE IF EXISTS "outcall";
+DROP TABLE IF EXISTS "outcall" CASCADE;
 CREATE TABLE "outcall" (
  "id" SERIAL,
  "name" VARCHAR(128) NOT NULL,
@@ -1115,7 +1115,7 @@ CREATE TABLE "outcall" (
 CREATE UNIQUE INDEX "outcall__uidx__name" ON "outcall"("name");
 
 
-DROP TABLE IF EXISTS "outcalltrunk";
+DROP TABLE IF EXISTS "outcalltrunk" CASCADE;
 CREATE TABLE "outcalltrunk" (
  "outcallid" INTEGER NOT NULL DEFAULT 0,
  "trunkfeaturesid" INTEGER NOT NULL DEFAULT 0,
@@ -1126,7 +1126,7 @@ CREATE TABLE "outcalltrunk" (
 CREATE INDEX "outcalltrunk__idx__priority" ON "outcalltrunk"("priority");
 
 
-DROP TABLE IF EXISTS "outcalldundipeer";
+DROP TABLE IF EXISTS "outcalldundipeer" CASCADE;
 CREATE TABLE "outcalldundipeer" (
  "outcallid" INTEGER NOT NULL DEFAULT 0,
  "dundipeerid" INTEGER NOT NULL DEFAULT 0,
@@ -1135,7 +1135,7 @@ CREATE TABLE "outcalldundipeer" (
 );
 
 
-DROP TABLE IF EXISTS "phonebook";
+DROP TABLE IF EXISTS "phonebook" CASCADE;
 DROP TYPE  IF EXISTS "phonebook_title";
 
 CREATE TYPE "phonebook_title" AS ENUM ('mr', 'mrs', 'ms');
@@ -1155,7 +1155,7 @@ CREATE TABLE "phonebook" (
 );
 
 
-DROP TABLE IF EXISTS "phonebookaddress";
+DROP TABLE IF EXISTS "phonebookaddress" CASCADE;
 DROP TYPE  IF EXISTS "phonebookaddress_type";
 
 CREATE TYPE "phonebookaddress_type" AS ENUM ('home', 'office', 'other');
@@ -1176,7 +1176,7 @@ CREATE TABLE "phonebookaddress" (
 CREATE UNIQUE INDEX "phonebookaddress__uidx__phonebookid_type" ON "phonebookaddress"("phonebookid","type");
 
 
-DROP TABLE IF EXISTS "phonebooknumber";
+DROP TABLE IF EXISTS "phonebooknumber" CASCADE;
 DROP TYPE  IF EXISTS "phonebooknumber_type";
 
 CREATE TYPE "phonebooknumber_type" AS ENUM ('home', 'office', 'mobile', 'fax', 'other');
@@ -1192,7 +1192,7 @@ CREATE TABLE "phonebooknumber" (
 CREATE UNIQUE INDEX "phonebooknumber__uidx__phonebookid_type" ON "phonebooknumber"("phonebookid","type");
 
 
-DROP TABLE IF EXISTS "phonefunckey";
+DROP TABLE IF EXISTS "phonefunckey" CASCADE;
 DROP TYPE  IF EXISTS "phonefunckey_typeextenumbers";
 DROP TYPE  IF EXISTS "phonefunckey_typeextenumbersright";
 
@@ -1219,9 +1219,9 @@ CREATE INDEX "phonefunckey__idx__typeextenumbers_typevalextenumbers" ON "phonefu
 CREATE INDEX "phonefunckey__idx__typeextenumbersright_typevalextenumbersright" ON "phonefunckey"("typeextenumbersright","typevalextenumbersright");
 
 
-DROP TABLE IF EXISTS "queue";
-DROP TYPE  IF EXISTS "queue_monitor_type";
-DROP TYPE  IF EXISTS "queue_category";
+DROP TABLE IF EXISTS "queue" CASCADE;
+DROP TYPE  IF EXISTS "queue_monitor_type" CASCADE;
+DROP TYPE  IF EXISTS "queue_category" CASCADE;
 
 CREATE TYPE "queue_monitor_type" AS ENUM ('no', 'mixmonitor');
 -- WARNING: used also in queuemember table
@@ -1282,7 +1282,7 @@ CREATE TABLE "queue" (
 CREATE INDEX "queue__idx__category" ON "queue"("category");
 
 
-DROP TABLE IF EXISTS "queue_info";
+DROP TABLE IF EXISTS "queue_info" CASCADE;
 CREATE TABLE "queue_info" (
  "id" SERIAL,
  "call_time_t" INTEGER,
@@ -1299,7 +1299,7 @@ CREATE INDEX "queue_info_call_time_t_index" ON "queue_info" ("call_time_t");
 CREATE INDEX "queue_info_queue_name_index" ON "queue_info" ("queue_name");
 
 
-DROP TABLE IF EXISTS "queuefeatures";
+DROP TABLE IF EXISTS "queuefeatures" CASCADE;
 CREATE TABLE "queuefeatures" (
  "id" SERIAL,
  "name" VARCHAR(128) NOT NULL,
@@ -1331,7 +1331,7 @@ CREATE INDEX "queuefeatures__idx__context" ON "queuefeatures"("context");
 CREATE UNIQUE INDEX "queuefeatures__uidx__name" ON "queuefeatures"("name");
 
 
-DROP TABLE IF EXISTS "queuemember";
+DROP TABLE IF EXISTS "queuemember" CASCADE;
 DROP TYPE  IF EXISTS "queuemember_usertype";
 
 CREATE TYPE "queuemember_usertype" AS ENUM ('agent', 'user');
@@ -1360,7 +1360,7 @@ CREATE INDEX "queuemember__idx__category" ON "queuemember"("category");
 CREATE UNIQUE INDEX "queuemember__uidx__queue_name_channel_usertype_userid_category" ON "queuemember"("queue_name","channel","usertype","userid","category");
 
 
-DROP TABLE IF EXISTS "queuepenalty";
+DROP TABLE IF EXISTS "queuepenalty" CASCADE;
 CREATE TABLE "queuepenalty" (
  "id" SERIAL,
  "name" VARCHAR(255) NOT NULL UNIQUE,
@@ -1370,7 +1370,7 @@ CREATE TABLE "queuepenalty" (
 );
 
 
-DROP TABLE IF EXISTS "queuepenaltychange";
+DROP TABLE IF EXISTS "queuepenaltychange" CASCADE;
 DROP TYPE  IF EXISTS "queuepenaltychange_sign";
 
 CREATE TYPE  "queuepenaltychange_sign" AS ENUM ('=','+','-');
@@ -1385,7 +1385,7 @@ CREATE TABLE "queuepenaltychange" (
 );
 
 
-DROP TABLE IF EXISTS "rightcall";
+DROP TABLE IF EXISTS "rightcall" CASCADE;
 CREATE TABLE "rightcall" (
  "id" SERIAL,
  "name" VARCHAR(128) NOT NULL DEFAULT '',
@@ -1399,7 +1399,7 @@ CREATE TABLE "rightcall" (
 CREATE UNIQUE INDEX "rightcall__uidx__name" ON "rightcall"("name");
 
 
-DROP TABLE IF EXISTS "rightcallexten";
+DROP TABLE IF EXISTS "rightcallexten" CASCADE;
 CREATE TABLE "rightcallexten" (
  "id" SERIAL,
  "rightcallid" INTEGER NOT NULL DEFAULT 0,
@@ -1411,7 +1411,7 @@ CREATE TABLE "rightcallexten" (
 CREATE UNIQUE INDEX "rightcallexten__uidx__rightcallid_extenhash" ON "rightcallexten"("rightcallid","extenhash");
 
 
-DROP TABLE IF EXISTS "rightcallmember";
+DROP TABLE IF EXISTS "rightcallmember" CASCADE;
 DROP TYPE  IF EXISTS "rightcallmember_type";
 
 CREATE TYPE "rightcallmember_type" AS ENUM ('user', 'group', 'incall', 'outcall');
@@ -1427,7 +1427,7 @@ CREATE TABLE "rightcallmember" (
 CREATE UNIQUE INDEX "rightcallmember__uidx__rightcallid_type_typeval" ON "rightcallmember"("rightcallid","type","typeval");
 
 
-DROP TABLE IF EXISTS "schedule";
+DROP TABLE IF EXISTS "schedule" CASCADE;
 CREATE TABLE "schedule" (
  "id" SERIAL,
  "name" VARCHAR(255) NOT NULL DEFAULT '',
@@ -1441,7 +1441,7 @@ CREATE TABLE "schedule" (
 );
 
 
-DROP TABLE IF EXISTS "schedule_path";
+DROP TABLE IF EXISTS "schedule_path" CASCADE;
 DROP TYPE  IF EXISTS "schedule_path_type";
 
 CREATE TYPE "schedule_path_type" AS ENUM ('user','group','queue','incall','outcall','voicemenu');
@@ -1457,7 +1457,7 @@ CREATE TABLE "schedule_path" (
 CREATE INDEX "schedule_path_path" ON "schedule_path"("path","pathid");
 
 
-DROP TABLE IF EXISTS "schedule_time";
+DROP TABLE IF EXISTS "schedule_time" CASCADE;
 DROP TYPE  IF EXISTS  "schedule_time_mode";
 
 CREATE TYPE "schedule_time_mode" AS ENUM ('opened','closed');
@@ -1481,7 +1481,7 @@ CREATE TABLE "schedule_time" (
 CREATE INDEX "schedule_time__idx__scheduleid_commented" ON "schedule_time"("schedule_id","commented");
 
 
-DROP TABLE IF EXISTS "serverfeatures";
+DROP TABLE IF EXISTS "serverfeatures" CASCADE;
 DROP TYPE  IF EXISTS "serverfeatures_feature";
 DROP TYPE  IF EXISTS "serverfeatures_type";
 
@@ -1500,7 +1500,7 @@ CREATE TABLE "serverfeatures" (
 CREATE UNIQUE INDEX "serverfeatures__uidx__serverid_feature_type" ON "serverfeatures"("serverid","feature","type");
 
 
-DROP TABLE IF EXISTS "servicesgroup";
+DROP TABLE IF EXISTS "servicesgroup" CASCADE;
 CREATE TABLE "servicesgroup" (
  "id" SERIAL,
  "name" VARCHAR(64) NOT NULL,
@@ -1514,7 +1514,7 @@ CREATE UNIQUE INDEX "servicesgroup__uidx__name" ON "servicesgroup"("name");
 CREATE UNIQUE INDEX "servicesgroup__uidx__accountcode" ON "servicesgroup"("accountcode");
 
 
-DROP TABLE IF EXISTS "servicesgroup_user";
+DROP TABLE IF EXISTS "servicesgroup_user" CASCADE;
 CREATE TABLE "servicesgroup_user" (
  "servicesgroup_id" INTEGER NOT NULL,
  "userfeatures_id" INTEGER NOT NULL,
@@ -1523,7 +1523,7 @@ CREATE TABLE "servicesgroup_user" (
 
 CREATE UNIQUE INDEX "servicesgroup_user__uidx__servicesgroupid_userfeaturesid" ON "servicesgroup_user"("servicesgroup_id","userfeatures_id");
 
-DROP TABLE IF EXISTS "staticiax";
+DROP TABLE IF EXISTS "staticiax" CASCADE;
 CREATE TABLE "staticiax" (
  "id" SERIAL,
  "cat_metric" INTEGER NOT NULL DEFAULT 0,
@@ -1591,7 +1591,7 @@ INSERT INTO "staticiax" VALUES (DEFAULT,0,0,0,'iax.conf','general','maxcallnumbe
 INSERT INTO "staticiax" VALUES (DEFAULT,0,0,0,'iax.conf','general','shrinkcallerid',NULL);
 
 
-DROP TABLE IF EXISTS "staticmeetme";
+DROP TABLE IF EXISTS "staticmeetme" CASCADE;
 CREATE TABLE "staticmeetme" (
  "id" SERIAL,
  "cat_metric" INTEGER NOT NULL DEFAULT 0,
@@ -1614,7 +1614,7 @@ INSERT INTO "staticmeetme" VALUES (DEFAULT,0,0,0,'meetme.conf','general','earlya
 INSERT INTO "staticmeetme" VALUES (DEFAULT,0,0,0,'meetme.conf','general','endalert',120);
 
 
-DROP TABLE IF EXISTS "staticqueue";
+DROP TABLE IF EXISTS "staticqueue" CASCADE;
 CREATE TABLE "staticqueue" (
  "id" SERIAL,
  "cat_metric" INTEGER NOT NULL DEFAULT 0,
@@ -1636,7 +1636,7 @@ INSERT INTO "staticqueue" VALUES (DEFAULT,0,0,0,'queues.conf','general','updatec
 INSERT INTO "staticqueue" VALUES (DEFAULT,0,0,0,'queues.conf','general','shared_lastcall','no');
 
 
-DROP TABLE IF EXISTS "staticsip";
+DROP TABLE IF EXISTS "staticsip" CASCADE;
 CREATE TABLE "staticsip" (
  "id" SERIAL,
  "cat_metric" INTEGER NOT NULL DEFAULT 0,
@@ -1800,7 +1800,7 @@ INSERT INTO "staticsip" VALUES (DEFAULT,0,0,0,'sip.conf','general','transport','
 INSERT INTO "staticsip" VALUES (DEFAULT,0,0,0,'sip.conf','general','prematuremedia','no');
 
 
-DROP TABLE IF EXISTS "staticvoicemail";
+DROP TABLE IF EXISTS "staticvoicemail" CASCADE;
 CREATE TABLE "staticvoicemail" (
  "id" SERIAL,
  "cat_metric" INTEGER NOT NULL DEFAULT 0,
@@ -1893,7 +1893,7 @@ INSERT INTO "staticvoicemail" VALUES (DEFAULT,0,0,1,'voicemail.conf','general','
 INSERT INTO "staticvoicemail" VALUES (DEFAULT,0,0,1,'voicemail.conf','general','listen-control-stop-key',NULL);
 INSERT INTO "staticvoicemail" VALUES (DEFAULT,0,0,1,'voicemail.conf','general','backupdeleted',NULL);
 
-DROP TABLE IF EXISTS "trunkfeatures";
+DROP TABLE IF EXISTS "trunkfeatures" CASCADE;
 CREATE TABLE "trunkfeatures" (
  "id" SERIAL,
  "protocol" "trunk_protocol" NOT NULL,
@@ -1909,7 +1909,7 @@ CREATE INDEX "trunkfeatures__idx__registercommented" ON "trunkfeatures"("registe
 CREATE UNIQUE INDEX "trunkfeatures__uidx__protocol_protocolid" ON "trunkfeatures"("protocol","protocolid");
 
 
-DROP TABLE IF EXISTS "usercustom";
+DROP TABLE IF EXISTS "usercustom" CASCADE;
 DROP TYPE  IF EXISTS "usercustom_category";
 
 CREATE TYPE "usercustom_category" AS ENUM ('user', 'trunk');
@@ -1932,7 +1932,7 @@ CREATE INDEX "usercustom__idx__category" ON "usercustom"("category");
 CREATE UNIQUE INDEX "usercustom__uidx__interface_intfsuffix_category" ON "usercustom"("interface","intfsuffix","category");
 
 
-DROP TABLE IF EXISTS "userfeatures";
+DROP TABLE IF EXISTS "userfeatures" CASCADE;
 DROP TYPE  IF EXISTS "userfeatures_voicemailtype";
 
 CREATE TYPE "userfeatures_voicemailtype" AS ENUM ('asterisk', 'exchange');
@@ -1993,8 +1993,8 @@ CREATE INDEX "userfeatures__idx__loginclient" ON "userfeatures"("loginclient");
 CREATE INDEX "userfeatures__idx__musiconhold" ON "userfeatures"("musiconhold");
 
 
-DROP TABLE IF EXISTS "useriax";
-DROP TABLE IF EXISTS "usersip";
+DROP TABLE IF EXISTS "useriax" CASCADE;
+DROP TABLE IF EXISTS "usersip" CASCADE;
 DROP TYPE  IF EXISTS "useriax_type";
 DROP TYPE  IF EXISTS "useriax_amaflags";
 DROP TYPE  IF EXISTS "useriax_auth";
@@ -2080,7 +2080,7 @@ CREATE INDEX "useriax__idx__category" ON "useriax"("category");
 CREATE UNIQUE INDEX "useriax__uidx__name" ON "useriax"("name");
 
 
-DROP TABLE IF EXISTS "usersip";
+DROP TABLE IF EXISTS "usersip" CASCADE;
 DROP TYPE  IF EXISTS "usersip_insecure";
 DROP TYPE  IF EXISTS "usersip_nat";
 DROP TYPE  IF EXISTS "usersip_videosupport";
@@ -2208,7 +2208,7 @@ CREATE INDEX "usersip__idx__category" ON "usersip"("category");
 CREATE UNIQUE INDEX "usersip__uidx__name" ON "usersip"("name");
 
 
-DROP TABLE IF EXISTS "voicemail";
+DROP TABLE IF EXISTS "voicemail" CASCADE;
 DROP TYPE  IF EXISTS "voicemail_hidefromdir";
 DROP TYPE  IF EXISTS "voicemail_passwordlocation";
 
@@ -2267,7 +2267,7 @@ CREATE INDEX "voicemail__idx__context" ON "voicemail"("context");
 CREATE UNIQUE INDEX "voicemail__uidx__mailbox_context" ON "voicemail"("mailbox","context");
 
 
-DROP TABLE IF EXISTS "voicemailfeatures";
+DROP TABLE IF EXISTS "voicemailfeatures" CASCADE;
 CREATE TABLE "voicemailfeatures" (
  "id" SERIAL,
  "voicemailid" INTEGER,
@@ -2278,7 +2278,7 @@ CREATE TABLE "voicemailfeatures" (
 CREATE UNIQUE INDEX "voicemailfeatures__uidx__voicemailid" ON "voicemailfeatures"("voicemailid");
 
 
-DROP TABLE IF EXISTS "voicemenu";
+DROP TABLE IF EXISTS "voicemenu" CASCADE;
 CREATE TABLE "voicemenu" (
  "id" SERIAL,
  "name" VARCHAR(29) NOT NULL DEFAULT '',
@@ -2295,7 +2295,7 @@ CREATE UNIQUE INDEX "voicemenu__uidx__name" ON "voicemenu"("name");
 
 
 -- queueskill categories
-DROP TABLE IF EXISTS "queueskillcat";
+DROP TABLE IF EXISTS "queueskillcat" CASCADE;
 CREATE TABLE "queueskillcat" (
  "id" SERIAL,
  "name" VARCHAR(64) NOT NULL DEFAULT '',
@@ -2306,7 +2306,7 @@ CREATE UNIQUE INDEX "queueskillcat__uidx__name" ON "queueskillcat"("name");
 
 
 -- queueskill values
-DROP TABLE IF EXISTS "queueskill";
+DROP TABLE IF EXISTS "queueskill" CASCADE;
 CREATE TABLE "queueskill" (
  "id" SERIAL,
  "catid" INTEGER NOT NULL DEFAULT 1,
@@ -2321,7 +2321,7 @@ CREATE UNIQUE INDEX "queueskill__uidx__name" ON "queueskill"("name");
 
 
 -- queueskill rules;
-DROP TABLE IF EXISTS "queueskillrule";
+DROP TABLE IF EXISTS "queueskillrule" CASCADE;
 CREATE TABLE "queueskillrule" (
  "id" SERIAL,
  "name" VARCHAR(64) NOT NULL DEFAULT '',
@@ -2331,7 +2331,7 @@ CREATE TABLE "queueskillrule" (
 
 
 -- user queueskills
-DROP TABLE IF EXISTS "userqueueskill";
+DROP TABLE IF EXISTS "userqueueskill" CASCADE;
 CREATE TABLE "userqueueskill" (
  "userid" INTEGER,
  "skillid" INTEGER,
@@ -2341,7 +2341,7 @@ CREATE TABLE "userqueueskill" (
 
 CREATE INDEX "userqueueskill__idx__userid" ON "userqueueskill"("userid");
 
-DROP TABLE IF EXISTS "general";
+DROP TABLE IF EXISTS "general" CASCADE;
 CREATE TABLE "general"
 (
  "id" SERIAL,
@@ -2355,7 +2355,7 @@ CREATE TABLE "general"
 INSERT INTO "general" VALUES (DEFAULT, 'Europe/Paris', NULL, NULL, 0);
 
 
-DROP TABLE IF EXISTS "sipauthentication";
+DROP TABLE IF EXISTS "sipauthentication" CASCADE;
 DROP TYPE  IF EXISTS "sipauthentication_secretmode";
 
 CREATE TYPE "sipauthentication_secretmode" AS ENUM ('md5','clear');
@@ -2373,7 +2373,7 @@ CREATE TABLE "sipauthentication"
 CREATE INDEX "sipauthentication__idx__usersip_id" ON "sipauthentication"("usersip_id");
 
 
-DROP TABLE IF EXISTS "iaxcallnumberlimits";
+DROP TABLE IF EXISTS "iaxcallnumberlimits" CASCADE;
 CREATE TABLE "iaxcallnumberlimits" (
  "id" SERIAL,
  "destination" VARCHAR(39) NOT NULL,
@@ -2402,7 +2402,7 @@ CREATE INDEX queue_log__idx_callid ON queue_log USING btree ("callid");
 CREATE INDEX queue_log__idx_queuename ON queue_log USING btree ("queuename");
 CREATE INDEX queue_log__idx_event ON queue_log USING btree ("event");
 
-DROP TYPE IF EXISTS "call_exit_type";
+DROP TYPE IF EXISTS "call_exit_type" CASCADE;
 CREATE TYPE "call_exit_type" AS ENUM (
   'full',
   'closed',
@@ -2415,7 +2415,7 @@ CREATE TYPE "call_exit_type" AS ENUM (
   'timeout'
 );
 
-DROP TABLE IF EXISTS "stat_agent";
+DROP TABLE IF EXISTS "stat_agent" CASCADE;
 CREATE TABLE "stat_agent" (
  "id" SERIAL PRIMARY KEY,
  "name" VARCHAR(128) NOT NULL
@@ -2423,7 +2423,7 @@ CREATE TABLE "stat_agent" (
 CREATE INDEX stat_agent__idx_name ON stat_agent("name");
 
 
-DROP TABLE IF EXISTS "stat_agent_periodic";
+DROP TABLE IF EXISTS "stat_agent_periodic" CASCADE;
 CREATE TABLE "stat_agent_periodic" (
  "id" SERIAL PRIMARY KEY,
  "time" timestamp NOT NULL,
@@ -2437,14 +2437,14 @@ CREATE INDEX "stat_agent_periodic__idx__time" ON "stat_agent_periodic"("time");
 CREATE INDEX "stat_agent_periodic__idx__agent_id" ON "stat_agent_periodic"("agent_id");
 
 
-DROP TABLE IF EXISTS "stat_queue";
+DROP TABLE IF EXISTS "stat_queue" CASCADE;
 CREATE TABLE "stat_queue" (
  "id" SERIAL PRIMARY KEY,
  "name" VARCHAR(128) NOT NULL
 );
 CREATE INDEX stat_queue__idx_name ON stat_queue("name");
 
-DROP TABLE IF EXISTS "stat_call_on_queue";
+DROP TABLE IF EXISTS "stat_call_on_queue" CASCADE;
 CREATE TABLE "stat_call_on_queue" (
  "id" SERIAL PRIMARY KEY,
  "callid" VARCHAR(32) NOT NULL,
@@ -2457,7 +2457,7 @@ CREATE TABLE "stat_call_on_queue" (
  "agent_id" INTEGER REFERENCES stat_agent (id)
 );
 
-DROP TABLE IF EXISTS "stat_queue_periodic";
+DROP TABLE IF EXISTS "stat_queue_periodic" CASCADE;
 CREATE TABLE "stat_queue_periodic" (
  "id" SERIAL PRIMARY KEY,
  "time" timestamp NOT NULL,
@@ -2474,7 +2474,7 @@ CREATE TABLE "stat_queue_periodic" (
  "queue_id" INTEGER REFERENCES stat_queue (id)
 );
 
-DROP TABLE IF EXISTS "pickup";
+DROP TABLE IF EXISTS "pickup" CASCADE;
 CREATE TABLE "pickup" (
  -- id is not an autoincrement number, because pickups are between 0 and 63 only
  "id" INTEGER NOT NULL,
@@ -2485,9 +2485,9 @@ CREATE TABLE "pickup" (
 );
 
 
-DROP TABLE IF EXISTS "pickupmember";
-DROP TYPE  IF EXISTS "pickup_category";
-DROP TYPE  IF EXISTS "pickup_membertype";
+DROP TABLE IF EXISTS "pickupmember" CASCADE;
+DROP TYPE  IF EXISTS "pickup_category" CASCADE;
+DROP TYPE  IF EXISTS "pickup_membertype" CASCADE;
 
 CREATE TYPE "pickup_category" AS ENUM ('member','pickup');
 CREATE TYPE "pickup_membertype" AS ENUM ('group','queue','user');
@@ -2500,7 +2500,7 @@ CREATE TABLE "pickupmember" (
 );
 
 
-DROP TABLE IF EXISTS "dundi";
+DROP TABLE IF EXISTS "dundi" CASCADE;
 CREATE TABLE "dundi" (
  "id"            SERIAL,
  "department"    VARCHAR(255),
@@ -2526,7 +2526,7 @@ CREATE TABLE "dundi" (
 INSERT INTO "dundi" VALUES (1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '0.0.0.0', 4520, NULL, NULL, 5, 2, 'yes', NULL, 0);
 
 
-DROP TABLE IF EXISTS "dundi_mapping";
+DROP TABLE IF EXISTS "dundi_mapping" CASCADE;
 CREATE TABLE "dundi_mapping" (
  "id"              SERIAL,
  "name"            VARCHAR(255) NOT NULL,
@@ -2549,7 +2549,7 @@ CREATE TABLE "dundi_mapping" (
 );
 
 
-DROP TABLE IF EXISTS "dundi_peer";
+DROP TABLE IF EXISTS "dundi_peer" CASCADE;
 CREATE TABLE "dundi_peer" (
  "id"            SERIAL,
  "macaddr"       VARCHAR(64)  NOT NULL,
@@ -2570,7 +2570,7 @@ CREATE TABLE "dundi_peer" (
 );
 
 -- DAHDI
-DROP TABLE IF EXISTS "dahdi_general";
+DROP TABLE IF EXISTS "dahdi_general" CASCADE;
 CREATE TABLE "dahdi_general" (
  "id"                  SERIAL,
  "context"             VARCHAR(255),
@@ -2597,7 +2597,7 @@ CREATE TABLE "dahdi_general" (
 INSERT INTO dahdi_general VALUES(1,'from-extern','fr_FR',1,0,'asreceived',0,1,'unknown','dynamic','outofband','0','00',1,1,1,NULL,1);
 
 
-DROP TABLE IF EXISTS "dahdi_group";
+DROP TABLE IF EXISTS "dahdi_group" CASCADE;
 CREATE TABLE "dahdi_group" (
  "groupno"    INTEGER NOT NULL,
  "context"    VARCHAR(255),
@@ -2618,7 +2618,7 @@ CREATE TABLE "dahdi_group" (
 -- INSERT INTO dahdi_group VALUES (3,'from-extern','fxs_ks',NULL,NULL,NULL, '33');
 
 
-DROP TABLE IF EXISTS "callcenter_campaigns_general";
+DROP TABLE IF EXISTS "callcenter_campaigns_general" CASCADE;
 CREATE TABLE "callcenter_campaigns_general" (
 	"id"                        SERIAL,
 	"records_path"              VARCHAR(2038),
@@ -2646,7 +2646,7 @@ CREATE TABLE "callcenter_campaigns_general" (
 INSERT INTO "callcenter_campaigns_general" VALUES(1,NULL,NULL,15552000,'00:00',2592000,'00:00',15552000,'00:00',NULL,NULL,NULL);
 
 
-DROP TABLE IF EXISTS "callcenter_campaigns_campaign";
+DROP TABLE IF EXISTS "callcenter_campaigns_campaign" CASCADE;
 CREATE TABLE "callcenter_campaigns_campaign" (
 	"id"               SERIAL,
 	"name"             VARCHAR(255) UNIQUE NOT NULL,
@@ -2657,7 +2657,7 @@ CREATE TABLE "callcenter_campaigns_campaign" (
 );
 
 
-DROP TABLE IF EXISTS "callcenter_campaigns_campaign_filter";
+DROP TABLE IF EXISTS "callcenter_campaigns_campaign_filter" CASCADE;
 DROP TYPE  IF EXISTS "callcenter_campaigns_campaign_filter_type";
 
 CREATE TYPE "callcenter_campaigns_campaign_filter_type" AS ENUM ('agent','queue','skill','way');
@@ -2669,7 +2669,7 @@ CREATE TABLE "callcenter_campaigns_campaign_filter" (
 );
 
 
-DROP TABLE IF EXISTS "callcenter_campaigns_tag";
+DROP TABLE IF EXISTS "callcenter_campaigns_tag" CASCADE;
 DROP TYPE  IF EXISTS "callcenter_campaigns_tag_action";
 
 CREATE TYPE "callcenter_campaigns_tag_action" AS ENUM ('removenow','keep','purge');
@@ -2683,7 +2683,7 @@ CREATE TABLE "callcenter_campaigns_tag" (
 INSERT INTO "callcenter_campaigns_tag" VALUES('notag', 'no tag', 'purge');
 
 
-DROP TABLE IF EXISTS "callcenter_campaigns_records";
+DROP TABLE IF EXISTS "callcenter_campaigns_records" CASCADE;
 CREATE TABLE "callcenter_campaigns_records" (
 	"id"                SERIAL,
 	"uniqueid"          VARCHAR(32) NOT NULL,
@@ -2716,7 +2716,7 @@ CREATE TABLE "callcenter_campaigns_records" (
 );
 
 
-DROP TABLE IF EXISTS "agentglobalparams";
+DROP TABLE IF EXISTS "agentglobalparams" CASCADE;
 CREATE TABLE "agentglobalparams" (
  "id" SERIAL,
  "category" VARCHAR(128) NOT NULL,
@@ -2732,7 +2732,7 @@ INSERT INTO "agentglobalparams" VALUES (DEFAULT,'agents','maxlogintries','3');
 INSERT INTO "agentglobalparams" VALUES (DEFAULT,'agents','endcall','no');
 
 
-DROP TABLE IF EXISTS "sccpgeneralsettings";
+DROP TABLE IF EXISTS "sccpgeneralsettings" CASCADE;
 CREATE TABLE "sccpgeneralsettings" (
     "id"                SERIAL,
     "option_name"       varchar(80) NOT NULL,
@@ -2745,7 +2745,7 @@ INSERT INTO "sccpgeneralsettings" VALUES (DEFAULT, 'dialtimeout', '5');
 INSERT INTO "sccpgeneralsettings" VALUES (DEFAULT, 'language', 'en_US');
 
 
-DROP TABLE IF EXISTS "sccpline";
+DROP TABLE IF EXISTS "sccpline" CASCADE;
 CREATE TABLE "sccpline" (
     "id"        SERIAL,
     "name"      varchar(80) NOT NULL,
@@ -2758,7 +2758,7 @@ CREATE TABLE "sccpline" (
 );
 
 
-DROP TABLE IF EXISTS "sccpdevice";
+DROP TABLE IF EXISTS "sccpdevice" CASCADE;
 CREATE TABLE "sccpdevice" (
     "id"        SERIAL,
     "name"      varchar(80) NOT NULL,
@@ -2769,7 +2769,7 @@ CREATE TABLE "sccpdevice" (
 );
 
 
-DROP TYPE IF EXISTS "queue_statistics";
+DROP TYPE IF EXISTS "queue_statistics" CASCADE;
 CREATE TYPE "queue_statistics" AS (
     received_call_count bigint,
     answered_call_count bigint,
@@ -2780,7 +2780,7 @@ CREATE TYPE "queue_statistics" AS (
     mean_hold_time integer
 );
 
-DROP TABLE IF EXISTS "agent_login_status";
+DROP TABLE IF EXISTS "agent_login_status" CASCADE;
 CREATE TABLE "agent_login_status" (
     "agent_id"        INTEGER      PRIMARY KEY,
     "extension"       VARCHAR(80)  NOT NULL,
