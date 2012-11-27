@@ -213,8 +213,16 @@ INSERT INTO "cti_profile_xlet" VALUES ((SELECT "id" FROM "cti_xlet" WHERE "plugi
                                        TRUE, TRUE, TRUE, TRUE, 0);
 INSERT INTO "cti_profile_xlet" VALUES ((SELECT "id" FROM "cti_xlet" WHERE "plugin_name" = 'switchboard'),
                                        (SELECT "id" FROM "cti_profile" WHERE "name" = 'switchboard'),
-                                       (SELECT "id" FROM "cti_xlet_layout" WHERE "name" = 'grid'),
+                                       (SELECT "id" FROM "cti_xlet_layout" WHERE "name" = 'dock'),
                                        TRUE, TRUE, TRUE, TRUE, 1);
+INSERT INTO "cti_profile_xlet" VALUES ((SELECT "id" FROM "cti_xlet" WHERE "plugin_name" = 'dial'),
+                                       (SELECT "id" FROM "cti_profile" WHERE "name" = 'switchboard'),
+                                       (SELECT "id" FROM "cti_xlet_layout" WHERE "name" = 'dock'),
+                                       TRUE, TRUE, TRUE, TRUE, 2);
+INSERT INTO "cti_profile_xlet" VALUES ((SELECT "id" FROM "cti_xlet" WHERE "plugin_name" = 'search'),
+                                       (SELECT "id" FROM "cti_profile" WHERE "name" = 'switchboard'),
+                                       (SELECT "id" FROM "cti_xlet_layout" WHERE "name" = 'dock'),
+                                       TRUE, TRUE, TRUE, TRUE, 3);
 
 
 GRANT ALL ON ALL SEQUENCES IN SCHEMA public to asterisk;
