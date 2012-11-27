@@ -173,6 +173,7 @@ INSERT INTO "cti_profile_preference" (
      WHERE preferences <> ''
    ) AS preference_split
  ) AS preference_id
+ WHERE "preference_name" <> ''
 );
 
 DROP TABLE IF EXISTS "cti_profile_service" CASCADE;
