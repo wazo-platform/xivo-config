@@ -44,7 +44,7 @@ INSERT INTO "cti_preference"("option") VALUES ('loginwindow.url');
 INSERT INTO "cti_preference"("option") VALUES ('xlet.identity.logagent');
 INSERT INTO "cti_preference"("option") VALUES ('xlet.identity.pauseagent');
 INSERT INTO "cti_preference"("option") VALUES ('xlet.agentdetails.noqueueaction');
-INSERT INTO "cti_preference"("option") VALUES ('xlet.agentdetails.hideAStid');
+INSERT INTO "cti_preference"("option") VALUES ('xlet.agentdetails.hideastid');
 INSERT INTO "cti_preference"("option") VALUES ('xlet.agentdetails.hidecontext');
 INSERT INTO "cti_preference"("option") VALUES ('xlet.agents.fontname');
 INSERT INTO "cti_preference"("option") VALUES ('xlet.agents.fontsize');
