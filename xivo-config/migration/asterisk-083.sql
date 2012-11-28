@@ -158,23 +158,26 @@ CREATE TABLE "cti_profile_preference" (
 
 INSERT INTO "cti_profile_preference" (
   SELECT
-    "profile_id",
-    (SELECT cti_preference."id" FROM cti_preference where cti_preference."option" = "preference_name") AS "preference_id",
+    (SELECT "cti_profile"."id" FROM "cti_profile" WHERE "cti_profile"."name" = "profile_name") AS "profile_id",
+    (SELECT "cti_preference"."id" FROM "cti_preference" where "cti_preference"."option" = "preference_name") AS "preference_id",
     "value"
   FROM (
    SELECT
-     id AS "profile_id",
+     "id" AS "profile_id",
+     "name" AS "profile_name",
      trim(both '"' FROM trim(both ' ' FROM pref[1])) AS "preference_name",
      trim(both '"' FROM trim(both ' ' FROM pref[2])) AS "value"
    FROM (
-     SELECT id,
-       regexp_split_to_array(trim(trailing '}' FROM trim(leading '{' FROM regexp_split_to_table("preferences", ','))), ':') AS "pref"
-     FROM ctiprofiles
-     WHERE preferences <> ''
-   ) AS preference_split
- ) AS preference_id
+     SELECT "id",
+        "name",
+        regexp_split_to_array(trim(trailing '}' FROM trim(leading '{' FROM regexp_split_to_table("preferences", ','))), ':') AS "pref"
+     FROM "ctiprofiles"
+     WHERE "preferences" <> ''
+   ) AS "preference_split"
+ ) AS "preference_id"
  WHERE "preference_name" <> ''
 );
+
 
 DROP TABLE IF EXISTS "cti_profile_service" CASCADE;
 CREATE TABLE "cti_profile_service" (
@@ -182,18 +185,21 @@ CREATE TABLE "cti_profile_service" (
        "service_id" INTEGER REFERENCES "cti_service"("id") ON DELETE CASCADE,
        PRIMARY KEY("profile_id", "service_id")
 );
+
 INSERT INTO "cti_profile_service" (
-SELECT "profile_id",
-       (SELECT "cti_service"."id"
-        FROM "cti_service"
-        WHERE "cti_service"."key" = "service_name") AS "service_id"
-FROM (
-  SELECT  "id" AS "profile_id",
-          regexp_split_to_table("services", ',') AS "service_name"
-  FROM "ctiprofiles"
-  WHERE "services" <> ''
-) AS "service"
+  SELECT
+    (SELECT "cti_profile"."id" FROM "cti_profile" WHERE "cti_profile"."name" = "profile_name") AS "profile_id",
+    (SELECT "cti_service"."id" FROM "cti_service" WHERE "cti_service"."key" = "service_name") AS "service_id"
+  FROM (
+    SELECT
+      "id" AS "profile_id",
+      "name" AS "profile_name",
+      regexp_split_to_table("services", ',') AS "service_name"
+    FROM "ctiprofiles"
+    WHERE "services" <> ''
+  ) AS "service"
 );
+
 
 DELETE FROM "cti_profile" WHERE "name" = 'oper';
 DELETE FROM "cti_profile" WHERE "name" = 'clock';
