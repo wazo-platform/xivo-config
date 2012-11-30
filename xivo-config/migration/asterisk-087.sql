@@ -1,9 +1,9 @@
 /*
- * XiVO BASe-Config
+ * XiVO Base-Config
  * Copyright (C) 2012  Avencall
  *
  * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License AS published by
+ * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
@@ -18,8 +18,13 @@
 
 BEGIN;
 
-DROP TABLE IF EXISTS "dundi" CASCADE;
-DROP TABLE IF EXISTS "dundi_mapping" CASCADE;
-DROP TABLE IF EXISTS "dundi_peer" CASCADE;
+ALTER TABLE "agent_login_status"
+    ADD COLUMN "interface" VARCHAR(128);
+
+UPDATE "agent_login_status" SET "interface" = 'Local/' || "extension" || '@' || "context";
+
+ALTER TABLE "agent_login_status"
+    ALTER "interface" SET NOT NULL,
+    ADD UNIQUE ("interface");
 
 COMMIT;
