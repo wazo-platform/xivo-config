@@ -79,6 +79,7 @@ INSERT INTO "cti_xlet"("plugin_name") VALUES ('switchboard');
 INSERT INTO "cti_xlet"("plugin_name") VALUES ('calls');
 INSERT INTO "cti_xlet"("plugin_name") VALUES ('callcampaign');
 INSERT INTO "cti_xlet"("plugin_name") VALUES ('operator');
+INSERT INTO "cti_xlet"("plugin_name") VALUES ('xletweb');
 
 DROP TABLE IF EXISTS "cti_xlet_layout" CASCADE;
 CREATE TABLE "cti_xlet_layout" (
@@ -207,6 +208,7 @@ DELETE FROM "cti_profile" WHERE "name" = 'clock';
 DELETE FROM "cti_xlet" WHERE "plugin_name" = 'operator';
 DELETE FROM "cti_xlet" WHERE "plugin_name" = 'calls';
 DELETE FROM "cti_xlet" WHERE "plugin_name" = 'callcampaign';
+DELETE FROM "cti_xlet" WHERE "plugin_name" = 'xletweb';
 
 DROP TABLE "ctiprofiles";
 
