@@ -458,28 +458,36 @@ INSERT INTO "cti_profile_xlet" VALUES ((SELECT "id" FROM "cti_xlet" WHERE "plugi
                                        TRUE, TRUE, TRUE, TRUE, 2);
 INSERT INTO "cti_profile_xlet" VALUES ((SELECT "id" FROM "cti_xlet" WHERE "plugin_name" = 'search'),
                                        (SELECT "id" FROM "cti_profile" WHERE "name" = 'client'),
-                                       (SELECT "id" FROM "cti_xlet_layout" WHERE "name" = 'tab'));
+                                       (SELECT "id" FROM "cti_xlet_layout" WHERE "name" = 'tab'),
+                                       TRUE, TRUE, TRUE, TRUE, 0);
 INSERT INTO "cti_profile_xlet" VALUES ((SELECT "id" FROM "cti_xlet" WHERE "plugin_name" = 'customerinfo'),
                                        (SELECT "id" FROM "cti_profile" WHERE "name" = 'client'),
-                                       (SELECT "id" FROM "cti_xlet_layout" WHERE "name" = 'tab'));
+                                       (SELECT "id" FROM "cti_xlet_layout" WHERE "name" = 'tab'),
+                                       TRUE, TRUE, TRUE, TRUE, 1);
 INSERT INTO "cti_profile_xlet" VALUES ((SELECT "id" FROM "cti_xlet" WHERE "plugin_name" = 'fax'),
                                        (SELECT "id" FROM "cti_profile" WHERE "name" = 'client'),
-                                       (SELECT "id" FROM "cti_xlet_layout" WHERE "name" = 'tab'));
+                                       (SELECT "id" FROM "cti_xlet_layout" WHERE "name" = 'tab'),
+                                       TRUE, TRUE, TRUE, TRUE, 2);
 INSERT INTO "cti_profile_xlet" VALUES ((SELECT "id" FROM "cti_xlet" WHERE "plugin_name" = 'history'),
                                        (SELECT "id" FROM "cti_profile" WHERE "name" = 'client'),
-                                       (SELECT "id" FROM "cti_xlet_layout" WHERE "name" = 'tab'));
+                                       (SELECT "id" FROM "cti_xlet_layout" WHERE "name" = 'tab'),
+                                       TRUE, TRUE, TRUE, TRUE, 3);
 INSERT INTO "cti_profile_xlet" VALUES ((SELECT "id" FROM "cti_xlet" WHERE "plugin_name" = 'directory'),
                                        (SELECT "id" FROM "cti_profile" WHERE "name" = 'client'),
-                                       (SELECT "id" FROM "cti_xlet_layout" WHERE "name" = 'tab'));
+                                       (SELECT "id" FROM "cti_xlet_layout" WHERE "name" = 'tab'),
+                                       TRUE, TRUE, TRUE, TRUE, 4);
 INSERT INTO "cti_profile_xlet" VALUES ((SELECT "id" FROM "cti_xlet" WHERE "plugin_name" = 'features'),
                                        (SELECT "id" FROM "cti_profile" WHERE "name" = 'client'),
-                                       (SELECT "id" FROM "cti_xlet_layout" WHERE "name" = 'tab'));
+                                       (SELECT "id" FROM "cti_xlet_layout" WHERE "name" = 'tab'),
+                                       TRUE, TRUE, TRUE, TRUE, 5);
 INSERT INTO "cti_profile_xlet" VALUES ((SELECT "id" FROM "cti_xlet" WHERE "plugin_name" = 'mylocaldir'),
                                        (SELECT "id" FROM "cti_profile" WHERE "name" = 'client'),
-                                       (SELECT "id" FROM "cti_xlet_layout" WHERE "name" = 'tab'));
+                                       (SELECT "id" FROM "cti_xlet_layout" WHERE "name" = 'tab'),
+                                       TRUE, TRUE, TRUE, TRUE, 6);
 INSERT INTO "cti_profile_xlet" VALUES ((SELECT "id" FROM "cti_xlet" WHERE "plugin_name" = 'conference'),
                                        (SELECT "id" FROM "cti_profile" WHERE "name" = 'client'),
-                                       (SELECT "id" FROM "cti_xlet_layout" WHERE "name" = 'tab'));
+                                       (SELECT "id" FROM "cti_xlet_layout" WHERE "name" = 'tab'),
+                                       TRUE, TRUE, TRUE, TRUE, 7);
 
 /* switchboard */
 INSERT INTO "cti_profile_xlet" VALUES ((SELECT "id" FROM "cti_xlet" WHERE "plugin_name" = 'identity'),
