@@ -2882,6 +2882,6 @@ LANGUAGE SQL;
 
 -- grant all rights to asterisk
 GRANT ALL ON ALL TABLES IN SCHEMA public TO asterisk;
-GRANT ALL ON ALL SEQUENCES IN SCHEMA public to asterisk;
+GRANT ALL ON ALL SEQUENCES IN SCHEMA public TO asterisk;
 
 COMMIT;
