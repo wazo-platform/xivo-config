@@ -37,6 +37,7 @@ class SQLExecutionException(Exception):
 
 
 class UpdateFile(object):
+
     def __init__(self, db_name, state_dir):
         self._db_name = db_name
         self._state_dir = state_dir
@@ -53,7 +54,7 @@ class UpdateFile(object):
         filename = self._get_filename()
         try:
             return open(filename, mode)
-        except IOError, e:
+        except IOError as e:
             if e.errno == errno.ENOENT:
                 logger.info('Update file %r not found', filename)
                 raise NoUpdateFileException(filename)
@@ -71,6 +72,7 @@ class UpdateFile(object):
 
 
 class PostgresDB(object):
+
     def __init__(self, db_name):
         self._db_name = db_name
 
@@ -111,12 +113,14 @@ class PostgresDB(object):
 
 
 class SQLFile(object):
+
     def __init__(self, filename, update_id):
         self.filename = filename
         self.update_id = update_id
 
 
 class SQLFilesRepository(object):
+
     def __init__(self, db_name, datastorage_dir, migration_dir):
         self._db_name = db_name
         self._datastorage_dir = datastorage_dir
@@ -160,6 +164,7 @@ class SQLFilesRepository(object):
 
 
 class DatabaseUpdater(object):
+
     def __init__(self, db_name, postgres_db, repository, update_file):
         self._db_name = db_name
         self._postgres_db = postgres_db
@@ -219,34 +224,29 @@ class DatabaseUpdater(object):
             logger.info('No new migration files')
 
     @classmethod
-    def new_from_name_and_args(cls, db_name, args):
+    def new_from_name_and_args(cls, db_name, parsed_args):
         postgres_db = PostgresDB(db_name)
-        repository = SQLFilesRepository(db_name, args.datastorage_dir,
-                                        args.migration_dir)
-        update_file = UpdateFile(db_name, args.state_dir)
+        repository = SQLFilesRepository(db_name, parsed_args.datastorage_dir,
+                                        parsed_args.migration_dir)
+        update_file = UpdateFile(db_name, parsed_args.state_dir)
         return cls(db_name, postgres_db, repository, update_file)
 
 
 def main():
-    args = _parse_args(sys.argv[1:])
-    _init_logging(args.verbose)
+    parsed_args = _parse_args()
+
+    _init_logging(parsed_args.verbose)
 
     for db_name in DB_NAMES:
-        db_updater = DatabaseUpdater.new_from_name_and_args(db_name, args)
+        db_updater = DatabaseUpdater.new_from_name_and_args(db_name, parsed_args)
         try:
             db_updater.update()
-        except SQLExecutionException, e:
+        except SQLExecutionException as e:
             logger.error('Error while updating database %r: %s', db_name, e)
             sys.exit(1)
 
 
-def _parse_args(args):
-    parser = _new_argument_parser()
-    parsed_args = parser.parse_args(args)
-    return parsed_args
-
-
-def _new_argument_parser():
+def _parse_args():
     parser = argparse.ArgumentParser()
     parser.add_argument('-v', '--verbose', action='store_true', default=False,
                         help='increase verbosity')
@@ -259,13 +259,13 @@ def _new_argument_parser():
     parser.add_argument('--migration-dir', action='store',
                         default='/usr/share/xivo-config/migration',
                         help='migration directory')
-    return parser
+    return parser.parse_args(args)
 
 
-def _init_logging(verbose=False):
+def _init_logging(verbose):
     logger = logging.getLogger()
     handler = logging.StreamHandler()
-    handler.setFormatter(logging.Formatter("%(message)s"))
+    handler.setFormatter(logging.Formatter('%(message)s'))
     logger.addHandler(handler)
     if verbose:
         logger.setLevel(logging.INFO)
