@@ -341,6 +341,7 @@ INSERT INTO "cti_xlet" VALUES (DEFAULT, 'queues');
 INSERT INTO "cti_xlet" VALUES (DEFAULT, 'queuemembers');
 INSERT INTO "cti_xlet" VALUES (DEFAULT, 'queueentrydetails');
 INSERT INTO "cti_xlet" VALUES (DEFAULT, 'switchboard');
+INSERT INTO "cti_xlet" VALUES (DEFAULT, 'remotedirectory');
 
 DROP TABLE IF EXISTS "cti_xlet_layout" CASCADE;
 CREATE TABLE "cti_xlet_layout" (
@@ -472,7 +473,7 @@ INSERT INTO "cti_profile_xlet" VALUES ((SELECT "id" FROM "cti_xlet" WHERE "plugi
                                        (SELECT "id" FROM "cti_profile" WHERE "name" = 'Client'),
                                        (SELECT "id" FROM "cti_xlet_layout" WHERE "name" = 'tab'),
                                        TRUE, TRUE, TRUE, TRUE, 3);
-INSERT INTO "cti_profile_xlet" VALUES ((SELECT "id" FROM "cti_xlet" WHERE "plugin_name" = 'directory'),
+INSERT INTO "cti_profile_xlet" VALUES ((SELECT "id" FROM "cti_xlet" WHERE "plugin_name" = 'remotedirectory'),
                                        (SELECT "id" FROM "cti_profile" WHERE "name" = 'Client'),
                                        (SELECT "id" FROM "cti_xlet_layout" WHERE "name" = 'tab'),
                                        TRUE, TRUE, TRUE, TRUE, 4);
@@ -502,10 +503,11 @@ INSERT INTO "cti_profile_xlet" VALUES ((SELECT "id" FROM "cti_xlet" WHERE "plugi
                                        (SELECT "id" FROM "cti_profile" WHERE "name" = 'Switchboard'),
                                        (SELECT "id" FROM "cti_xlet_layout" WHERE "name" = 'dock'),
                                        TRUE, TRUE, TRUE, TRUE, 2);
-INSERT INTO "cti_profile_xlet" VALUES ((SELECT "id" FROM "cti_xlet" WHERE "plugin_name" = 'search'),
+INSERT INTO "cti_profile_xlet" VALUES ((SELECT "id" FROM "cti_xlet" WHERE "plugin_name" = 'directory'),
                                        (SELECT "id" FROM "cti_profile" WHERE "name" = 'Switchboard'),
                                        (SELECT "id" FROM "cti_xlet_layout" WHERE "name" = 'dock'),
                                        TRUE, TRUE, TRUE, TRUE, 3);
+
 
 
 DROP TABLE IF EXISTS "cti_profile_preference" CASCADE;
