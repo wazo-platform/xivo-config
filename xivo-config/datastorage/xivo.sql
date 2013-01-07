@@ -409,6 +409,6 @@ CREATE UNIQUE INDEX "stats_conf_xivouser_index" ON "stats_conf_xivouser" USING b
 
 -- grant all rights to xivo
 GRANT ALL ON ALL TABLES IN SCHEMA public TO xivo;
-GRANT ALL ON ALL SEQUENCES IN SCHEMA public to xivo;
+GRANT ALL ON ALL SEQUENCES IN SCHEMA public TO xivo;
 
 COMMIT;
