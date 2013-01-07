@@ -17,7 +17,7 @@ def main():
 def _parse_args():
     parser = argparse.ArgumentParser()
     parser.add_argument('seconds', type=int,
-                        help='number of seconds of queue_log to keep')
+                        help='number of seconds of queue_info to keep')
     return parser.parse_args()
 
 
