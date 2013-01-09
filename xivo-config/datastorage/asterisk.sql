@@ -2771,6 +2771,7 @@ CREATE TYPE "queue_statistics" AS (
     mean_hold_time integer
 );
 
+
 DROP TABLE IF EXISTS "agent_login_status" CASCADE;
 CREATE TABLE "agent_login_status" (
     "agent_id"        INTEGER      PRIMARY KEY,
@@ -2779,6 +2780,14 @@ CREATE TABLE "agent_login_status" (
     "interface"       VARCHAR(128) NOT NULL UNIQUE,
     "login_at"        TIMESTAMP    NOT NULL DEFAULT NOW(),
     UNIQUE ("extension", "context")
+);
+
+
+DROP TABLE IF EXISTS "agent_membership_status" CASCADE;
+CREATE TABLE "agent_membership_status" (
+    "agent_id"        INTEGER,
+    "queue_id"        INTEGER,
+    PRIMARY KEY("agent_id", "queue_id")
 );
 
 
