@@ -2786,8 +2786,9 @@ CREATE TABLE "agent_login_status" (
 
 DROP TABLE IF EXISTS "agent_membership_status" CASCADE;
 CREATE TABLE "agent_membership_status" (
-    "agent_id"        INTEGER,
-    "queue_id"        INTEGER,
+    "agent_id"        INTEGER      NOT NULL,
+    "queue_id"        INTEGER      NOT NULL,
+    "queue_name"      VARCHAR(128) NOT NULL,
     PRIMARY KEY("agent_id", "queue_id")
 );
 
