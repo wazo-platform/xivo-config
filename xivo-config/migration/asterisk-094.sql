@@ -22,22 +22,22 @@ ALTER TABLE "agent_membership_status"
     ADD COLUMN "queue_name" VARCHAR(128) NOT NULL;
 
 
-INSERT INTO agent_membership_status (
-    agent_id,
-    queue_id,
-    queue_name
+INSERT INTO "agent_membership_status" (
+    "agent_id",
+    "queue_id",
+    "queue_name"
 )
 SELECT
-    agent_login_status.agent_id     AS agent_id,
-    queuefeatures.id                AS queue_id,
-    queuefeatures.name              AS queue_name
+    "agent_login_status"."agent_id" AS "agent_id",
+    "queuefeatures"."id"            AS "queue_id",
+    "queuefeatures"."name"          AS "queue_name"
 FROM
-    agent_login_status
-    INNER JOIN queuemember
-        ON agent_login_status.agent_id = queuemember.userid
-        AND queuemember.usertype = 'agent'
-        INNER JOIN queuefeatures
-            ON queuefeatures.name = queuemember.queue_name
+    "agent_login_status"
+    INNER JOIN "queuemember"
+        ON "agent_login_status"."agent_id" = "queuemember"."userid"
+        AND "queuemember"."usertype" = 'agent'
+        INNER JOIN "queuefeatures"
+            ON "queuefeatures"."name" = "queuemember"."queue_name"
 ;
 
 COMMIT;
