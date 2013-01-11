@@ -2775,6 +2775,7 @@ CREATE TYPE "queue_statistics" AS (
 DROP TABLE IF EXISTS "agent_login_status" CASCADE;
 CREATE TABLE "agent_login_status" (
     "agent_id"        INTEGER      PRIMARY KEY,
+    "agent_number"    VARCHAR(40)  NOT NULL,
     "extension"       VARCHAR(80)  NOT NULL,
     "context"         VARCHAR(80)  NOT NULL,
     "interface"       VARCHAR(128) NOT NULL UNIQUE,
