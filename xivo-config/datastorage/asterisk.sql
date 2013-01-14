@@ -63,6 +63,7 @@ CREATE TABLE "agentfeatures" (
  "group" VARCHAR(255),
  "commented" INTEGER NOT NULL DEFAULT 0, -- BOOLEAN
  "description" text NOT NULL,
+ "preprocess_subroutine" VARCHAR(40),
  PRIMARY KEY("id")
 );
 
