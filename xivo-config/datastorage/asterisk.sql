@@ -2609,6 +2609,7 @@ CREATE INDEX queue_log__idx_time ON queue_log USING btree ("time");
 CREATE INDEX queue_log__idx_callid ON queue_log USING btree ("callid");
 CREATE INDEX queue_log__idx_queuename ON queue_log USING btree ("queuename");
 CREATE INDEX queue_log__idx_event ON queue_log USING btree ("event");
+CREATE INDEX queue_log__idx_agent ON queue_log USING btree ("agent");
 
 DROP TYPE IF EXISTS "call_exit_type" CASCADE;
 CREATE TYPE "call_exit_type" AS ENUM (
