@@ -2792,6 +2792,7 @@ CREATE TABLE "agent_membership_status" (
     "agent_id"        INTEGER      NOT NULL,
     "queue_id"        INTEGER      NOT NULL,
     "queue_name"      VARCHAR(128) NOT NULL,
+    "penalty"         INTEGER      NOT NULL DEFAULT 0,
     PRIMARY KEY("agent_id", "queue_id")
 );
 
