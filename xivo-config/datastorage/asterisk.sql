@@ -2796,6 +2796,48 @@ CREATE TABLE "agent_membership_status" (
     PRIMARY KEY("agent_id", "queue_id")
 );
 
+--DDL for recordings: 
+DROP TABLE IF EXISTS recording;
+DROP TABLE IF EXISTS record_campaign;
+
+CREATE TABLE record_campaign
+(
+  id serial NOT NULL,
+  campaign_name character varying(128) NOT NULL,
+  activated boolean NOT NULL,
+  base_filename character varying(64) NOT NULL,
+  queue_id integer,
+  start_date timestamp without time zone,
+  end_date timestamp without time zone,
+  CONSTRAINT record_campaign_pkey PRIMARY KEY (id ),
+  CONSTRAINT record_campaign_queue_id_fkey FOREIGN KEY (queue_id)
+      REFERENCES queuefeatures (id) MATCH SIMPLE
+      ON UPDATE CASCADE ON DELETE SET NULL,
+  CONSTRAINT campaign_name_u UNIQUE (campaign_name )
+);
+
+
+CREATE TABLE recording
+(
+  cid character varying(32) NOT NULL,
+  start_time timestamp without time zone,
+  end_time timestamp without time zone,
+  caller character varying(32),
+  client_id character varying(1024),
+  callee character varying(32),
+  filename character varying(1024),
+  campaign_id integer NOT NULL,
+  agent_id integer,
+  CONSTRAINT recording_pkey PRIMARY KEY (cid ),
+  CONSTRAINT recording_agent_id_fkey FOREIGN KEY (agent_id)
+      REFERENCES agentfeatures (id) MATCH SIMPLE
+      ON UPDATE CASCADE ON DELETE SET NULL,
+  CONSTRAINT recording_campaign_id_fkey FOREIGN KEY (campaign_id)
+      REFERENCES record_campaign (id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION
+);
+
+
 
 DROP FUNCTION IF EXISTS "fill_answered_calls" (text, text);
 CREATE FUNCTION "fill_answered_calls"(period_start text, period_end text)
