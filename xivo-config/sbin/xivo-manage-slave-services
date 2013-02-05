@@ -55,13 +55,23 @@ set_berofos_to_master_state() {
     /usr/sbin/xivo-berofos -q --syslog master
 }
 
+enable_xivo() {
+    echo startup=yes > $XIVO_DEFAULT_FILE
+}
+
+disable_xivo() {
+    echo startup=no > $XIVO_DEFAULT_FILE
+}
+
 enable_service() {
     enable_asterisk
     enable_monit
     set_berofos_to_slave_state
+    enable_xivo
 }
 
 disable_service() {
+    desable_xivo
     set_berofos_to_master_state
     disable_monit
     disable_asterisk
