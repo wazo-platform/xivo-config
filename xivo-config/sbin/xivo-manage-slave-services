@@ -56,11 +56,11 @@ set_berofos_to_master_state() {
 }
 
 enable_xivo() {
-    echo startup=yes > $XIVO_DEFAULT_FILE
+    echo startup=yes > /etc/default/xivo
 }
 
 disable_xivo() {
-    echo startup=no > $XIVO_DEFAULT_FILE
+    echo startup=no > /etc/default/xivo
 }
 
 enable_service() {
