@@ -686,9 +686,7 @@ CREATE TABLE "ctisheetactions" (
  "id" SERIAL,
  "name" VARCHAR(50),
  "description" text NOT NULL,
- "context" VARCHAR(50),
  "whom" VARCHAR(50),
- "capaids" text NOT NULL,
  "sheet_info" text,
  "systray_info" text,
  "sheet_qtui" text,
@@ -699,28 +697,21 @@ CREATE TABLE "ctisheetactions" (
  PRIMARY KEY("id")
 );
 
-INSERT INTO "ctisheetactions" VALUES(DEFAULT,'XiVO','Modèle de fiche de base.','[]','dest','[]','{"10": [ "Nom","title","","{xivo-calleridname}",0 ],"20": [ "Numéro","text","","{xivo-calleridnum}",0 ],"30": [ "Origine","text","","{xivo-origin}",0 ]}','{"10": [ "Nom","title","","{xivo-calledidname}" ],"20": [ "Numéro","body","","{xivo-calleridnum}" ],"30": [ "Origine","body","","{xivo-origin}" ]}','','{}',0,1,1);
+INSERT INTO "ctisheetactions" VALUES(DEFAULT,'XiVO','Modèle de fiche de base.','dest','{"10": [ "Nom","title","","{xivo-calleridname}",0 ],"20": [ "Numéro","text","","{xivo-calleridnum}",0 ],"30": [ "Origine","text","","{xivo-origin}",0 ]}','{"10": [ "Nom","title","","{xivo-calledidname}" ],"20": [ "Numéro","body","","{xivo-calleridnum}" ],"30": [ "Origine","body","","{xivo-origin}" ]}','','{}',0,1,1);
 
 
 DROP TABLE IF EXISTS "ctisheetevents" CASCADE;
 CREATE TABLE "ctisheetevents" (
  "id" SERIAL,
- "agentlinked" VARCHAR(50),
- "agentunlinked" VARCHAR(50),
- "faxreceived" VARCHAR(50),
- "incomingqueue" VARCHAR(50),
- "incominggroup" VARCHAR(50),
  "incomingdid" VARCHAR(50),
- "outcall" VARCHAR(50),
  "hangup" VARCHAR(50),
  "dial" VARCHAR(50),
  "link" VARCHAR(50),
  "unlink" VARCHAR(50),
- "custom" text NOT NULL,
  PRIMARY KEY("id")
 );
 
-INSERT INTO "ctisheetevents" VALUES(DEFAULT,'','','','','','','','','XiVO','','','{"": ""}');
+INSERT INTO "ctisheetevents" VALUES(DEFAULT,'','','XiVO','','');
 
 
 DROP TABLE IF EXISTS "ctistatus" CASCADE;
