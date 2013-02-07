@@ -48,6 +48,7 @@ server {
     location ^~ /extra-libs/timepicker/    { alias /usr/share/javascript/jquery.timepicker/; }
     location ^~ /extra-libs/multiselect/   { alias /usr/share/javascript/jquery.multiselect/; }
     location ^~ /extra-libs/ui-timepicker/ { alias /usr/share/javascript/jquery-ui.timepicker/; }
+    location ^~ /extra-libs/select2/       { alias /usr/share/javascript/select2/; }
 
     location ~ ^/monit {
         rewrite ^/monit/(.*) /$1 break;
