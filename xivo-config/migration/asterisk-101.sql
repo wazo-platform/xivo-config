@@ -1,6 +1,6 @@
 /*
  * XiVO Base-Config
- * Copyright (C) 2012  Avencall
+ * Copyright (C) 2013  Avencall
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,13 +18,19 @@
 
 BEGIN;
 
-UPDATE ctisheetevents SET link=agentlinked WHERE link='' AND agentlinked<>'';
-UPDATE ctisheetevents SET unlink=agentunlinked WHERE unlink='' AND agentunlinked<>'';
-ALTER TABLE ctisheetevents DROP COLUMN agentlinked;
-ALTER TABLE ctisheetevents DROP COLUMN agentunlinked;
-ALTER TABLE ctisheetevents DROP COLUMN faxreceived;
-ALTER TABLE ctisheetevents DROP COLUMN outcall;
-ALTER TABLE ctisheetevents DROP COLUMN incomingqueue;
-ALTER TABLE ctisheetevents DROP COLUMN incominggroup;
+ALTER TABLE "ctisheetactions"
+    DROP COLUMN "context",
+    DROP COLUMN "capaids";
+
+ALTER TABLE "ctisheetevents"
+    -- some columns were previsouly removed in a migration script
+    -- but not in the asterisk.sql script
+    DROP COLUMN IF EXISTS "agentlinked",
+    DROP COLUMN IF EXISTS "agentunlinked",
+    DROP COLUMN IF EXISTS "faxreceived",
+    DROP COLUMN IF EXISTS "outcall",
+    DROP COLUMN IF EXISTS "incomingqueue",
+    DROP COLUMN IF EXISTS "incominggroup",
+    DROP COLUMN "custom";
 
 COMMIT;

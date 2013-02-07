@@ -27,26 +27,6 @@ disable_asterisk() {
     fi
 }
 
-enable_ctid() {
-    grep -q "startup=no" /etc/default/xivo-ctid
-    if [ $? -eq 0 ]; then
-        sed -i 's/startup=no/startup=yes/' /etc/default/xivo-ctid
-    fi
-    if [ ! -f /var/run/xivo-ctid.pid ]; then
-        /usr/sbin/invoke-rc.d xivo-ctid start
-    fi
-}
-
-disable_ctid() {
-    if [ -f /var/run/xivo-ctid.pid ]; then
-        /usr/sbin/invoke-rc.d xivo-ctid stop
-    fi
-    grep -q "startup=yes" /etc/default/xivo-ctid
-    if [ $? -eq 0 ]; then
-        sed -i 's/startup=yes/startup=no/' /etc/default/xivo-ctid
-    fi
-}
-
 enable_monit() {
     grep -q "startup=0" /etc/default/monit
     if [ $? -eq 0 ]; then
@@ -75,17 +55,25 @@ set_berofos_to_master_state() {
     /usr/sbin/xivo-berofos -q --syslog master
 }
 
+enable_xivo() {
+    echo startup=yes > /etc/default/xivo
+}
+
+disable_xivo() {
+    echo startup=no > /etc/default/xivo
+}
+
 enable_service() {
     enable_asterisk
-    enable_ctid
     enable_monit
     set_berofos_to_slave_state
+    enable_xivo
 }
 
 disable_service() {
+    desable_xivo
     set_berofos_to_master_state
     disable_monit
-    disable_ctid
     disable_asterisk
 }
 
