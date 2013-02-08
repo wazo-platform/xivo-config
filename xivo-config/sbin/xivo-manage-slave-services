@@ -1,5 +1,6 @@
 #!/bin/sh
 
+xivo_agentctl="/usr/bin/xivo-agentctl"
 xivo_service="/usr/bin/xivo-service"
 
 usage() {
@@ -63,6 +64,7 @@ enable_service() {
     set_berofos_to_slave_state
     $xivo_service enable
     $xivo_service start
+    $xivo_agentctl --no-fetch -c 'relog all'
 }
 
 disable_service() {
