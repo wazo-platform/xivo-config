@@ -2846,11 +2846,15 @@ $$
          WHEN event = 'TRANSFER' THEN CAST (data4 AS INTEGER) END as talktime,
     CASE WHEN event IN ('COMPLETEAGENT', 'COMPLETECALLER') THEN CAST (data1 AS INTEGER)
          WHEN event = 'TRANSFER' THEN CAST (data3 AS INTEGER) END as waittime,
-    (SELECT id FROM stat_queue WHERE "name"=outer_queue_log.queuename) AS queue_id,
-    (SELECT id FROM stat_agent WHERE "name"=outer_queue_log.agent) AS agent_id,
+    stat_queue.id AS queue_id,
+    stat_agent.id AS agent_id,
     'answered' AS status
   FROM
     queue_log as outer_queue_log
+  LEFT JOIN
+    stat_agent ON outer_queue_log.agent = stat_agent.name
+  LEFT JOIN
+    stat_queue ON outer_queue_log.queuename = stat_queue.name
   WHERE
     callid IN
       (SELECT callid
