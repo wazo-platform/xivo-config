@@ -5,7 +5,7 @@ BASE_TEMPLATE_DIR=/usr/share/xivo-config/templates
 CUSTOM_TEMPLATE_DIR=/etc/pf-xivo/custom-templates
 
 set -o allexport
-. /usr/sbin/pf-common-read-config
+. /usr/sbin/xivo-read-config
 set +o allexport
 
 # list all variables with the good prefix
