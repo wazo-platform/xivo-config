@@ -2934,6 +2934,29 @@ $$
 $$
 LANGUAGE SQL;
 
+DROP FUNCTION IF EXISTS "set_agent_on_pauseall" ();
+CREATE FUNCTION "set_agent_on_pauseall" ()
+  RETURNS trigger AS
+$$
+DECLARE
+    "number" text;
+BEGIN
+    SELECT "agent_number" INTO "number" FROM "agent_login_status" WHERE "interface" = NEW."agent";
+    IF FOUND THEN
+        NEW."agent" := 'Agent/' || "number";
+    END IF;
+
+    RETURN NEW;
+END;
+$$
+LANGUAGE plpgsql;
+
+CREATE TRIGGER "change_queue_log_agent"
+    BEFORE INSERT ON "queue_log"
+    FOR EACH ROW
+    WHEN (NEW."event" = 'PAUSEALL' OR NEW."event" = 'UNPAUSEALL')
+    EXECUTE PROCEDURE "set_agent_on_pauseall"();
+
 -- grant all rights to asterisk
 GRANT ALL ON ALL TABLES IN SCHEMA public TO asterisk;
 GRANT ALL ON ALL SEQUENCES IN SCHEMA public TO asterisk;
