@@ -2898,7 +2898,7 @@ SELECT
   'leaveempty' AS status
 FROM (SELECT
         CAST (time AS TIMESTAMP) AS enter_time,
-        (select CAST (time AS TIMESTAMP) from queue_log where callid=main.callid AND event='LEAVEEMPTY') AS leave_time,
+        (select CAST (time AS TIMESTAMP) from queue_log where callid=main.callid AND event='LEAVEEMPTY' LIMIT 1) AS leave_time,
         callid,
         (SELECT id FROM stat_queue WHERE name=queuename) AS queue_id
       FROM queue_log AS main
