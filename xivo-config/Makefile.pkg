@@ -5,3 +5,4 @@ DEB_PKG="xivo-config"
 DEB_TB_DEPS=""
 
 default:
+
