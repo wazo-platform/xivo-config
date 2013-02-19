@@ -4,7 +4,7 @@ server {
 
     access_log /var/log/nginx/xivo.access.log;
     error_log /var/log/nginx/xivo.error.log;
-    root /usr/share/pf-xivo-web-interface/www;
+    root /usr/share/xivo-web-interface/www;
 
     location / {
         if ($host !~* "(127\.0\.0\.1|localhost)") {
@@ -27,7 +27,7 @@ server {
 
     access_log /var/log/nginx/xivo.access.log;
     error_log /var/log/nginx/xivo.error.log;
-    root /usr/share/pf-xivo-web-interface/www;
+    root /usr/share/xivo-web-interface/www;
 
     location / {
         rewrite ^/backup/(.*) /backup.php?path=$1 last;
