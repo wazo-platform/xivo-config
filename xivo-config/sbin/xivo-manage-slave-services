@@ -1,7 +1,6 @@
 #!/bin/sh
 
-xivo_agentctl="/usr/bin/xivo-agentctl"
-xivo_service="/usr/bin/xivo-service"
+PATH=/bin:/usr/bin:/sbin:/usr/sbin
 
 usage() {
     cat << EOF
@@ -39,29 +38,29 @@ disable_monit() {
 }
 
 set_berofos_to_slave_state() {
-    /usr/sbin/xivo-berofos -q --syslog slave
+    xivo-berofos -q --syslog slave
 }
 
 set_berofos_to_master_state() {
-    /usr/sbin/xivo-berofos -q --syslog master
+    xivo-berofos -q --syslog master
 }
 
 enable_service() {
     enable_asterisk
     enable_monit
     set_berofos_to_slave_state
-    $xivo_service enable
-    $xivo_service start
-    $xivo_agentctl --no-fetch -c 'relog all'
+    xivo-service enable
+    xivo-service start
+    xivo-agentctl --no-fetch -c 'relog all'
 }
 
 disable_service() {
-    $xivo_service stop
-    $xivo_service disable
-    $xivo_service start
+    xivo-service stop
+    xivo-service disable
     set_berofos_to_master_state
     disable_monit
     disable_asterisk
+    xivo-service start
 }
 
 case $1 in
