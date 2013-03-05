@@ -9,34 +9,6 @@ usage() {
 EOF
 }
 
-enable_asterisk() {
-    grep -q RUNASTERISK=no /etc/default/asterisk
-    if [ $? -eq 0 ]; then
-        sed -i 's/RUNASTERISK=no/RUNASTERISK=yes/' /etc/default/asterisk
-    fi
-}
-
-disable_asterisk() {
-    grep -q RUNASTERISK=yes /etc/default/asterisk
-    if [ $? -eq 0 ]; then
-        sed -i 's/RUNASTERISK=yes/RUNASTERISK=no/' /etc/default/asterisk
-    fi
-}
-
-enable_monit() {
-    grep -q "startup=0" /etc/default/monit
-    if [ $? -eq 0 ]; then
-        sed -i 's/startup=0/startup=1/' /etc/default/monit
-    fi
-}
-
-disable_monit() {
-    grep -q "startup=1" /etc/default/monit
-    if [ $? -eq 0 ]; then
-        sed -i 's/startup=1/startup=0/' /etc/default/monit
-    fi
-}
-
 set_berofos_to_slave_state() {
     xivo-berofos -q --syslog slave
 }
@@ -46,8 +18,6 @@ set_berofos_to_master_state() {
 }
 
 enable_service() {
-    enable_asterisk
-    enable_monit
     set_berofos_to_slave_state
     xivo-service enable
     xivo-service start
@@ -55,11 +25,9 @@ enable_service() {
 }
 
 disable_service() {
-    xivo-service stop
+    xivo-service stop_slave
     xivo-service disable
     set_berofos_to_master_state
-    disable_monit
-    disable_asterisk
     xivo-service start
 }
 
