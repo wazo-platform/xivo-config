@@ -154,11 +154,11 @@ for P in ${LIST}; do
   fi
 done
 
-if [ -x /usr/sbin/pf-check-dahdi-ports ]; then
+if [ -x /usr/sbin/xivo-check-dahdi-ports ]; then
   if [ -n "${DEBUG}" ]; then
     echo "DEBUG: create monit DAHDI ports configuration"
   fi
-  /usr/sbin/pf-check-dahdi-ports configure
+  /usr/sbin/xivo-check-dahdi-ports configure
 fi
 
 if [ "${XIVO_DHCP_ACTIVE}" = "1" ]; then
