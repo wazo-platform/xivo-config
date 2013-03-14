@@ -2459,22 +2459,12 @@ CREATE TABLE "voicemail" (
  "volgain" float,
  "passwordlocation" voicemail_passwordlocation,
  "commented" INTEGER NOT NULL DEFAULT 0, -- BOOLEAN
+ "skipcheckpass" integer NOT NULL DEFAULT 0,
  PRIMARY KEY("uniqueid")
 );
 
 CREATE INDEX "voicemail__idx__context" ON "voicemail"("context");
 CREATE UNIQUE INDEX "voicemail__uidx__mailbox_context" ON "voicemail"("mailbox","context");
-
-
-DROP TABLE IF EXISTS "voicemailfeatures" CASCADE;
-CREATE TABLE "voicemailfeatures" (
- "id" SERIAL,
- "voicemailid" INTEGER,
- "skipcheckpass" INTEGER NOT NULL DEFAULT 0, -- BOOLEAN
- PRIMARY KEY("id")
-);
-
-CREATE UNIQUE INDEX "voicemailfeatures__uidx__voicemailid" ON "voicemailfeatures"("voicemailid");
 
 
 DROP TABLE IF EXISTS "voicemenu" CASCADE;
