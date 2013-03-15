@@ -135,7 +135,6 @@ CREATE TYPE "callfilter_callfrom" AS ENUM ('internal', 'external', 'all');
 CREATE TABLE "callfilter" (
  "id" SERIAL,
  "name" VARCHAR(128) NOT NULL DEFAULT '',
- "context" VARCHAR(39) NOT NULL,
  "type" callfilter_type NOT NULL,
  "bosssecretary" callfilter_bosssecretary,
  "callfrom" callfilter_callfrom,
