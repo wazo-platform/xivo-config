@@ -342,6 +342,7 @@ INSERT INTO "cti_xlet" VALUES (DEFAULT, 'queuemembers');
 INSERT INTO "cti_xlet" VALUES (DEFAULT, 'queueentrydetails');
 INSERT INTO "cti_xlet" VALUES (DEFAULT, 'switchboard');
 INSERT INTO "cti_xlet" VALUES (DEFAULT, 'remotedirectory');
+INSERT INTO "cti_xlet" VALUES (DEFAULT, 'agentstatusdashboard');
 
 DROP TABLE IF EXISTS "cti_xlet_layout" CASCADE;
 CREATE TABLE "cti_xlet_layout" (
