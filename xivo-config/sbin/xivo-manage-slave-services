@@ -25,7 +25,7 @@ enable_service() {
 }
 
 disable_service() {
-    xivo-service stop_slave
+    xivo-service stop xivo
     xivo-service disable
     set_berofos_to_master_state
     xivo-service start
