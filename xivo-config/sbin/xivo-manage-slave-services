@@ -3,10 +3,10 @@
 PATH=/bin:/usr/bin:/sbin:/usr/sbin
 
 usage() {
-    cat << EOF
-    usage: $(basename $0) action
-        action: start or stop to enable/disable slave services
-EOF
+    cat <<-EOF
+	usage: $(basename $0) action
+	    action: start or stop to enable/disable slave services
+	EOF
 }
 
 set_berofos_to_slave_state() {
