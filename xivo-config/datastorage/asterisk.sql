@@ -1552,15 +1552,11 @@ CREATE TABLE "queuemember" (
  "queue_name" VARCHAR(128) NOT NULL,
  "interface" VARCHAR(128) NOT NULL,
  "penalty" INTEGER NOT NULL DEFAULT 0,
- "call-limit" INTEGER NOT NULL DEFAULT 0,
- "paused" INTEGER, -- BOOLEAN
  "commented" INTEGER NOT NULL DEFAULT 0, -- BOOLEAN
  "usertype" queuemember_usertype NOT NULL,
  "userid" INTEGER NOT NULL,
  "channel" VARCHAR(25) NOT NULL,
  "category" queue_category NOT NULL,
- "skills" VARCHAR(64) NOT NULL DEFAULT '',
- "state_interface" VARCHAR(128) NOT NULL DEFAULT '',
  "position" INTEGER NOT NULL DEFAULT 0,
  PRIMARY KEY("queue_name","interface")
 );
