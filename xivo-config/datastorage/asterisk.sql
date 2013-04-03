@@ -2528,17 +2528,6 @@ CREATE TABLE "queueskillrule" (
 );
 
 
--- user queueskills
-DROP TABLE IF EXISTS "userqueueskill" CASCADE;
-CREATE TABLE "userqueueskill" (
- "userid" INTEGER,
- "skillid" INTEGER,
- "weight" INTEGER NOT NULL DEFAULT 0,
- PRIMARY KEY("userid", "skillid")
-);
-
-CREATE INDEX "userqueueskill__idx__userid" ON "userqueueskill"("userid");
-
 DROP TABLE IF EXISTS "general" CASCADE;
 CREATE TABLE "general"
 (
