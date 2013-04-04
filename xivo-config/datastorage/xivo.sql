@@ -16,9 +16,19 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
--- execute with *psql -f xivo.db.sql template1*
+DO
+$body$
+BEGIN
+   IF NOT EXISTS (
+      SELECT *
+      FROM   pg_catalog.pg_user
+      WHERE  usename = 'xivo') THEN
 
-CREATE USER xivo WITH PASSWORD 'proformatique';
+        CREATE ROLE xivo WITH PASSWORD 'proformatique';
+   END IF;
+END
+$body$
+
 CREATE DATABASE xivo WITH OWNER xivo ENCODING 'UTF8';
 
 \connect xivo;
