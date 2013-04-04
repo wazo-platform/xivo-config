@@ -24,7 +24,7 @@ BEGIN
       FROM   pg_catalog.pg_user
       WHERE  usename = 'xivo') THEN
 
-        CREATE ROLE xivo WITH PASSWORD 'proformatique';
+        CREATE ROLE xivo WITH LOGIN PASSWORD 'proformatique';
    END IF;
 END
 $body$

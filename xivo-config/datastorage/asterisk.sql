@@ -24,7 +24,7 @@ BEGIN
       FROM   pg_catalog.pg_user
       WHERE  usename = 'asterisk') THEN
 
-        CREATE ROLE asterisk WITH PASSWORD 'proformatique';
+        CREATE ROLE asterisk WITH LOGIN PASSWORD 'proformatique';
    END IF;
 END
 $body$
