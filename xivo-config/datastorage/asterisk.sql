@@ -16,7 +16,20 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-CREATE USER asterisk WITH PASSWORD 'proformatique';
+DO
+$body$
+BEGIN
+   IF NOT EXISTS (
+      SELECT *
+      FROM   pg_catalog.pg_user
+      WHERE  usename = 'asterisk') THEN
+
+        CREATE ROLE asterisk WITH PASSWORD 'proformatique';
+   END IF;
+END
+$body$
+;
+
 CREATE DATABASE asterisk WITH OWNER asterisk ENCODING 'UTF8';
 
 \connect asterisk;
