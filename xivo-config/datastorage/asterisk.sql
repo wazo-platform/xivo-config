@@ -222,8 +222,6 @@ CREATE TABLE "context" (
  PRIMARY KEY("name")
 );
 
-INSERT INTO "context" VALUES ('__switchboard_directory', 'Switchboard', 'xivo_entity', 'internal', 0, '');
-
 
 DROP TABLE IF EXISTS "contextinclude" CASCADE;
 CREATE TABLE "contextinclude" (
