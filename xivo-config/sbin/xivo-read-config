@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # TODO: use the _XIVO_* namespace for generated variables
 
