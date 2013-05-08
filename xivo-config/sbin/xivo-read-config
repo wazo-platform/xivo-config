@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # TODO: use the _XIVO_* namespace for generated variables
 
@@ -55,10 +55,10 @@ if [ "${XIVO_DHCP_ACTIVE}" = "1" ]; then
     XIVO_DHCP_IFACES="${XIVO_VOIP_IFACES} ${XIVO_DHCP_EXTRA_IFACES}"
 fi
 
-if [ -n "${XIVO_DHCP_POOL}" ]; then
-  _XIVO_DHCP_SUBNET="\# Include of the subnet declaration (XIVO_DHCP_POOL is not void in common.conf)\ninclude \"/etc/dhcp/dhcpd_subnet.conf\";"
+if [[ "${XIVO_DHCP_ACTIVE}" = "1" && -n "${XIVO_DHCP_POOL}" ]]; then
+  _XIVO_DHCP_SUBNET="\# Include of the subnet declaration (DHCP is configured)\ninclude \"/etc/dhcp/dhcpd_subnet.conf\";"
 else
-  _XIVO_DHCP_SUBNET="\# Subnet declaration not specified because XIVO_DHCP_POOL is void in common.conf\n\# Use dhcpd_extra.conf for custom configuration"
+  _XIVO_DHCP_SUBNET="\# Subnet declaration not specified because DHCP is not configured\n\# Use dhcpd_extra.conf for custom configuration"
 fi
 
 if [ "${XIVO_MAINTENANCE}" = "1" ]; then
