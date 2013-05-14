@@ -650,9 +650,6 @@ CREATE TABLE "ctimain" (
  "info_ip" VARCHAR(16),
  "info_port" INTEGER,
  "info_active" INTEGER NOT NULL DEFAULT 1, -- BOOLEAN
- "announce_ip" VARCHAR(16),
- "announce_port" INTEGER,
- "announce_active" INTEGER NOT NULL DEFAULT 1, -- BOOLEAN
  "tlscertfile" VARCHAR(128),
  "tlsprivkeyfile" VARCHAR(128),
  "socket_timeout" INTEGER, -- BOOLEAN
