@@ -1119,7 +1119,6 @@ CREATE TABLE "linefeatures" (
  "number" VARCHAR(40),
  "context" VARCHAR(39) NOT NULL,
  "provisioningid" INTEGER NOT NULL,
- "rules_order" INTEGER DEFAULT 0,
  "rules_group" VARCHAR(16),
  "num" INTEGER DEFAULT 0,
  "line_num" INTEGER DEFAULT 0,
