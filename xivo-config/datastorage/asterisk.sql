@@ -1120,7 +1120,6 @@ CREATE TABLE "linefeatures" (
  "context" VARCHAR(39) NOT NULL,
  "provisioningid" INTEGER NOT NULL,
  "num" INTEGER DEFAULT 0,
- "line_num" INTEGER DEFAULT 0,
  "ipfrom" VARCHAR(15),
  "internal" INTEGER NOT NULL DEFAULT 0,
  "commented" INTEGER NOT NULL DEFAULT 0,
@@ -1129,7 +1128,6 @@ CREATE TABLE "linefeatures" (
 );
 
 CREATE INDEX "linefeatures__idx__iduserfeatures" ON "linefeatures"("iduserfeatures");
-CREATE INDEX "linefeatures__idx__line_num" ON "linefeatures"("line_num");
 CREATE INDEX "linefeatures__idx__config" ON "linefeatures"("config");
 CREATE INDEX "linefeatures__idx__device" ON "linefeatures"("device");
 CREATE INDEX "linefeatures__idx__number" ON "linefeatures"("number");
