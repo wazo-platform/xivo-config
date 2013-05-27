@@ -1,0 +1,13 @@
+# Change 0 to 1 to enable php-fastcgi to be run from init scripts
+ENABLED=1
+
+#
+# You shouldn't need to change these other variables for most uses.
+# If you're not sure if you should change them, don't.
+#
+
+# Address to bind to
+#ADDRESS=127.0.0.1
+
+# Port to bind to
+#PORT=9000
