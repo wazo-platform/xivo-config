@@ -2405,6 +2405,16 @@ CREATE INDEX "usersip__idx__category" ON "usersip"("category");
 CREATE UNIQUE INDEX "usersip__uidx__name" ON "usersip"("name");
 
 
+CREATE VIEW "user_line" AS
+    SELECT
+        "id",
+        "iduserfeatures" AS "user_id",
+        "id" AS "line_id",
+        true AS "main_user"
+    FROM "linefeatures"
+    WHERE "iduserfeatures" <> 0;
+
+
 DROP TABLE IF EXISTS "voicemail" CASCADE;
 DROP TYPE  IF EXISTS "voicemail_hidefromdir";
 DROP TYPE  IF EXISTS "voicemail_passwordlocation";
