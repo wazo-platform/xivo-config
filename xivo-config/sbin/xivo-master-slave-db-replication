@@ -6,7 +6,7 @@ if [ -z $SLAVE_IP ]; then
 fi
 DB_NAME='asterisk'
 SLAVE_BACKUP='out_slave_backup.sql'
-EXCLUDE_TABLES='--exclude-table cel --exclude-table cel_id_seq'
+EXCLUDE_TABLES='--exclude-table cel --exclude-table cel_id_seq --exclude-table queue_log'
 PG_DUMP_OPTIONS="--clean $EXCLUDE_TABLES"
 
 panic() {
