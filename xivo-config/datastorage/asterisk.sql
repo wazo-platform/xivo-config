@@ -613,7 +613,7 @@ INSERT INTO "ctidirectoryfields" VALUES(1, 'mail', 'phonebook.email');
 INSERT INTO "ctidirectoryfields" VALUES(1, 'reverse', 'phonebook.fullname');
 INSERT INTO "ctidirectoryfields" VALUES(2, 'firstname', 'userfeatures.firstname');
 INSERT INTO "ctidirectoryfields" VALUES(2, 'lastname', 'userfeatures.lastname');
-INSERT INTO "ctidirectoryfields" VALUES(2, 'phone', 'linefeatures.number');
+INSERT INTO "ctidirectoryfields" VALUES(2, 'phone', 'extenumbers.exten');
 
 
 DROP TABLE IF EXISTS "ctidisplays" CASCADE;
