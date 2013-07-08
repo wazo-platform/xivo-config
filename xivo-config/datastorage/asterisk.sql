@@ -246,10 +246,8 @@ CREATE INDEX "contextmember__idx__context_type" ON "contextmember"("context","ty
 
 
 DROP TABLE IF EXISTS "contextnumbers" CASCADE;
-DROP TABLE IF EXISTS "contextnummember" CASCADE;
 DROP TYPE  IF EXISTS "contextnumbers_type";
 
--- WARNING: also used in contextnummember table
 CREATE TYPE "contextnumbers_type" AS ENUM ('user', 'group', 'queue', 'meetme', 'incall');
 
 CREATE TABLE "contextnumbers" (
@@ -260,20 +258,6 @@ CREATE TABLE "contextnumbers" (
  "didlength" INTEGER NOT NULL DEFAULT 0,
  PRIMARY KEY("context","type","numberbeg","numberend")
 );
-
-
-DROP TABLE IF EXISTS "contextnummember" CASCADE;
-CREATE TABLE "contextnummember" (
- "context" VARCHAR(39) NOT NULL,
- "type" contextnumbers_type NOT NULL,
- "typeval" VARCHAR(128) NOT NULL DEFAULT 0,
- "number" VARCHAR(40) NOT NULL DEFAULT '',
- PRIMARY KEY("context","type","typeval")
-);
-
-CREATE INDEX "contextnummember__idx__context" ON "contextnummember"("context");
-CREATE INDEX "contextnummember__idx__context_type" ON "contextnummember"("context","type");
-CREATE INDEX "contextnummember__idx__number" ON "contextnummember"("number");
 
 
 DROP TABLE IF EXISTS "contexttype" CASCADE;
