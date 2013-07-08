@@ -909,8 +909,6 @@ CREATE INDEX "extenumbers__idx__context" ON "extenumbers"("context");
 CREATE INDEX "extenumbers__idx__type" ON "extenumbers"("type");
 CREATE INDEX "extenumbers__idx__typeval" ON "extenumbers"("typeval");
 
-INSERT INTO "extenumbers" VALUES (DEFAULT,'*8','aa5820277564fac26df0e3dc72f796407597721d','','generalfeatures','pickupexten');
-INSERT INTO "extenumbers" VALUES (DEFAULT,'700','d8e4bbea3af2e4861ad5a445aaec573e02f9aca2','','generalfeatures','parkext');
 INSERT INTO "extenumbers" VALUES (DEFAULT,'_*31.','678fe23ee0d6aa64460584bebbed210e270d662f','','extenfeatures','agentstaticlogin');
 INSERT INTO "extenumbers" VALUES (DEFAULT,'_*32.','3ae0f1ff0ef4907faa2dad5da7bb891c9dbf45ad','','extenfeatures','agentstaticlogoff');
 INSERT INTO "extenumbers" VALUES (DEFAULT,'_*30.','7758898081b262cc0e42aed23cf601fba8969b08','','extenfeatures','agentstaticlogtoggle');
