@@ -613,7 +613,7 @@ INSERT INTO "ctidirectoryfields" VALUES(1, 'mail', 'phonebook.email');
 INSERT INTO "ctidirectoryfields" VALUES(1, 'reverse', 'phonebook.fullname');
 INSERT INTO "ctidirectoryfields" VALUES(2, 'firstname', 'userfeatures.firstname');
 INSERT INTO "ctidirectoryfields" VALUES(2, 'lastname', 'userfeatures.lastname');
-INSERT INTO "ctidirectoryfields" VALUES(2, 'phone', 'linefeatures.number');
+INSERT INTO "ctidirectoryfields" VALUES(2, 'phone', 'extenumbers.exten');
 
 
 DROP TABLE IF EXISTS "ctidisplays" CASCADE;
@@ -1119,12 +1119,7 @@ CREATE TABLE "linefeatures" (
  "number" VARCHAR(40),
  "context" VARCHAR(39) NOT NULL,
  "provisioningid" INTEGER NOT NULL,
- "rules_type" VARCHAR(16),
- "rules_time" VARCHAR(8),
- "rules_order" INTEGER DEFAULT 0,
- "rules_group" VARCHAR(16),
  "num" INTEGER DEFAULT 0,
- "line_num" INTEGER DEFAULT 0,
  "ipfrom" VARCHAR(15),
  "internal" INTEGER NOT NULL DEFAULT 0,
  "commented" INTEGER NOT NULL DEFAULT 0,
@@ -1133,7 +1128,6 @@ CREATE TABLE "linefeatures" (
 );
 
 CREATE INDEX "linefeatures__idx__iduserfeatures" ON "linefeatures"("iduserfeatures");
-CREATE INDEX "linefeatures__idx__line_num" ON "linefeatures"("line_num");
 CREATE INDEX "linefeatures__idx__config" ON "linefeatures"("config");
 CREATE INDEX "linefeatures__idx__device" ON "linefeatures"("device");
 CREATE INDEX "linefeatures__idx__number" ON "linefeatures"("number");
@@ -2409,6 +2403,16 @@ CREATE TABLE "usersip" (
 CREATE INDEX "usersip__idx__mailbox" ON "usersip"("mailbox");
 CREATE INDEX "usersip__idx__category" ON "usersip"("category");
 CREATE UNIQUE INDEX "usersip__uidx__name" ON "usersip"("name");
+
+
+CREATE VIEW "user_line" AS
+    SELECT
+        "id",
+        "iduserfeatures" AS "user_id",
+        "id" AS "line_id",
+        true AS "main_user"
+    FROM "linefeatures"
+    WHERE "iduserfeatures" <> 0;
 
 
 DROP TABLE IF EXISTS "voicemail" CASCADE;
