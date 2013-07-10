@@ -848,52 +848,49 @@ CREATE TABLE "extensions" (
  "commented" INTEGER NOT NULL DEFAULT 0, -- BOOLEAN
  "context" VARCHAR(39) NOT NULL DEFAULT '',
  "exten" VARCHAR(40) NOT NULL DEFAULT '',
- "priority" INTEGER NOT NULL DEFAULT 0,
- "app" VARCHAR(128) NOT NULL DEFAULT '',
- "appdata" VARCHAR(128) NOT NULL DEFAULT '',
  "type" extenumbers_type NOT NULL,
  "typeval" VARCHAR(255) NOT NULL DEFAULT '',
  PRIMARY KEY("id")
 );
 
-CREATE INDEX "extensions__idx__context_exten_priority" ON "extensions"("context","exten","priority");
+CREATE INDEX "extensions__idx__context_exten" ON "extensions"("context","exten");
 CREATE INDEX "extensions__idx__exten" ON "extensions"("exten");
 CREATE INDEX "extensions__idx__context" ON "extensions"("context");
 CREATE INDEX "extensions__idx__type" ON "extensions"("type");
 CREATE INDEX "extensions__idx__typeval" ON "extensions"("typeval");
 
-INSERT INTO "extensions" VALUES (DEFAULT,0,'xivo-features','_*31.',1,'GoSub','agentstaticlogin,s,1(${EXTEN:3})','extenfeatures','agentstaticlogin');
-INSERT INTO "extensions" VALUES (DEFAULT,0,'xivo-features','_*32.',1,'GoSub','agentstaticlogoff,s,1(${EXTEN:3})','extenfeatures','agentstaticlogoff');
-INSERT INTO "extensions" VALUES (DEFAULT,0,'xivo-features','_*30.',1,'GoSub','agentstaticlogtoggle,s,1(${EXTEN:3})','extenfeatures','agentstaticlogtoggle');
-INSERT INTO "extensions" VALUES (DEFAULT,0,'xivo-features','_*37.',1,'GoSub','bsfilter,s,1(${EXTEN:3})','extenfeatures','bsfilter');
-INSERT INTO "extensions" VALUES (DEFAULT,0,'xivo-features','_*664.',1,'GoSub','group,s,1(${EXTEN:4})','extenfeatures','callgroup');
-INSERT INTO "extensions" VALUES (DEFAULT,1,'xivo-features','*34',1,'GoSub','calllistening,s,1','extenfeatures','calllistening');
-INSERT INTO "extensions" VALUES (DEFAULT,0,'xivo-features','_*667.',1,'GoSub','meetme,s,1(${EXTEN:4})','extenfeatures','callmeetme');
-INSERT INTO "extensions" VALUES (DEFAULT,0,'xivo-features','_*665.',1,'GoSub','queue,s,1(${EXTEN:4})','extenfeatures','callqueue');
-INSERT INTO "extensions" VALUES (DEFAULT,1,'xivo-features','*26',1,'GoSub','callrecord,s,1','extenfeatures','callrecord');
-INSERT INTO "extensions" VALUES (DEFAULT,0,'xivo-features','_*666.',1,'GoSub','user,s,1(${EXTEN:4})','extenfeatures','calluser');
-INSERT INTO "extensions" VALUES (DEFAULT,0,'xivo-features','*36',1,'Directory','${CONTEXT}','extenfeatures','directoryaccess');
-INSERT INTO "extensions" VALUES (DEFAULT,0,'xivo-features','*25',1,'GoSub','enablednd,s,1','extenfeatures','enablednd');
-INSERT INTO "extensions" VALUES (DEFAULT,0,'xivo-features','*90',1,'GoSub','enablevm,s,1','extenfeatures','enablevm');
-INSERT INTO "extensions" VALUES (DEFAULT,0,'xivo-features','_*90.',1,'GoSub','enablevm,s,1(${EXTEN:3})','extenfeatures','enablevmslt');
-INSERT INTO "extensions" VALUES (DEFAULT,0,'xivo-features','_*23.',1,'GoSub','feature_forward,s,1(busy,${EXTEN:3})','extenfeatures','fwdbusy');
-INSERT INTO "extensions" VALUES (DEFAULT,0,'xivo-features','_*22.',1,'GoSub','feature_forward,s,1(rna,${EXTEN:3})','extenfeatures','fwdrna');
-INSERT INTO "extensions" VALUES (DEFAULT,0,'xivo-features','_*21.',1,'GoSub','feature_forward,s,1(unc,${EXTEN:3})','extenfeatures','fwdunc');
-INSERT INTO "extensions" VALUES (DEFAULT,0,'xivo-features','*20',1,'GoSub','fwdundoall,s,1','extenfeatures','fwdundoall');
-INSERT INTO "extensions" VALUES (DEFAULT,0,'xivo-features','*48378',1,'GoSub','autoprov,s,1','extenfeatures','autoprov');
-INSERT INTO "extensions" VALUES (DEFAULT,0,'xivo-features','*27',1,'GoSub','incallfilter,s,1','extenfeatures','incallfilter');
-INSERT INTO "extensions" VALUES (DEFAULT,0,'xivo-features','*10',1,'GoSub','phonestatus,s,1','extenfeatures','phonestatus');
-INSERT INTO "extensions" VALUES (DEFAULT,0,'xivo-features','_*735.',1,'GoSub','phoneprogfunckey,s,1(${EXTEN:0:4},${EXTEN:4})','extenfeatures','phoneprogfunckey');
-INSERT INTO "extensions" VALUES (DEFAULT,0,'xivo-features','_*8.',1,'Pickup','${EXTEN:2}%${CONTEXT}@PICKUPMARK','extenfeatures','pickup');
-INSERT INTO "extensions" VALUES (DEFAULT,0,'xivo-features','*9',1,'GoSub','recsnd,s,1(wav)','extenfeatures','recsnd');
-INSERT INTO "extensions" VALUES (DEFAULT,0,'xivo-features','_*99.',1,'GoSub','vmboxmsg,s,1(${EXTEN:3})','extenfeatures','vmboxmsgslt');
-INSERT INTO "extensions" VALUES (DEFAULT,1,'xivo-features','_*93.',1,'GoSub','vmboxpurge,s,1(${EXTEN:3})','extenfeatures','vmboxpurgeslt');
-INSERT INTO "extensions" VALUES (DEFAULT,0,'xivo-features','_*97.',1,'GoSub','vmbox,s,1(${EXTEN:3})','extenfeatures','vmboxslt');
-INSERT INTO "extensions" VALUES (DEFAULT,0,'xivo-features','*98',1,'GoSub','vmusermsg,s,1','extenfeatures','vmusermsg');
-INSERT INTO "extensions" VALUES (DEFAULT,1,'xivo-features','*92',1,'GoSub','vmuserpurge,s,1','extenfeatures','vmuserpurge');
-INSERT INTO "extensions" VALUES (DEFAULT,1,'xivo-features','_*92.',1,'GoSub','vmuserpurge,s,1(${EXTEN:3})','extenfeatures','vmuserpurgeslt');
-INSERT INTO "extensions" VALUES (DEFAULT,0,'xivo-features','_*96.',1,'GoSub','vmuser,s,1(${EXTEN:3})','extenfeatures','vmuserslt');
-INSERT INTO "extensions" VALUES (DEFAULT,0,'xivo-features','_*11.',1,'GoSub','paging,s,1(${EXTEN:3})','extenfeatures','paging');
+INSERT INTO "extensions" VALUES (DEFAULT,0,'xivo-features','_*31.','extenfeatures','agentstaticlogin');
+INSERT INTO "extensions" VALUES (DEFAULT,0,'xivo-features','_*32.','extenfeatures','agentstaticlogoff');
+INSERT INTO "extensions" VALUES (DEFAULT,0,'xivo-features','_*30.','extenfeatures','agentstaticlogtoggle');
+INSERT INTO "extensions" VALUES (DEFAULT,0,'xivo-features','_*37.','extenfeatures','bsfilter');
+INSERT INTO "extensions" VALUES (DEFAULT,0,'xivo-features','_*664.','extenfeatures','callgroup');
+INSERT INTO "extensions" VALUES (DEFAULT,1,'xivo-features','*34','extenfeatures','calllistening');
+INSERT INTO "extensions" VALUES (DEFAULT,0,'xivo-features','_*667.','extenfeatures','callmeetme');
+INSERT INTO "extensions" VALUES (DEFAULT,0,'xivo-features','_*665.','extenfeatures','callqueue');
+INSERT INTO "extensions" VALUES (DEFAULT,1,'xivo-features','*26','extenfeatures','callrecord');
+INSERT INTO "extensions" VALUES (DEFAULT,0,'xivo-features','_*666.','extenfeatures','calluser');
+INSERT INTO "extensions" VALUES (DEFAULT,0,'xivo-features','*36','extenfeatures','directoryaccess');
+INSERT INTO "extensions" VALUES (DEFAULT,0,'xivo-features','*25','extenfeatures','enablednd');
+INSERT INTO "extensions" VALUES (DEFAULT,0,'xivo-features','*90','extenfeatures','enablevm');
+INSERT INTO "extensions" VALUES (DEFAULT,0,'xivo-features','_*90.','extenfeatures','enablevmslt');
+INSERT INTO "extensions" VALUES (DEFAULT,0,'xivo-features','_*23.','extenfeatures','fwdbusy');
+INSERT INTO "extensions" VALUES (DEFAULT,0,'xivo-features','_*22.','extenfeatures','fwdrna');
+INSERT INTO "extensions" VALUES (DEFAULT,0,'xivo-features','_*21.','extenfeatures','fwdunc');
+INSERT INTO "extensions" VALUES (DEFAULT,0,'xivo-features','*20','extenfeatures','fwdundoall');
+INSERT INTO "extensions" VALUES (DEFAULT,0,'xivo-features','*48378','extenfeatures','autoprov');
+INSERT INTO "extensions" VALUES (DEFAULT,0,'xivo-features','*27','extenfeatures','incallfilter');
+INSERT INTO "extensions" VALUES (DEFAULT,0,'xivo-features','*10','extenfeatures','phonestatus');
+INSERT INTO "extensions" VALUES (DEFAULT,0,'xivo-features','_*735.','extenfeatures','phoneprogfunckey');
+INSERT INTO "extensions" VALUES (DEFAULT,0,'xivo-features','_*8.','extenfeatures','pickup');
+INSERT INTO "extensions" VALUES (DEFAULT,0,'xivo-features','*9','extenfeatures','recsnd');
+INSERT INTO "extensions" VALUES (DEFAULT,0,'xivo-features','_*99.','extenfeatures','vmboxmsgslt');
+INSERT INTO "extensions" VALUES (DEFAULT,1,'xivo-features','_*93.','extenfeatures','vmboxpurgeslt');
+INSERT INTO "extensions" VALUES (DEFAULT,0,'xivo-features','_*97.','extenfeatures','vmboxslt');
+INSERT INTO "extensions" VALUES (DEFAULT,0,'xivo-features','*98','extenfeatures','vmusermsg');
+INSERT INTO "extensions" VALUES (DEFAULT,1,'xivo-features','*92','extenfeatures','vmuserpurge');
+INSERT INTO "extensions" VALUES (DEFAULT,1,'xivo-features','_*92.','extenfeatures','vmuserpurgeslt');
+INSERT INTO "extensions" VALUES (DEFAULT,0,'xivo-features','_*96.','extenfeatures','vmuserslt');
+INSERT INTO "extensions" VALUES (DEFAULT,0,'xivo-features','_*11.','extenfeatures','paging');
 
 
 DROP TABLE IF EXISTS "features" CASCADE;
