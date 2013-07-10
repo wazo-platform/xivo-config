@@ -909,12 +909,6 @@ CREATE INDEX "extenumbers__idx__context" ON "extenumbers"("context");
 CREATE INDEX "extenumbers__idx__type" ON "extenumbers"("type");
 CREATE INDEX "extenumbers__idx__typeval" ON "extenumbers"("typeval");
 
-INSERT INTO "extenumbers" VALUES (DEFAULT,'*8','aa5820277564fac26df0e3dc72f796407597721d','','generalfeatures','pickupexten');
-INSERT INTO "extenumbers" VALUES (DEFAULT,'700','d8e4bbea3af2e4861ad5a445aaec573e02f9aca2','','generalfeatures','parkext');
-INSERT INTO "extenumbers" VALUES (DEFAULT,'*0','e914c907ff6d7a8ffefae72fe47363726b39d112','','featuremap','disconnect');
-INSERT INTO "extenumbers" VALUES (DEFAULT,'*1','8e04e82b8798d3979eded4ca2afdda3bebcb963d','','featuremap','blindxfer');
-INSERT INTO "extenumbers" VALUES (DEFAULT,'*2','6951109c8ca021277336cc2c8f6ac7f47d3b30e9','','featuremap','atxfer');
-INSERT INTO "extenumbers" VALUES (DEFAULT,'*3','68631b4b53ba2a27a969ca63bdcdc00805c2c258','','featuremap','automon');
 INSERT INTO "extenumbers" VALUES (DEFAULT,'_*31.','678fe23ee0d6aa64460584bebbed210e270d662f','','extenfeatures','agentstaticlogin');
 INSERT INTO "extenumbers" VALUES (DEFAULT,'_*32.','3ae0f1ff0ef4907faa2dad5da7bb891c9dbf45ad','','extenfeatures','agentstaticlogoff');
 INSERT INTO "extenumbers" VALUES (DEFAULT,'_*30.','7758898081b262cc0e42aed23cf601fba8969b08','','extenfeatures','agentstaticlogtoggle');
