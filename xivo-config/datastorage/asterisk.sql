@@ -853,7 +853,7 @@ CREATE TABLE "extensions" (
  PRIMARY KEY("id")
 );
 
-CREATE INDEX "extensions__idx__context_exten" ON "extensions"("context","exten");
+CREATE UNIQUE INDEX "extensions__uidx__exten_context" ON "extensions"("exten","context");
 CREATE INDEX "extensions__idx__exten" ON "extensions"("exten");
 CREATE INDEX "extensions__idx__context" ON "extensions"("context");
 CREATE INDEX "extensions__idx__type" ON "extensions"("type");
