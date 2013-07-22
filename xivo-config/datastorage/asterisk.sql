@@ -2332,14 +2332,25 @@ CREATE INDEX "usersip__idx__category" ON "usersip"("category");
 CREATE UNIQUE INDEX "usersip__uidx__name" ON "usersip"("name");
 
 
-CREATE VIEW "user_line" AS
-    SELECT
-        "id",
-        "iduserfeatures" AS "user_id",
-        "id" AS "line_id",
-        true AS "main_user"
-    FROM "linefeatures"
-    WHERE "iduserfeatures" <> 0;
+DROP TABLE IF EXISTS "user_line" CASCADE;
+CREATE TABLE "user_line" (
+	"id" SERIAL,
+	"user_id" INTEGER NOT NULL,
+	"line_id" INTEGER NOT NULL,
+    "extension_id" INTEGER NOT NULL,
+	"main_user" boolean NOT NULL,
+    "main_line" boolean NOT NULL,
+  CONSTRAINT "user_line__userfeatures_id_fkey" FOREIGN KEY ("user_id")
+      REFERENCES "userfeatures" (id) MATCH SIMPLE
+      ON UPDATE CASCADE ON DELETE SET NULL,
+  CONSTRAINT "user_line__linefeatures_id_fkey" FOREIGN KEY ("line_id")
+      REFERENCES "linefeatures" (id) MATCH SIMPLE
+      ON UPDATE CASCADE ON DELETE SET NULL,
+  CONSTRAINT "user_line__extensions_id_fkey" FOREIGN KEY ("extension_id")
+      REFERENCES "extensions" (id) MATCH SIMPLE
+      ON UPDATE CASCADE ON DELETE SET NULL,
+ PRIMARY KEY("id", "user_id", "line_id")
+);
 
 
 DROP TABLE IF EXISTS "voicemail" CASCADE;
