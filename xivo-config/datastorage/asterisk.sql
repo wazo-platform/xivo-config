@@ -1039,7 +1039,6 @@ CREATE TABLE "linefeatures" (
  "id" SERIAL,
  "protocol" "trunk_protocol" NOT NULL,
  "protocolid" INTEGER NOT NULL,
- "iduserfeatures" INTEGER DEFAULT 0,
  "config" VARCHAR(128),
  "device" VARCHAR(32),
  "configregistrar" VARCHAR(128),
@@ -1055,7 +1054,6 @@ CREATE TABLE "linefeatures" (
  PRIMARY KEY("id")
 );
 
-CREATE INDEX "linefeatures__idx__iduserfeatures" ON "linefeatures"("iduserfeatures");
 CREATE INDEX "linefeatures__idx__config" ON "linefeatures"("config");
 CREATE INDEX "linefeatures__idx__device" ON "linefeatures"("device");
 CREATE INDEX "linefeatures__idx__number" ON "linefeatures"("number");
