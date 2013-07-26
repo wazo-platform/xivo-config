@@ -2350,6 +2350,8 @@ CREATE TABLE "user_line" (
  PRIMARY KEY("id", "user_id", "line_id")
 );
 
+CREATE UNIQUE INDEX "user_line_extension__uidx__user_id_line_id" ON "user_line"("user_id","line_id");
+
 
 DROP TABLE IF EXISTS "voicemail" CASCADE;
 DROP TYPE  IF EXISTS "voicemail_hidefromdir";
