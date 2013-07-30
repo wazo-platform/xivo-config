@@ -2339,14 +2339,11 @@ CREATE TABLE "user_line" (
 	"main_user" boolean NOT NULL,
     "main_line" boolean NOT NULL,
   CONSTRAINT "user_line__userfeatures_id_fkey" FOREIGN KEY ("user_id")
-      REFERENCES "userfeatures" (id) MATCH SIMPLE
-      ON UPDATE CASCADE ON DELETE SET NULL,
+      REFERENCES "userfeatures" (id) MATCH SIMPLE,
   CONSTRAINT "user_line__linefeatures_id_fkey" FOREIGN KEY ("line_id")
-      REFERENCES "linefeatures" (id) MATCH SIMPLE
-      ON UPDATE CASCADE ON DELETE SET NULL,
+      REFERENCES "linefeatures" (id) MATCH SIMPLE,
   CONSTRAINT "user_line__extensions_id_fkey" FOREIGN KEY ("extension_id")
-      REFERENCES "extensions" (id) MATCH SIMPLE
-      ON UPDATE CASCADE ON DELETE SET NULL,
+      REFERENCES "extensions" (id) MATCH SIMPLE,
  PRIMARY KEY("id", "user_id", "line_id")
 );
 
