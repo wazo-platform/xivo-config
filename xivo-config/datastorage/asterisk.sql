@@ -2330,7 +2330,7 @@ CREATE INDEX "usersip__idx__category" ON "usersip"("category");
 CREATE UNIQUE INDEX "usersip__uidx__name" ON "usersip"("name");
 
 
-DROP TABLE IF EXISTS "user_line" CASCADE;
+DROP VIEW IF EXISTS "user_line" CASCADE;
 CREATE TABLE "user_line" (
 	"id" SERIAL,
 	"user_id" INTEGER NOT NULL,
