@@ -181,6 +181,29 @@ CREATE TABLE "callfiltermember" (
 CREATE UNIQUE INDEX "callfiltermember__uidx__callfilterid_type_typeval" ON "callfiltermember"("callfilterid","type","typeval");
 
 
+DROP TABLE IF EXISTS "call_log" CASCADE;
+CREATE TABLE "call_log" (
+ "id" SERIAL PRIMARY KEY,
+ "date" TIMESTAMP NOT NULL,
+ "source_name" VARCHAR(255),
+ "source_exten" VARCHAR(255),
+ "destination_name" VARCHAR(255),
+ "destination_exten" VARCHAR(255),
+ "duration" INTERVAL NOT NULL,
+ "user_field" VARCHAR(255),
+ "linked_id" VARCHAR(150) NOT NULL,
+ "answered" BOOLEAN
+);
+
+
+DROP TABLE IF EXISTS "cel_call_log" CASCADE;
+CREATE TABLE "cel_call_log" (
+       "cel_id" INTEGER REFERENCES "cel"("id") ON DELETE CASCADE,
+       "call_log_id" INTEGER REFERENCES "call_log"("id") ON DELETE CASCADE,
+       PRIMARY KEY("cel_id", "call_log_id")
+);
+
+
 DROP TABLE IF EXISTS "cel" CASCADE;
 CREATE TABLE "cel" (
  "id" serial , 
