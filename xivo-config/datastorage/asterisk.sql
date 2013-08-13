@@ -1062,7 +1062,6 @@ CREATE TABLE "linefeatures" (
  "id" SERIAL,
  "protocol" "trunk_protocol" NOT NULL,
  "protocolid" INTEGER NOT NULL,
- "config" VARCHAR(128),
  "device" VARCHAR(32),
  "configregistrar" VARCHAR(128),
  "name" VARCHAR(128) NOT NULL,
