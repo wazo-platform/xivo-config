@@ -191,7 +191,6 @@ CREATE TABLE "call_log" (
  "destination_exten" VARCHAR(255),
  "duration" INTERVAL NOT NULL,
  "user_field" VARCHAR(255),
- "linked_id" VARCHAR(150) NOT NULL,
  "answered" BOOLEAN
 );
 
