@@ -195,14 +195,6 @@ CREATE TABLE "call_log" (
 );
 
 
-DROP TABLE IF EXISTS "cel_call_log" CASCADE;
-CREATE TABLE "cel_call_log" (
-       "cel_id" INTEGER REFERENCES "cel"("id") ON DELETE CASCADE UNIQUE,
-       "call_log_id" INTEGER REFERENCES "call_log"("id") ON DELETE CASCADE,
-       PRIMARY KEY("cel_id", "call_log_id")
-);
-
-
 DROP TABLE IF EXISTS "cel" CASCADE;
 CREATE TABLE "cel" (
  "id" serial , 
@@ -231,6 +223,14 @@ CREATE TABLE "cel" (
 
 CREATE INDEX "cel__idx__uniqueid" ON "cel"("uniqueid");
 CREATE INDEX "cel__idx__eventtime" ON "cel"("eventtime");
+
+
+DROP TABLE IF EXISTS "cel_call_log" CASCADE;
+CREATE TABLE "cel_call_log" (
+       "cel_id" INTEGER REFERENCES "cel"("id") ON DELETE CASCADE UNIQUE,
+       "call_log_id" INTEGER REFERENCES "call_log"("id") ON DELETE CASCADE,
+       PRIMARY KEY("cel_id", "call_log_id")
+);
 
 
 DROP TABLE IF EXISTS "context" CASCADE;
@@ -1075,7 +1075,6 @@ CREATE TABLE "linefeatures" (
  PRIMARY KEY("id")
 );
 
-CREATE INDEX "linefeatures__idx__config" ON "linefeatures"("config");
 CREATE INDEX "linefeatures__idx__device" ON "linefeatures"("device");
 CREATE INDEX "linefeatures__idx__number" ON "linefeatures"("number");
 CREATE INDEX "linefeatures__idx__context" ON "linefeatures"("context");
