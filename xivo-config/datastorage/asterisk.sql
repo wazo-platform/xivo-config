@@ -2097,7 +2097,7 @@ CREATE TABLE "userfeatures" (
  "cti_profile_id" INTEGER REFERENCES cti_profile("id") ON DELETE RESTRICT,
  "enablehint" INTEGER NOT NULL DEFAULT 1, -- BOOLEAN
  "enablevoicemail" INTEGER NOT NULL DEFAULT 0, -- BOOLEAN
- "enablexfer" INTEGER NOT NULL DEFAULT 0, -- BOOLEAN
+ "enablexfer" INTEGER NOT NULL DEFAULT 1, -- BOOLEAN
  "enableautomon" INTEGER NOT NULL DEFAULT 0, -- BOOLEAN
  "callrecord" INTEGER NOT NULL DEFAULT 0, -- BOOLEAN
  "incallfilter" INTEGER NOT NULL DEFAULT 0, -- BOOLEAN
