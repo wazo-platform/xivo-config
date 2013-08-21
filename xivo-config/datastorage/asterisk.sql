@@ -1069,7 +1069,6 @@ CREATE TABLE "linefeatures" (
  "provisioningid" INTEGER NOT NULL,
  "num" INTEGER DEFAULT 0,
  "ipfrom" VARCHAR(15),
- "internal" INTEGER NOT NULL DEFAULT 0,
  "commented" INTEGER NOT NULL DEFAULT 0,
  "description" text,
  PRIMARY KEY("id")
@@ -1078,7 +1077,6 @@ CREATE TABLE "linefeatures" (
 CREATE INDEX "linefeatures__idx__device" ON "linefeatures"("device");
 CREATE INDEX "linefeatures__idx__number" ON "linefeatures"("number");
 CREATE INDEX "linefeatures__idx__context" ON "linefeatures"("context");
-CREATE INDEX "linefeatures__idx__internal" ON "linefeatures"("internal");
 CREATE INDEX "linefeatures__idx__provisioningid" ON "linefeatures"("provisioningid");
 CREATE UNIQUE INDEX "linefeatures__uidx__name" ON "linefeatures"("name");
 CREATE UNIQUE INDEX "linefeatures__uidx__protocol_protocolid" ON "linefeatures"("protocol","protocolid");
@@ -1645,29 +1643,6 @@ CREATE TABLE "serverfeatures" (
 
 CREATE UNIQUE INDEX "serverfeatures__uidx__serverid_feature_type" ON "serverfeatures"("serverid","feature","type");
 
-
-DROP TABLE IF EXISTS "servicesgroup" CASCADE;
-CREATE TABLE "servicesgroup" (
- "id" SERIAL,
- "name" VARCHAR(64) NOT NULL,
- "accountcode" VARCHAR(20),
- "disable" INTEGER DEFAULT 0 NOT NULL,
- "description" text,
- PRIMARY KEY("id")
-);
-
-CREATE UNIQUE INDEX "servicesgroup__uidx__name" ON "servicesgroup"("name");
-CREATE UNIQUE INDEX "servicesgroup__uidx__accountcode" ON "servicesgroup"("accountcode");
-
-
-DROP TABLE IF EXISTS "servicesgroup_user" CASCADE;
-CREATE TABLE "servicesgroup_user" (
- "servicesgroup_id" INTEGER NOT NULL,
- "userfeatures_id" INTEGER NOT NULL,
- PRIMARY KEY("servicesgroup_id","userfeatures_id")
-);
-
-CREATE UNIQUE INDEX "servicesgroup_user__uidx__servicesgroupid_userfeaturesid" ON "servicesgroup_user"("servicesgroup_id","userfeatures_id");
 
 DROP TABLE IF EXISTS "staticiax" CASCADE;
 CREATE TABLE "staticiax" (
