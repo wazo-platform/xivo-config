@@ -755,32 +755,6 @@ INSERT INTO "ctistatus" VALUES(DEFAULT,1,'berightback','Bientôt de retour','ena
 INSERT INTO "ctistatus" VALUES(DEFAULT,1,'disconnected','Déconnecté','agentlogoff()','#202020','',0);
 
 
-DROP TABLE IF EXISTS "devicefeatures" CASCADE;
-CREATE TABLE "devicefeatures" (
- "id" SERIAL,
- "deviceid" VARCHAR(32) NOT NULL,
- "config" VARCHAR(32),
- "plugin" VARCHAR(64),
- "ip" VARCHAR(39),
- "mac" character(17) NOT NULL,
- "sn" VARCHAR(64),
- "vendor" VARCHAR(32) NOT NULL,
- "model" VARCHAR(32) NOT NULL,
- "version" VARCHAR(32),
- "proto" VARCHAR(16) NOT NULL,
- "internal" INTEGER NOT NULL DEFAULT 0,
- "configured" INTEGER NOT NULL DEFAULT 0,
- "commented" INTEGER NOT NULL DEFAULT 0,
- "description" text,
- PRIMARY KEY("id")
-);
-
-CREATE INDEX "devicefeatures__idx__mac" ON "devicefeatures"("mac");
-CREATE INDEX "devicefeatures__idx__ip" ON "devicefeatures"("ip");
-CREATE INDEX "devicefeatures__idx__plugin" ON "devicefeatures"("plugin");
-CREATE INDEX "devicefeatures__idx__config" ON "devicefeatures"("config");
-CREATE INDEX "devicefeatures__idx__deviceid" ON "devicefeatures"("deviceid");
-
 DROP TABLE IF EXISTS "dialaction" CASCADE;
 DROP TABLE IF EXISTS "schedule" CASCADE; -- USE dialaction_action
 DROP TABLE IF EXISTS "schedule_time" CASCADE; -- USE dialaction_action
