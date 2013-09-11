@@ -218,19 +218,12 @@ CREATE TABLE "cel" (
  "linkedid" VARCHAR (150) NOT NULL , 
  "userfield" VARCHAR (255) NOT NULL ,
  "peer" VARCHAR (80) NOT NULL ,
+ "call_log_id" INTEGER REFERENCES "call_log"("id") ON DELETE SET NULL DEFAULT NULL,
  PRIMARY KEY("id")
 );
 
 CREATE INDEX "cel__idx__uniqueid" ON "cel"("uniqueid");
 CREATE INDEX "cel__idx__eventtime" ON "cel"("eventtime");
-
-
-DROP TABLE IF EXISTS "cel_call_log" CASCADE;
-CREATE TABLE "cel_call_log" (
-       "cel_id" INTEGER REFERENCES "cel"("id") ON DELETE CASCADE UNIQUE,
-       "call_log_id" INTEGER REFERENCES "call_log"("id") ON DELETE CASCADE,
-       PRIMARY KEY("cel_id", "call_log_id")
-);
 
 
 DROP TABLE IF EXISTS "context" CASCADE;
