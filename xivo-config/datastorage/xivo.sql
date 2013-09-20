@@ -179,7 +179,6 @@ CREATE INDEX "netiface__idx__hwtypeid" ON "netiface"("hwtypeid");
 CREATE INDEX "netiface__idx__networktype" ON "netiface"("networktype");
 CREATE INDEX "netiface__idx__type" ON "netiface"("type");
 CREATE INDEX "netiface__idx__family" ON "netiface"("family");
-CREATE INDEX "netiface__idx__method" ON "netiface"("method");
 CREATE INDEX "netiface__idx__address" ON "netiface"("address");
 CREATE INDEX "netiface__idx__netmask" ON "netiface"("netmask");
 CREATE INDEX "netiface__idx__broadcast" ON "netiface"("broadcast");
