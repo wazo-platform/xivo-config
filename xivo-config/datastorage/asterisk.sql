@@ -793,8 +793,8 @@ CREATE TABLE "dialaction" (
  "category" dialaction_category,
  "categoryval" VARCHAR(128) NOT NULL DEFAULT '',
  "action" dialaction_action NOT NULL,
- "actionarg1" VARCHAR(255)SET DEFAULT NULL::character varying,
- "actionarg2" VARCHAR(255)SET DEFAULT NULL::character varying,
+ "actionarg1" VARCHAR(255) DEFAULT NULL::character varying,
+ "actionarg2" VARCHAR(255) DEFAULT NULL::character varying,
  "linked" INTEGER NOT NULL DEFAULT 0, -- BOOLEAN
  PRIMARY KEY("event","category","categoryval")
 );
