@@ -160,7 +160,7 @@ CREATE TABLE "netiface" (
  "networktype" netiface_networktype NOT NULL,
  "type" netiface_type NOT NULL,
  "family" netiface_family NOT NULL,
- "method" netiface_method NOT NULL,
+ "method" netiface_method,
  "address" varchar(39),
  "netmask" varchar(39),
  "broadcast" varchar(15),

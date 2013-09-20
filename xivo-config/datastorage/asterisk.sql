@@ -73,7 +73,7 @@ CREATE TABLE "agentfeatures" (
  "language" VARCHAR(20) NOT NULL,
  -- features
  "autologoff" INTEGER,
- "group" VARCHAR(255),
+ "group" VARCHAR(255) DEFAULT NULL::character varying,
  "description" text NOT NULL,
  "preprocess_subroutine" VARCHAR(40),
  PRIMARY KEY("id")
@@ -793,8 +793,8 @@ CREATE TABLE "dialaction" (
  "category" dialaction_category,
  "categoryval" VARCHAR(128) NOT NULL DEFAULT '',
  "action" dialaction_action NOT NULL,
- "actionarg1" VARCHAR(255),
- "actionarg2" VARCHAR(255),
+ "actionarg1" VARCHAR(255)SET DEFAULT NULL::character varying,
+ "actionarg2" VARCHAR(255)SET DEFAULT NULL::character varying,
  "linked" INTEGER NOT NULL DEFAULT 0, -- BOOLEAN
  PRIMARY KEY("event","category","categoryval")
 );
@@ -938,7 +938,6 @@ CREATE TABLE "paging" (
  "ignore" 			INTEGER NOT NULL DEFAULT 0, -- BOOLEAN,
  "record" 			INTEGER NOT NULL DEFAULT 0, -- BOOLEAN,
  "quiet" 			INTEGER NOT NULL DEFAULT 0, -- BOOLEAN,
- "callnotbusy" 		INTEGER NOT NULL DEFAULT 0, -- BOOLEAN,
  "timeout" 			INTEGER NOT NULL,
  "announcement_file" VARCHAR(64),
  "announcement_play" INTEGER NOT NULL DEFAULT 0, -- BOOLEAN,
@@ -971,11 +970,11 @@ CREATE TABLE "parkinglot" (
  "next"          INTEGER NOT NULL DEFAULT 1, -- BOOLEAN
  "duration"      INTEGER,
  
- "calltransfers" VARCHAR(8),
- "callreparking" VARCHAR(8),
- "callhangup"    VARCHAR(8),
- "callrecording" VARCHAR(8),
- "musicclass"    VARCHAR(255),
+ "calltransfers" VARCHAR(8) DEFAULT NULL::character varying,
+ "callreparking" VARCHAR(8) DEFAULT NULL::character varying,
+ "callhangup"    VARCHAR(8) DEFAULT NULL::character varying,
+ "callrecording" VARCHAR(8) DEFAULT NULL::character varying,
+ "musicclass"    VARCHAR(255) DEFAULT NULL::character varying,
  "hints"         INTEGER    NOT NULL DEFAULT 0, -- BOOLEAN
 
  "commented"     INTEGER NOT NULL DEFAULT 0, -- BOOLEAN
@@ -1391,7 +1390,7 @@ CREATE TABLE "queue" (
  "random-periodic-announce" INTEGER NOT NULL DEFAULT 0, -- BOOLEAN
  "announce-position" VARCHAR(1024) NOT NULL DEFAULT 'yes',
  "announce-position-limit" INTEGER NOT NULL DEFAULT 5,
- "defaultrule" VARCHAR(1024),
+ "defaultrule" VARCHAR(1024) DEFAULT NULL::character varying,
  PRIMARY KEY("name")
 );
 
@@ -1542,10 +1541,10 @@ DROP TABLE IF EXISTS "schedule" CASCADE;
 CREATE TABLE "schedule" (
  "id" SERIAL,
  "name" VARCHAR(255) NOT NULL DEFAULT '',
- "timezone" VARCHAR(128),
+ "timezone" VARCHAR(128) DEFAULT NULL::character varying,
  "fallback_action"  dialaction_action NOT NULL DEFAULT 'none',
- "fallback_actionid"   VARCHAR(255),
- "fallback_actionargs" VARCHAR(255),
+ "fallback_actionid"   VARCHAR(255) DEFAULT NULL::character varying,
+ "fallback_actionargs" VARCHAR(255) DEFAULT NULL::character varying,
  "description" TEXT,
  "commented"   INTEGER NOT NULL DEFAULT 0, -- BOOLEAN
  PRIMARY KEY("id")
@@ -1576,14 +1575,14 @@ CREATE TABLE "schedule_time" (
  "id" SERIAL,
  "schedule_id" INTEGER,
  "mode" schedule_time_mode NOT NULL DEFAULT 'opened',
- "hours"    VARCHAR(512),
- "weekdays" VARCHAR(512),
- "monthdays"   VARCHAR(512),
- "months"   VARCHAR(512),
+ "hours"    VARCHAR(512) DEFAULT NULL::character varying,
+ "weekdays" VARCHAR(512) DEFAULT NULL::character varying,
+ "monthdays"   VARCHAR(512) DEFAULT NULL::character varying,
+ "months"   VARCHAR(512) DEFAULT NULL::character varying,
  -- only when mode == 'closed'
  "action"   dialaction_action,
- "actionid" VARCHAR(255),
- "actionargs"  VARCHAR(255),
+ "actionid" VARCHAR(255) DEFAULT NULL::character varying,
+ "actionargs"  VARCHAR(255) DEFAULT NULL::character varying,
 
  "commented"   INTEGER NOT NULL DEFAULT 0, -- BOOLEAN
  PRIMARY KEY("id")
@@ -2258,8 +2257,8 @@ CREATE TABLE "usersip" (
 
  "outboundproxy" VARCHAR(1024),
 	-- asterisk 1.8 new values
- "transport" VARCHAR(255),
- "remotesecret" VARCHAR(255),
+ "transport" VARCHAR(255) DEFAULT NULL::character varying,
+ "remotesecret" VARCHAR(255) DEFAULT NULL::character varying,
  "directmedia" usersip_directmedia,
  "callcounter" INTEGER, -- BOOLEAN
  "busylevel" INTEGER,
@@ -2268,20 +2267,20 @@ CREATE TABLE "usersip" (
  "session-expires" INTEGER,
  "session-minse" INTEGER,
  "session-refresher" usersip_session_refresher,
- "callbackextension" VARCHAR(255),
+ "callbackextension" VARCHAR(255) DEFAULT NULL::character varying,
  "registertrying" INTEGER, -- BOOLEAN
  "timert1" INTEGER,
  "timerb" INTEGER,
  
  "qualifyfreq" INTEGER,
- "contactpermit" VARCHAR(1024),
- "contactdeny" VARCHAR(1024),
- "unsolicited_mailbox" VARCHAR(1024),
+ "contactpermit" VARCHAR(1024) DEFAULT NULL::character varying,
+ "contactdeny" VARCHAR(1024) DEFAULT NULL::character varying,
+ "unsolicited_mailbox" VARCHAR(1024) DEFAULT NULL::character varying,
  "use_q850_reason" INTEGER, -- BOOLEAN
  "encryption" INTEGER, -- BOOLEAN
  "snom_aoc_enabled" INTEGER, -- BOOLEAN
  "maxforwards" INTEGER,
- "disallowed_methods" VARCHAR(1024),
+ "disallowed_methods" VARCHAR(1024) DEFAULT NULL::character varying,
  "textsupport" INTEGER, -- BOOLEAN
  "commented" INTEGER NOT NULL DEFAULT 0, -- BOOLEAN -- user / peer --
  PRIMARY KEY("id")
@@ -2430,7 +2429,7 @@ CREATE TABLE "general"
  "id" SERIAL,
  "timezone"         VARCHAR(128),
  "exchange_trunkid" INTEGER,
- "exchange_exten"   VARCHAR(128),
+ "exchange_exten"   VARCHAR(128) DEFAULT NULL::character varying,
  "dundi"            INTEGER NOT NULL DEFAULT 0, -- boolean
  PRIMARY KEY("id")
 );
@@ -2702,7 +2701,7 @@ CREATE TABLE recording
   callee character varying(32),
   filename character varying(1024),
   campaign_id integer NOT NULL,
-  agent_id integer,
+  agent_id integer NOT NULL,
   CONSTRAINT recording_pkey PRIMARY KEY (cid ),
   CONSTRAINT recording_agent_id_fkey FOREIGN KEY (agent_id)
       REFERENCES agentfeatures (id) MATCH SIMPLE
