@@ -224,7 +224,7 @@ CREATE TABLE "cel" (
 
 CREATE INDEX "cel__idx__uniqueid" ON "cel"("uniqueid");
 CREATE INDEX "cel__idx__eventtime" ON "cel"("eventtime");
-
+CREATE INDEX "cel__idx__call_log_id" ON "cel" ("call_log_id");
 
 DROP TABLE IF EXISTS "context" CASCADE;
 CREATE TABLE "context" (
