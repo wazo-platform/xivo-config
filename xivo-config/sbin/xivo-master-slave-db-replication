@@ -43,6 +43,6 @@ if [ "$master_md5" != "$slave_md5" ]; then
     rm -f out_*.sql
     panic "md5sum didnt match"
 else
-    #rm -f out_*.sql
+    rm -f out_*.sql
     echo "Slave replication completed succesfully"
 fi
