@@ -40,9 +40,7 @@ slave_md5=$(cat out_slave.sql | sort > out_slave.sorted.sql && md5sum out_slave.
 
 if [ "$master_md5" != "$slave_md5" ]; then
     su postgres -c "psql --host $SLAVE_IP $DB_NAME < $SLAVE_BACKUP > /dev/null"
-    rm -f out_*.sql
     panic "md5sum didnt match"
 else
-    rm -f out_*.sql
     echo "Slave replication completed succesfully"
 fi
