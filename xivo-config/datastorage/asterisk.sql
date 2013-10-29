@@ -913,13 +913,13 @@ INSERT INTO "features" VALUES (DEFAULT,0,0,1,'features.conf','general','parkeddy
 INSERT INTO "features" VALUES (DEFAULT,0,0,1,'features.conf','general','adsipark','no');
 INSERT INTO "features" VALUES (DEFAULT,0,0,1,'features.conf','general','findslot','next');
 INSERT INTO "features" VALUES (DEFAULT,0,0,1,'features.conf','general','parkedmusicclass','default');
-INSERT INTO "features" VALUES (DEFAULT,0,0,1,'features.conf','general','transferdigittimeout','3');
+INSERT INTO "features" VALUES (DEFAULT,0,0,1,'features.conf','general','transferdigittimeout','5');
 INSERT INTO "features" VALUES (DEFAULT,0,0,1,'features.conf','general','xfersound',NULL);
 INSERT INTO "features" VALUES (DEFAULT,0,0,1,'features.conf','general','xferfailsound',NULL);
 INSERT INTO "features" VALUES (DEFAULT,0,0,1,'features.conf','general','pickupexten','*8');
 INSERT INTO "features" VALUES (DEFAULT,0,0,1,'features.conf','general','pickupsound','');
 INSERT INTO "features" VALUES (DEFAULT,0,0,1,'features.conf','general','pickupfailsound','');
-INSERT INTO "features" VALUES (DEFAULT,0,0,1,'features.conf','general','featuredigittimeout','500');
+INSERT INTO "features" VALUES (DEFAULT,0,0,1,'features.conf','general','featuredigittimeout','1500');
 INSERT INTO "features" VALUES (DEFAULT,0,0,1,'features.conf','general','atxfernoanswertimeout','15');
 INSERT INTO "features" VALUES (DEFAULT,0,0,1,'features.conf','general','atxferdropcall','no');
 INSERT INTO "features" VALUES (DEFAULT,0,0,1,'features.conf','general','atxferloopdelay','10');
