@@ -2619,6 +2619,8 @@ CREATE TABLE "sccpline" (
     "context"   varchar(80) NOT NULL,
     "cid_name"  varchar(80) NOT NULL,
     "cid_num"   varchar(80) NOT NULL,
+    "disallow"  varchar(100) NOT NULL DEFAULT '',
+    "allow"     text,
     "protocol" "trunk_protocol" NOT NULL DEFAULT 'sccp',
     "commented" INTEGER NOT NULL DEFAULT 0,
     PRIMARY KEY("id")
