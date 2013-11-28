@@ -2609,7 +2609,9 @@ CREATE TABLE "sccpgeneralsettings" (
 
 INSERT INTO "sccpgeneralsettings" VALUES (DEFAULT, 'directmedia', 'no');
 INSERT INTO "sccpgeneralsettings" VALUES (DEFAULT, 'dialtimeout', '5');
+INSERT INTO "sccpgeneralsettings" VALUES (DEFAULT, 'keepalive', '10');
 INSERT INTO "sccpgeneralsettings" VALUES (DEFAULT, 'language', 'en_US');
+INSERT INTO "sccpgeneralsettings" VALUES (DEFAULT, 'allow', '');
 
 
 DROP TABLE IF EXISTS "sccpline" CASCADE;
