@@ -2296,7 +2296,7 @@ CREATE TABLE "user_line" (
 	"id" SERIAL,
 	"user_id" INTEGER NOT NULL,
 	"line_id" INTEGER NOT NULL,
-    "extension_id" INTEGER NOT NULL,
+    "extension_id" INTEGER,
 	"main_user" boolean NOT NULL,
     "main_line" boolean NOT NULL,
   CONSTRAINT "user_line__userfeatures_id_fkey" FOREIGN KEY ("user_id")
