@@ -2296,7 +2296,7 @@ CREATE UNIQUE INDEX "usersip__uidx__name" ON "usersip"("name");
 DROP VIEW IF EXISTS "user_line" CASCADE;
 CREATE TABLE "user_line" (
 	"id" SERIAL,
-	"user_id" INTEGER NOT NULL,
+	"user_id" INTEGER,
 	"line_id" INTEGER NOT NULL,
     "extension_id" INTEGER,
 	"main_user" boolean NOT NULL,
@@ -2307,7 +2307,7 @@ CREATE TABLE "user_line" (
       REFERENCES "linefeatures" (id) MATCH SIMPLE,
   CONSTRAINT "user_line__extensions_id_fkey" FOREIGN KEY ("extension_id")
       REFERENCES "extensions" (id) MATCH SIMPLE,
- PRIMARY KEY("id", "user_id", "line_id")
+ PRIMARY KEY("id", "line_id")
 );
 
 CREATE UNIQUE INDEX "user_line_extension__uidx__user_id_line_id" ON "user_line"("user_id","line_id");
