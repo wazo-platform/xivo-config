@@ -187,8 +187,10 @@ CREATE TABLE "call_log" (
  "date" TIMESTAMP NOT NULL,
  "source_name" VARCHAR(255),
  "source_exten" VARCHAR(255),
+ "source_line_identity" VARCHAR(255),
  "destination_name" VARCHAR(255),
  "destination_exten" VARCHAR(255),
+ "destination_line_identity" VARCHAR(255),
  "duration" INTERVAL NOT NULL,
  "user_field" VARCHAR(255),
  "answered" BOOLEAN
