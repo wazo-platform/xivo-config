@@ -2295,18 +2295,18 @@ CREATE UNIQUE INDEX "usersip__uidx__name" ON "usersip"("name");
 
 DROP VIEW IF EXISTS "user_line" CASCADE;
 CREATE TABLE "user_line" (
-	"id" SERIAL,
-	"user_id" INTEGER,
-	"line_id" INTEGER NOT NULL,
-    "extension_id" INTEGER,
-	"main_user" boolean NOT NULL,
-    "main_line" boolean NOT NULL,
-  CONSTRAINT "user_line__userfeatures_id_fkey" FOREIGN KEY ("user_id")
-      REFERENCES "userfeatures" (id) MATCH SIMPLE,
-  CONSTRAINT "user_line__linefeatures_id_fkey" FOREIGN KEY ("line_id")
-      REFERENCES "linefeatures" (id) MATCH SIMPLE,
-  CONSTRAINT "user_line__extensions_id_fkey" FOREIGN KEY ("extension_id")
-      REFERENCES "extensions" (id) MATCH SIMPLE,
+ "id" SERIAL,
+ "user_id" INTEGER,
+ "line_id" INTEGER NOT NULL,
+ "extension_id" INTEGER,
+ "main_user" boolean NOT NULL,
+ "main_line" boolean NOT NULL,
+ CONSTRAINT "user_line__userfeatures_id_fkey" FOREIGN KEY ("user_id")
+     REFERENCES "userfeatures" (id) MATCH SIMPLE,
+ CONSTRAINT "user_line__linefeatures_id_fkey" FOREIGN KEY ("line_id")
+     REFERENCES "linefeatures" (id) MATCH SIMPLE,
+ CONSTRAINT "user_line__extensions_id_fkey" FOREIGN KEY ("extension_id")
+     REFERENCES "extensions" (id) MATCH SIMPLE,
  PRIMARY KEY("id", "line_id")
 );
 
