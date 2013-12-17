@@ -1174,7 +1174,7 @@ CREATE UNIQUE INDEX "musiconhold__uidx__filename_category_var_name" ON "musiconh
 INSERT INTO "musiconhold" VALUES (DEFAULT,0,0,0,'musiconhold.conf','default','mode','files');
 INSERT INTO "musiconhold" VALUES (DEFAULT,0,0,1,'musiconhold.conf','default','application','');
 INSERT INTO "musiconhold" VALUES (DEFAULT,0,0,0,'musiconhold.conf','default','random','no');
-INSERT INTO "musiconhold" VALUES (DEFAULT,0,0,0,'musiconhold.conf','default','directory','/var/lib/pf-xivo/moh/default');
+INSERT INTO "musiconhold" VALUES (DEFAULT,0,0,0,'musiconhold.conf','default','directory','/var/lib/xivo/moh/default');
 
 
 DROP TABLE IF EXISTS "operator" CASCADE;

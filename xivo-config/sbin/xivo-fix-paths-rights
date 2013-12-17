@@ -4,7 +4,7 @@ AST_ETC_PATH="/etc/asterisk"
 AST_USR_PATH="/usr/share/asterisk"
 AST_SPOOL_PATH="/var/spool/asterisk"
 AST_VARLIB_PATH="/var/lib/asterisk"
-XIVO_VARLIB_PATH="/var/lib/pf-xivo"
+XIVO_VARLIB_PATH="/var/lib/xivo"
 
 AST_VARLIB_MOH_PATH="${AST_VARLIB_PATH}/moh"
 AST_USR_MOH_PATH="${AST_USR_PATH}/moh"
