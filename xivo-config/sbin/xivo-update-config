@@ -2,7 +2,7 @@
 #
 
 BASE_TEMPLATE_DIR=/usr/share/xivo-config/templates
-CUSTOM_TEMPLATE_DIR=/etc/pf-xivo/custom-templates
+CUSTOM_TEMPLATE_DIR=/etc/xivo/custom-templates
 
 set -o allexport
 . /usr/sbin/xivo-read-config

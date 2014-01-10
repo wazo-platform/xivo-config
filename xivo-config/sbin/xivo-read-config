@@ -2,7 +2,7 @@
 
 # TODO: use the _XIVO_* namespace for generated variables
 
-[ -r /etc/pf-xivo/common.conf ] && . /etc/pf-xivo/common.conf
+[ -r /etc/xivo/common.conf ] && . /etc/xivo/common.conf
 
 
 _PF_EMAIL_ALERTS_LIST="pv-tech-client-alerts"
