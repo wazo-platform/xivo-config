@@ -1,0 +1,9 @@
+# see: dh_installdeb(1)
+
+mv_conffile /etc/pf-xivo/datastorage.conf /etc/xivo/datastorage.conf 14.02
+mv_conffile /etc/pf-xivo/mail.txt /etc/xivo/mail.txt 14.02
+mv_conffile /etc/pf-xivo/asterisk/xivo_callback_on_congestion.conf /etc/xivo/asterisk/xivo_callback_on_congestion.conf 14.02
+mv_conffile /etc/pf-xivo/asterisk/xivo_fax.conf /etc/xivo/asterisk/xivo_fax.conf 14.02
+mv_conffile /etc/pf-xivo/asterisk/xivo_globals.conf /etc/xivo/asterisk/xivo_globals.conf 14.02
+mv_conffile /etc/pf-xivo/asterisk/xivo_in_callerid.conf /etc/xivo/asterisk/xivo_in_callerid.conf 14.02
+mv_conffile /etc/pf-xivo/asterisk/xivo_ring.conf /etc/xivo/asterisk/xivo_ring.conf 14.02

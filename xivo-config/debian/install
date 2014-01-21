@@ -1,0 +1,4 @@
+etc/*                       etc/
+sbin/                       usr/
+templates                   usr/share/xivo-config/
+dialplan                    usr/share/xivo-config/

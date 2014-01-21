@@ -1,0 +1,3 @@
+etc/xivo/custom-templates
+var/lib/xivo-config
+var/spool/asterisk/fax

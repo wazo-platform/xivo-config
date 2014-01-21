@@ -1,0 +1,949 @@
+xivo-config (14.01~20140114.181228.739b439-wheezy-2) xivo-dev; urgency=low
+
+  * add conffile to be moved from pf-xivo to xivo
+
+ -- Sebastien Duthil <sduthil@avencall.com>  Thu, 16 Jan 2014 08:50:07 -0500
+
+xivo-config (14.01~20140110.141754.c58f1e1-wheezy-3) xivo-dev; urgency=low
+
+  * use maintscript to rename pf-xivo to xivo
+
+ -- Pascal Cadotte Michaud <pcadottemichaud@avencall.com>  Tue, 14 Jan 2014 10:07:30 -0500
+
+xivo-config (14.01~20140110.141754.c58f1e1-wheezy-2) xivo-dev; urgency=low
+
+  * rename configuration paths from pf-xivo to xivo when copying conffiles
+
+ -- Sebastien Duthil <sduthil@avencall.com>  Mon, 13 Jan 2014 10:53:54 -0500
+
+xivo-config (14.01~20131216.174245.a5138a8-wheezy-2) xivo-dev; urgency=low
+
+  * fix rsyslog reload for fail2ban
+
+ -- Sebastien Duthil <sduthil@avencall.com>  Mon, 06 Jan 2014 09:48:46 -0500
+
+xivo-config (13.18~20130822.155350.df70fa7-2) squeeze-xivo-skaro-dev; urgency=low
+
+  * add depends on postgresql-9.1 
+
+ -- Nicolas HICHER <nhicher@avencall.com>  Thu, 05 Sep 2013 15:55:03 -0400
+
+xivo-config (13.09~20130508.154315.228741d-2) squeeze-xivo-skaro-dev; urgency=low
+
+  * remove references to asterisk11
+
+ -- Etienne Lessard <elessard@avencall.com>  Wed, 08 May 2013 13:48:04 -0400
+
+xivo-config (13.05~20130305.202248.c5b438b-3) squeeze-xivo-skaro-dev; urgency=low
+
+  * rename pf-* scripts to xivo-*
+
+ -- Gregory Eric Sanderson <gsanderson@avencall.com>  Tue, 12 Mar 2013 15:26:21 -0500
+
+xivo-config (13.05~20130305.202248.c5b438b-2) squeeze-xivo-skaro-dev; urgency=low
+
+  * add depends on xivo-utils 
+
+ -- Nicolas HICHER <nhicher@avencall.com>  Tue, 12 Mar 2013 08:49:22 -0400
+
+xivo-config (13.04~20130220.204648.13f62a0-2) squeeze-xivo-skaro-dev; urgency=low
+
+  * add depends on asterisk11 
+
+ -- Nicolas HICHER <nhicher@avencall.com>  Fri, 22 Feb 2013 13:01:23 -0500
+
+xivo-config (13.04~20130218.132204.fc6e05a-3) squeeze-xivo-skaro-dev; urgency=low
+
+  * fix packagingfarm
+
+ -- Cedric Abunar <cabunar@avencall.com>  Tue, 19 Feb 2013 08:04:04 -0500
+
+xivo-config (13.04~20130218.132204.fc6e05a-2) squeeze-xivo-skaro-dev; urgency=low
+
+  * exec  xivo-fix-path-rights script in postinst
+
+ -- Cedric Abunar <cabunar@avencall.com>  Tue, 19 Feb 2013 07:50:11 -0500
+
+xivo-config (13.03~20130208.163851.38c0ff1-2) squeeze-xivo-skaro-dev; urgency=low
+
+  * reload nginx in postinst
+
+ -- Etienne Lessard <elessard@avencall.com>  Fri, 08 Feb 2013 15:12:46 -0500
+
+xivo-config (13.03~20130207.180239.cddea41-2) squeeze-xivo-skaro-dev; urgency=low
+
+  * add jslib-select2 to nginx config
+
+ -- Gregory Eric Sanderson <gsanderson@avencall.com>  Thu, 07 Feb 2013 15:02:24 -0500
+
+xivo-config (13.02~20130128.173355.93cbb26-2) squeeze-xivo-skaro-dev; urgency=low
+
+  * don't start service in postinst (done by xivo-upgrade)
+
+ -- Etienne Lessard <elessard@avencall.com>  Thu, 31 Jan 2013 10:40:17 -0500
+
+xivo-config (13.02~20130115.174312.8032309-2) squeeze-xivo-skaro-dev; urgency=low
+
+  * add pre-depends on rabbitmq-server 
+
+ -- Nicolas HICHER (atarakt) <nhicher@proformatique.com>  Wed, 23 Jan 2013 10:37:54 -0500
+
+xivo-config (12.23~20121123.152712.66cdcc3-2) squeeze-xivo-skaro-dev; urgency=low
+
+  * add depends on xivo-provisionning 
+
+ -- Nicolas HICHER (atarakt) <nhicher@proformatique.com>  Mon, 26 Nov 2012 15:03:55 -0500
+
+xivo-config (12.20~20121016.123254.3a58d0b-2) squeeze-xivo-skaro-dev; urgency=low
+
+  * add recording-meetme directory
+
+ -- Cedric Abunar (cabunar) <cabunar@avencall.com>  Tue, 30 Oct 2012 11:04:59 -0400
+
+xivo-config (12.19~20120925.182657.ef18b82-3) squeeze-xivo-skaro-dev; urgency=low
+
+  * fix postrm to allow purge 
+
+ -- Nicolas HICHER (atarakt) <nhicher@proformatique.com>  Thu, 27 Sep 2012 09:43:51 -0400
+
+xivo-config (12.19~20120925.182657.ef18b82-2) squeeze-xivo-skaro-dev; urgency=low
+
+  * fix version 
+
+ -- Nicolas HICHER (atarakt) <nhicher@proformatique.com>  Tue, 25 Sep 2012 15:59:36 -0400
+
+xivo-config (12.18~20120823.151953.de589ea-4) squeeze-xivo-skaro-dev; urgency=low
+
+  * add replace for pf-sys-ca 
+
+ -- Nicolas HICHER (atarakt) <nhicher@proformatique.com>  Tue, 25 Sep 2012 15:40:24 -0400
+
+xivo-config (12.18~20120823.151953.de589ea-3) squeeze-xivo-skaro-dev; urgency=low
+
+  * rename package 
+
+ -- Nicolas HICHER (atarakt) <nhicher@proformatique.com>  Tue, 25 Sep 2012 14:02:35 -0400
+
+pf-xivo-base-config (13:12.18~20120823.151953.de589ea-2) squeeze-xivo-skaro-dev; urgency=low
+
+  * fix postinst script 
+
+ -- Nicolas HICHER (atarakt) <nhicher@proformatique.com>  Mon, 10 Sep 2012 14:36:08 -0400
+
+pf-xivo-base-config (13:1.2.8~20120516.182233.b8166e4-2) squeeze-xivo-skaro-dev; urgency=low
+
+  * stop xivo-confgen and xivo-ctid before databases migration
+
+ -- Nicolas HICHER (atarakt) <nhicher@proformatique.com>  Wed, 16 May 2012 15:57:02 -0400
+
+pf-xivo-base-config (13:1.2.8~20120509.203843.4314abe-2) squeeze-xivo-skaro-dev; urgency=low
+
+  * fix version 
+
+ -- Nicolas HICHER (atarakt) <nhicher@proformatique.com>  Thu, 10 May 2012 16:57:06 -0400
+
+pf-xivo-base-config (13:1.2.3~20120224.164915.472ccef-2) squeeze-xivo-skaro-dev; urgency=low
+
+  * replace pf-server and pf-server-config
+
+ -- Nicolas HICHER (atarakt) <nhicher@proformatique.com>  Fri, 24 Feb 2012 12:13:52 -0500
+
+pf-xivo-base-config (13:1.2~beta-2-1) squeeze-xivo-skaro-dev; urgency=low
+
+  * Remove pf-xivo-routing.
+
+ -- Etienne Lessard <edesrocherslessard@avencall.com>  Tue, 13 Dec 2011 14:42:09 -0500
+
+pf-xivo-base-config (13:1.2~beta-1-rc2-1) squeeze-xivo-skaro-dev; urgency=low
+
+  * Fix version for packaging-farm
+
+ -- Nicolas HICHER (atarakt) <nhicher@proformatique.com>  Fri, 09 Dec 2011 10:10:09 -0500
+
+pf-xivo-base-config (12:1.2-dev~20111205.192333.91a9021-2) squeeze-xivo-skaro-dev; urgency=low
+
+  * Use xivo-update-db.
+
+ -- Etienne Lessard <edesrocherslessard@avencall.com>  Tue, 06 Dec 2011 09:30:17 -0500
+
+pf-xivo-base-config (12:1.2-dev~20111202.165632.5d2adad-2) squeeze-xivo-skaro-dev; urgency=low
+
+  * Do not redirect stderr to /dev/null for postgres.
+
+ -- Etienne Lessard <edesrocherslessard@avencall.com>  Fri, 02 Dec 2011 14:26:10 -0500
+
+pf-xivo-base-config (12:1.2-dev~20111202.154000.2360585-2) squeeze-xivo-skaro-dev; urgency=low
+
+  * Fix missing leading slash.
+
+ -- Etienne Lessard <edesrocherslessard@avencall.com>  Fri, 02 Dec 2011 13:55:23 -0500
+
+pf-xivo-base-config (12:1.2-dev~20111129.194503.052cd01-2) squeeze-xivo-skaro-dev; urgency=low
+
+  * Fix redirection (using sh instead of bash).
+
+ -- Etienne Lessard <edesrocherslessard@avencall.com>  Tue, 29 Nov 2011 15:45:30 -0500
+
+pf-xivo-base-config (12:1.2-dev~20111123.152138.86bac98-1) squeeze-xivo-skaro-dev; urgency=low
+
+  * fix version 
+
+ -- Nicolas HICHER (atarakt) <nhicher@proformatique.com>  Mon, 28 Nov 2011 09:30:37 -0500
+
+pf-xivo-base-config (11:squeeze~xivo-skaro-1.2-dev~20111121.205800.47d0e0c-2) squeeze-xivo-skaro-dev; urgency=low
+
+  * remove mysql/sqlite provisionning
+
+ -- Nicolas HICHER (atarakt) <nhicher@proformatique.com>  Tue, 22 Nov 2011 10:12:26 -0500
+
+pf-xivo-base-config (11:1.2~20110908.153804.6532ff3-1) squeeze-xivo-skaro-dev; urgency=low
+
+  * Update version.
+
+ -- Etienne Lessard <edesrocherslessard@avencall.com>  Fri, 09 Sep 2011 08:06:22 -0400
+
+pf-xivo-base-config (11:1.2~20110817.155800.06ea074-2) squeeze-xivo-skaro-dev; urgency=low
+
+  * Divert to pf.orig instead of pf-orig.
+
+ -- Etienne Lessard <edesrocherslessard@avencall.com>  Thu, 08 Sep 2011 13:27:32 -0400
+
+pf-xivo-base-config (11:1.2~20110817.155800.06ea074-1) squeeze-xivo-skaro-dev; urgency=low
+
+  * Update package version (svn to git).
+
+ -- Etienne Lessard <edesrocherslessard@avencall.com>  Mon, 22 Aug 2011 08:12:23 -0400
+
+pf-xivo-base-config (10:1.2~svn10395-3) squeeze-xivo-skaro-dev; urgency=low
+
+  * delete depends on lighttpd, add depends on nginx 
+
+ -- Nicolas HICHER (atarakt) <nhicher@proformatique.com>  Fri, 20 May 2011 09:51:28 +0200
+
+pf-xivo-base-config (10:1.2~svn10395-2) squeeze-xivo-skaro-dev; urgency=low
+
+  * remvove Provides: pf-xivo-web-interface-config-custom
+  * base-config have a depends on pf-xivo-web-interface, and lauch fix_right
+    script
+
+ -- Nicolas HICHER (atarakt) <nhicher@proformatique.com>  Thu, 17 Mar 2011 07:57:14 +0100
+
+pf-xivo-base-config (10:1.2~svn10191-2) squeeze-xivo-skaro-dev; urgency=low
+
+  * Fix rsyslog
+
+ -- Sylvain Boily <sboily@proformatique.com>  Mon, 14 Feb 2011 16:28:10 -0500
+
+pf-xivo-base-config (10:1.2~svn10191-0) squeeze-xivo-skaro-dev; urgency=low
+
+  * Added fail2ban configuration by default
+  * Removed all ref to atftpd
+
+ -- Sylvain Boily <sboily@proformatique.com>  Mon, 14 Feb 2011 16:04:01 -0500
+
+pf-xivo-base-config (10:1.2~svn10183-0) squeeze-xivo-skaro-dev; urgency=low
+
+  * remove references to old tftpboot directory.
+
+ -- Etienne Lessard <edesrocherslessard@proformatique.com>  Mon, 14 Feb 2011 09:40:45 -0500
+
+pf-xivo-base-config (10:1.2~svn10135-1) squeeze-xivo-skaro-dev; urgency=low
+
+  * rebuild for squeeze 
+
+ -- Nicolas HICHER (atarakt) <nhicher@proformatique.com>  Fri, 11 Feb 2011 16:42:34 +0100
+
+pf-xivo-base-config (8:1.2.0~svn9945-0) lenny-xivo-skaro-dev; urgency=low
+
+  * redirect http to https 
+
+ -- Nicolas HICHER (atarakt) <nhicher@proformatique.com>  Thu, 13 Jan 2011 17:27:21 +0100
+
+pf-xivo-base-config (8:1.2.0~svn9166-0.1) lenny-xivo-skaro-dev; urgency=low
+
+  * add depend on lighttpd
+
+ -- Nicolas HICHER (atarakt) <nhicher@proformatique.com>  Wed, 12 Jan 2011 11:34:09 +0100
+
+pf-xivo-base-config (8:1.2.0~svn9166-0) lenny-xivo-skaro-dev; urgency=low
+
+  * Add links for Nortel IP Phone 1220.
+
+ -- Etienne Lessard <edesrocherslessard@proformatique.com>  Mon, 13 Sep 2010 15:02:28 -0400
+
+pf-xivo-base-config (8:1.2.0~svn9157-0) lenny-xivo-skaro-dev; urgency=low
+
+  * Add new links for Cisco ringlist.xml and distinctiveringlist.xml files.
+
+ -- Etienne Lessard <edesrocherslessard@proformatique.com>  Mon, 13 Sep 2010 08:03:08 -0400
+
+pf-xivo-base-config (8:1.2.0~svn9149-0) lenny-xivo-skaro-dev; urgency=low
+
+  * Updated for new Thomson ST2030 firmware (2.72.2)
+
+ -- Etienne Lessard <edesrocherslessard@proformatique.com>  Fri, 10 Sep 2010 13:45:52 -0400
+
+pf-xivo-base-config (8:1.2.0~svn8950-0) lenny-xivo-skaro-dev; urgency=low
+
+  * Removed obsolete dependance
+
+ -- Sylvain Boily <sboily@proformatique.com>  Wed, 18 Aug 2010 14:46:23 -0400
+
+pf-xivo-base-config (8:1.2.0~svn8869-0) lenny-xivo-skaro-dev; urgency=low
+
+  * Added a link for Zenitel generic configuration file
+
+ -- Etienne Lessard <edesrocherslessard@proformatique.com>  Thu, 05 Aug 2010 09:40:45 -0400
+
+pf-xivo-base-config (8:1.2.0~svn8819-0) lenny-xivo-skaro-dev; urgency=low
+
+  * Updated for new Thomson ST2020 firmware (4.69.2)
+
+ -- Etienne Lessard <edesrocherslessard@proformatique.com>  Mon, 02 Aug 2010 09:53:54 -0400
+
+pf-xivo-base-config (8:1.1.0~rc4~svn8518-0) lenny-xivo-gallifrey-dev; urgency=low
+
+  * Updated for new Thomson firmware TB30
+
+ -- Sylvain Boily <sboily@proformatique.com>  Wed, 30 Jun 2010 13:41:09 -0400
+
+pf-xivo-base-config (8:1.1.0~rc4~svn8502-2) lenny-xivo-gallifrey-dev; urgency=low
+
+  * [fix] bad links
+
+ -- Etienne Lessard <edesrocherslessard@proformatique.com>  Tue, 29 Jun 2010 14:36:19 -0400
+
+pf-xivo-base-config (8:1.1.0~rc4~svn8502-0) lenny-xivo-gallifrey-dev; urgency=low
+
+  * added more links in links file for Linksys SPA9xx, CiscoSMB 5xx and Thomson configuration files
+
+ -- Etienne Lessard <edesrocherslessard@proformatique.com>  Tue, 29 Jun 2010 13:59:33 -0400
+
+pf-xivo-base-config (8:1.1.0~rc2~svn8116-7) lenny-xivo-gallifrey-dev; urgency=low
+
+  * [evol] Add ability to migrate both sqlite and mysql asterisk databases.
+
+ -- Guillaume Bour <gbour@proformatique.com>  Thu, 17 Jun 2010 10:41:29 +0200
+
+pf-xivo-base-config (8:1.1.0~rc2~svn8116-6) lenny-xivo-gallifrey-dev; urgency=low
+
+  * Database creation scripts are symlinks to package pf-xivo-web-interface ones
+
+ -- Guillaume Bour <gbour@proformatique.com>  Tue, 08 Jun 2010 11:59:48 +0200
+
+pf-xivo-base-config (8:1.1.0~rc2~svn8116-5) lenny-xivo-gallifrey-dev; urgency=low
+
+  * Ensure scripts in '/etc/network/if-up.d/' are executable.
+
+ -- Marc Dequènes (Duck) <mdequenes@proformatique.com>  Mon, 17 May 2010 16:16:16 +0200
+
+pf-xivo-base-config (8:1.1~svn7565-2) lenny-xivo-gallifrey-dev; urgency=low
+
+  * Ensure 'php5' apache module is loaded.
+
+ -- Adrien DELLE CAVE (Decryptus) <decryptus@proformatique.com>  Sun,  7 Feb 2010 16:28:03 +0100
+
+pf-xivo-base-config (5:1.0.2~svn7506-5) etch-xivo-dalek-dev; urgency=low
+
+  * Fixed php4 to php5
+
+ -- Sylvain Boily <sboily@proformatique.com>  Fri, 05 Feb 2010 19:44:35 +0100
+
+pf-xivo-base-config (5:1.0.2~svn7333-0) etch-xivo-dalek-dev; urgency=low
+
+  * Added dialplan directory to /usr/share/pf-xivo-base-config/
+
+ -- Sylvain Boily <sboily@proformatique.com>  Wed, 30 Dec 2009 14:27:23 +0100
+
+pf-xivo-base-config (8:1.0.8~svn7194-0) etch-xivo-dalek-dev; urgency=low
+
+  * Depends on pf-server-config to use common config mechanism.
+
+ -- Marc Dequènes (Duck) <mdequenes@proformatique.com>  Thu, 03 Dec 2009 12:17:28 +0100
+
+pf-xivo-base-config (5:1.0.2~svn6603-2) etch-xivo-dalek-dev; urgency=low
+
+  * Ensure preinst don't fail if a diverted file is missing (for
+    whatever reason).
+
+ -- Marc Dequènes (Duck) <mdequenes@proformatique.com>  Mon, 15 Jun 2009 12:20:26 +0200
+
+pf-xivo-base-config (3:1.0~svn6051-2) etch-xivo-dalek-dev; urgency=low
+
+  * Added missing depends on ipcalc.
+
+ -- Marc Dequènes (Duck) <mdequenes@proformatique.com>  Tue, 21 Apr 2009 12:22:02 +0200
+
+pf-xivo-base-config (3:1.0~svn6043-2) etch-xivo-dalek-dev; urgency=low
+
+  * Generate configuration via templates in postinst.
+
+ -- Marc Dequènes (Duck) <mdequenes@proformatique.com>  Tue, 21 Apr 2009 11:07:43 +0200
+
+pf-xivo-base-config (3:1.0~svn6035-0) etch-xivo-dalek-dev; urgency=low
+
+  * Missing template and sbin directory
+
+ -- Sylvain Boily <sboily@proformatique.com>  Mon, 20 Apr 2009 17:21:00 +0200
+
+pf-xivo-base-config (2:0.4.5~svn5637-0) etch-xivo-k-9-dev; urgency=low
+
+  * Added crontab for specific monitoring tasks.
+
+ -- Marc Dequènes (Duck) <mdequenes@proformatique.com>  Mon, 16 Mar 2009 15:35:02 +0100
+
+pf-xivo-base-config (2:0.4.5~svn5585-0) etch-xivo-k-9-dev; urgency=low
+
+  * Adapted to new pf common config path.
+  * Create empty custom pf apache sites dir.
+
+ -- Marc Dequènes (Duck) <mdequenes@proformatique.com>  Wed, 11 Mar 2009 12:42:38 +0100
+
+pf-xivo-base-config (2:0.4.5~svn5572-0) etch-xivo-k-9-dev; urgency=low
+
+  * Providing defaut PF common config via symlink.
+
+ -- Marc Dequènes (Duck) <mdequenes@proformatique.com>  Mon, 09 Mar 2009 12:52:49 +0100
+
+pf-xivo-base-config (2:0.4.5~svn5515-0) etch-xivo-k-9-dev; urgency=low
+
+  * Ensure atftpd creates a pid file (needed for monitoring).
+
+ -- Marc Dequènes (Duck) <mdequenes@proformatique.com>  Wed, 04 Mar 2009 16:03:22 +0100
+
+pf-xivo-base-config (2:0.4.4~5433-0) etch-xivo-k-9-dev; urgency=low
+
+  * Removed tftpboot symbolic links for Aastra firmware.
+
+ -- Adrien DELLE CAVE (Decryptus) <decryptus@proformatique.com>  Wed, 25 Feb 2009 19:59:17 +0100
+
+pf-xivo-base-config (2:0.4.2~svn4964-0) etch-xivo-k-9-dev; urgency=low
+
+  * Added tftpboot symbolic links for Aastra firmware.
+
+ -- Adrien DELLE CAVE (Decryptus) <decryptus@proformatique.com>  Mon, 15 Dec 2008 16:29:31 +0100
+
+pf-xivo-base-config (2:0.4~svn4843-2) etch-xivo-k-9-dev; urgency=low
+
+  * Fixed diversion processing.
+
+ -- Marc Dequènes (Duck) <mdequenes@proformatique.com>  Tue, 02 Dec 2008 18:36:05 +0100
+
+pf-xivo-base-config (2:0.4~svn4838-3) etch-xivo-k-9-dev; urgency=low
+
+  * Protect apache certificate.
+
+ -- Marc Dequènes (Duck) <mdequenes@proformatique.com>  Tue, 02 Dec 2008 13:57:03 +0100
+
+pf-xivo-base-config (2:0.4~svn4838-2) etch-xivo-k-9-dev; urgency=low
+
+  * Try to fix removed diversions harder (to avoid vanished files).
+
+ -- Marc Dequènes (Duck) <mdequenes@proformatique.com>  Tue, 02 Dec 2008 11:24:04 +0100
+
+pf-xivo-base-config (2:0.4~svn4811-0) etch-xivo-k-9-dev; urgency=low
+
+  * Added migration support in postinst.
+
+ -- Adrien DELLE CAVE (Decryptus) <decryptus@proformatique.com>  Sat, 29 Nov 2008 02:41:47 +0100
+
+pf-xivo-base-config (2:0.4~svn4762-2) etch-xivo-k-9-dev; urgency=low
+
+  * Removed symlink on xivo.db.sqlite.sql.
+
+ -- Adrien DELLE CAVE (Decryptus) <decryptus@proformatique.com>  Fri, 28 Nov 2008 12:03:47 +0100
+
+pf-xivo-base-config (2:0.4~svn4749-3) etch-xivo-k-9-dev; urgency=low
+
+  * Added MySQL DB files.
+
+ -- Marc Dequènes (Duck) <mdequenes@proformatique.com>  Thu, 20 Nov 2008 17:38:27 +0100
+
+pf-xivo-base-config (2:0.4~svn4749-2) etch-xivo-k-9-dev; urgency=low
+
+  * Added tftpboot symbolic links for Linksys/spa3102.cfg.
+
+ -- Adrien DELLE CAVE (Decryptus) <decryptus@proformatique.com>  Wed, 19 Nov 2008 19:50:53 +0100
+
+pf-xivo-base-config (2:0.4~svn4698-2) etch-xivo-k-9-dev; urgency=low
+
+  * Ensure un-diverted files are not destroyed by rename the old one,
+    and hope dpkg would handle new versions of the file correctly.
+
+ -- Marc Dequènes (Duck) <mdequenes@proformatique.com>  Mon, 17 Nov 2008 12:29:57 +0100
+
+pf-xivo-base-config (2:0.4~svn4698-0) etch-xivo-k-9-dev; urgency=low
+
+  * Ensure 'status' apache module is loaded, as needed for
+    stats/monitoring.
+
+ -- Marc Dequènes (Duck) <mdequenes@proformatique.com>  Mon, 17 Nov 2008 11:48:38 +0100
+
+pf-xivo-base-config (2:0.4~svn4367-2) etch-xivo-k-9-dev; urgency=low
+
+  * Added Depends on 'pf-xivo-utils' because severals scripts are needed
+    in the dialplan.
+
+ -- Marc Dequènes (Duck) <mdequenes@proformatique.com>  Fri, 17 Oct 2008 18:15:01 +0200
+
+pf-xivo-base-config (2:0.4~svn3952-0) etch-xivo-k-9-dev; urgency=low
+
+  * Created /var/log/atftpd.log and added /var/log/atftpd.log logrotate.
+
+ -- Adrien DELLE CAVE (Decryptus) <decryptus@proformatique.com>  Sun, 31 Aug 2008 12:49:47 +0200
+
+pf-xivo-base-config (2:0.4~svn3910-0) etch-xivo-k-9-dev; urgency=low
+
+  * Added tftpboot symbolic links.
+
+ -- Adrien DELLE CAVE (Decryptus) <decryptus@proformatique.com>  Mon, 25 Aug 2008 11:20:23 +0200
+
+pf-xivo-base-config (2:0.4~svn3898-0) etch-xivo-k-9-dev; urgency=low
+
+  * Added replaces on initscripts for the conffiles /etc/default/bootlogd.
+
+ -- Adrien DELLE CAVE (Decryptus) <decryptus@proformatique.com>  Wed, 20 Aug 2008 16:42:19 +0200
+
+pf-xivo-base-config (2:0.4~svn3839-0) etch-xivo-k-9-dev; urgency=low
+
+  * Added '/var/spool/asterisk/monitor' in fix_rights script.
+
+ -- Adrien DELLE CAVE (Decryptus) <decryptus@proformatique.com>  Fri, 15 Aug 2008 02:57:10 +0200
+
+pf-xivo-base-config (2:0.4~svn3813-2) etch-xivo-k-9-dev; urgency=low
+
+  * Removed option --rename on dpkg-divert in preinst.
+
+ -- Adrien DELLE CAVE (Decryptus) <decryptus@proformatique.com>  Thu, 14 Aug 2008 15:36:44 +0200
+
+pf-xivo-base-config (2:0.4~svn3638-2) etch-xivo-k-9-dev; urgency=low
+
+  * Replaced all occurrences to Xivo by XIVO in copyright file.
+
+ -- Adrien DELLE CAVE (Decryptus) <decryptus@proformatique.com>  Wed, 23 Jul 2008 00:33:43 +0200
+
+pf-xivo-base-config (2:0.4~svn3630-22) etch-xivo-k-9-dev; urgency=low
+
+  * Changed all references to pf-asterisk-func-strsubst to
+    pf-asterisk-module-xivo.
+
+ -- Guillaume Knispel <gknispel@proformatique.com>  Mon, 21 Jul 2008 20:28:47 +0200
+
+pf-xivo-base-config (2:0.4~svn3584-2) etch-xivo-k-9-dev; urgency=low
+
+  * Fixed name of the dependency pf-xivo-web-interface.
+
+ -- Adrien DELLE CAVE (Decryptus) <decryptus@proformatique.com>  Sun, 13 Jul 2008 00:11:44 +0200
+
+pf-xivo-base-config (2:0.4~svn3550-2) etch-xivo-k-9-dev; urgency=low
+
+  * Added a dependency on pf-asterisk-module-xivo.
+
+ -- Guillaume Knispel <gknispel@proformatique.com>  Fri, 11 Jul 2008 15:05:14 +0200
+
+pf-xivo-base-config (1:0.4~svn3532-0) etch-xivo-k-9-dev; urgency=low
+
+  * Now depends on pf-sys-ca because the CA certificate is now shipped
+    in a separate package.
+
+ -- Marc Dequènes (Duck) <mdequenes@proformatique.com>  Wed, 09 Jul 2008 11:40:39 +0200
+
+pf-xivo-base-config (1:0.4~svn3444-2) etch-xivo-k-9-dev; urgency=low
+
+  * Fixed ASTERISK_DIRS list.
+
+ -- Adrien DELLE CAVE (Decryptus) <decryptus@proformatique.com>  Sat, 28 Jun 2008 13:08:57 +0200
+
+pf-xivo-base-config (1:0.4~svn2681-0) etch-xivo-k-9-dev; urgency=low
+
+  * chmod -R go-w /tftpboot/, so that atftpd will never be allowed to write in
+    /tftpboot/
+
+ -- Guillaume Knispel <gknispel@proformatique.com>  Sun, 23 Mar 2008 19:11:20 +0100
+
+pf-xivo-base-config (1:0.3~svn2277-2) etch-xivo-tardis; urgency=low
+
+  * Fixed epoch.
+
+ -- Marc Dequènes (Duck) <mdequenes@proformatique.com>  Wed, 09 Jan 2008 15:37:04 +0100
+
+pf-xivo-base-config (0.3~svn2133-2) etch-xivo-tardis; urgency=low
+
+  * Port modification from etch-xivo-torchwood
+    - Moved XIVO-VERSION file installation to pf-xivo package.
+    - Add code for config directory
+
+ -- Adrien DELLE CAVE (Decryptus) <decryptus@proformatique.com>  Mon,  3 Dec 2007 13:30:38 +0100
+
+pf-xivo-base-config (0.2~svn2094-3) etch-xivo-torchwood; urgency=low
+
+  * Added XIVO-VERSION file with XIVO branch version.
+
+ -- Marc Dequènes (Duck) <Duck@DuckCorp.org>  Wed, 28 Nov 2007 16:14:46 +0100
+
+pf-xivo-base-config (0.2~svn2043-2) etch-xivo-torchwood; urgency=low
+
+  * Added Replaces: since the configs were previously in phones-firmware
+
+ -- Corentin Le Gall <clegall@proformatique.com>  Wed, 21 Nov 2007 14:07:58 +0100
+
+pf-xivo-base-config (0.2~svn1841-3) etch-testing; urgency=low
+
+  * Do not add explicitly etc*, and prepend tftpboot pathes with a /.
+
+ -- Corentin Le Gall <clegall@proformatique.com>  Wed,  7 Nov 2007 18:30:19 +0100
+
+pf-xivo-base-config (0.2~svn1841-2) etch-testing; urgency=low
+
+  * Added conffiles generation, including /tftpboot files.
+
+ -- Corentin Le Gall <clegall@proformatique.com>  Wed,  7 Nov 2007 18:15:19 +0100
+
+pf-xivo-base-config (0.2~svn1839-0) etch-testing; urgency=low
+
+  * New development snapshot.
+    Links for Linksys phones.
+
+ -- Corentin Le Gall <clegall@proformatique.com>  Wed,  7 Nov 2007 16:21:18 +0100
+
+pf-xivo-base-config (0.2~svn1838-0) etch-testing; urgency=low
+
+  * Moved ASCII config files from package phones-firmware to here.
+
+ -- Corentin Le Gall <clegall@proformatique.com>  Wed,  7 Nov 2007 15:40:16 +0100
+
+pf-xivo-base-config (0.1.1~svn1492-2) etch; urgency=low
+
+  * Add SET_GID on ASTERISK_DIRS
+
+ -- Adrien DELLE CAVE (Decryptus) <decryptus@proformatique.com>  Fri, 14 Sep 2007 18:37:59 +0200
+
+pf-xivo-base-config (0.1.1~svn1370-2) etch; urgency=low
+
+  * Implemented removal of obsolete divertions in preinst.
+
+ -- Marc Dequènes (Duck) <mdequenes@proformatique.com>  Mon, 20 Aug 2007 19:24:49 +0200
+
+pf-xivo-base-config (0.1.1~svn1367-2) etch; urgency=low
+
+  * Readded Pre-Depends on apache2.2-common removed by mistake.
+  * Make use of asterisk-flavour in Depends to be more flexible with
+    future flavours.
+  * Removed obsolete Depends on asterisk-chan-misdn (conffiles handled
+    via divertion).
+  * Moved service restart to pf-xivo.
+
+ -- Marc Dequènes (Duck) <mdequenes@proformatique.com>  Mon, 20 Aug 2007 16:24:52 +0200
+
+pf-xivo-base-config (0.1.1~svn1350-0) etch; urgency=low
+
+  * Test removing Replaces on pf-xivo-base-config-extra, which should
+    not be needed because of divertion, and probably is responsible for
+    strange behaviors.
+  * Fixed double Conflicts line.
+
+ -- Marc Dequènes (Duck) <mdequenes@proformatique.com>  Mon, 13 Aug 2007 11:19:53 +0200
+
+pf-xivo-base-config (0.1.1~svn1344-2) etch; urgency=low
+
+  * Don't forget to install diverted files.
+
+ -- Marc Dequènes (Duck) <Duck@DuckCorp.org>  Thu, 09 Aug 2007 18:44:21 +0200
+
+pf-xivo-base-config (0.1.1~svn1344-0) etch; urgency=low
+
+  * Split provided conffiles (Provides), and diverted ones.
+
+ -- Marc Dequènes (Duck) <Duck@DuckCorp.org>  Thu, 09 Aug 2007 18:39:00 +0200
+
+pf-xivo-base-config (0.1.1~svn1342-2) etch; urgency=low
+
+  * Fixed dpkg-divert call with non-absolute paths.
+
+ -- Marc Dequènes (Duck) <Duck@DuckCorp.org>  Thu, 09 Aug 2007 17:23:17 +0200
+
+pf-xivo-base-config (0.1.1~svn1342-0) etch; urgency=low
+
+  * Improved overriden conffiles management using dpkg-divert (with a
+    generated preinst with the proper file list).
+  * Removed now obsolete pf-xivo-base-config-extra package.
+
+ -- Marc Dequènes (Duck) <mdequenes@proformatique.com>  Thu, 09 Aug 2007 16:00:35 +0200
+
+pf-xivo-base-config (0.1.1~svn1225-5) etch; urgency=low
+
+  * Added Depends on asterisk-chan-misdn, to ensure configuration file
+    is replaced properly.
+
+ -- Marc Dequènes (Duck) <mdequenes@proformatique.com>  Wed, 25 Jul 2007 11:27:52 +0200
+
+pf-xivo-base-config (0.1.1~svn1131-4) etch; urgency=low
+
+  * Added replaces on asterisk-chan-misdn as mISDN channel is now out of
+    the asterisk package.
+
+ -- Marc Dequènes (Duck) <mdequenes@proformatique.com>  Tue, 24 Jul 2007 18:47:38 +0200
+
+pf-xivo-base-config (0.1.1~svn1131-3) etch; urgency=low
+
+  * Updated Depends to follow asterisk 1:1.2.22~dfsg-0+pf.4 changes.
+
+ -- Marc Dequènes (Duck) <mdequenes@proformatique.com>  Thu, 19 Jul 2007 18:38:26 +0200
+
+pf-xivo-base-config (0.1.1~svn1131-2) etch; urgency=low
+
+  * Depends on asterisk-common instead of asterisk, to work with fixed
+    asterisk packages (see asterisk changelog for 1:1.2.22~dfsg-0+pf.2).
+
+ -- Marc Dequènes (Duck) <mdequenes@proformatique.com>  Thu, 19 Jul 2007 17:29:27 +0200
+
+pf-xivo-base-config (0.1.1~svn832-0) etch; urgency=low
+
+  * Preparing new development snapshot:
+    + extra files for Asterisk are in a separate directory, moved
+      files acordingly, simplified rules, and updated Replaces.
+    + widened Replaces on pf-xivo-base-config, which is safer
+
+ -- Marc Dequènes (Duck) <mdequenes@proformatique.com>  Thu, 07 Jun 2007 12:06:42 +0200
+
+pf-xivo-base-config (0.1.1~svn793-2) etch; urgency=low
+
+  * Fixed mutt config file installation.
+
+ -- Marc Dequènes (Duck) <mdequenes@proformatique.com>  Fri, 01 Jun 2007 17:23:15 +0200
+
+pf-xivo-base-config (0.1.1~svn793-0) etch; urgency=low
+
+  * Preparing new development snapshot:
+    + added mutt files and corresponding Replaces.
+
+ -- Marc Dequènes (Duck) <mdequenes@proformatique.com>  Fri, 01 Jun 2007 15:14:50 +0200
+
+pf-xivo-base-config (0.1.1~svn733-2) etch; urgency=low
+
+  * Added missing dependency on pf-xivo-base-config for pf-xivo-base-
+    config-extra.
+  * Added '/var/spool/asterisk/fax' directory, needed for optional
+    features.
+  * Moved rights management (formerly in postinst) in a script and run
+    it in both postinst to ensure everything is alright.
+
+ -- Marc Dequènes (Duck) <mdequenes@proformatique.com>  Fri, 01 Jun 2007 12:03:01 +0200
+
+pf-xivo-base-config (0.1.1~svn733-1) etch; urgency=low
+
+  * Fixed rules (wrong rule name).
+
+ -- Marc Dequènes (Duck) <mdequenes@proformatique.com>  Fri, 25 May 2007 18:25:43 +0200
+
+pf-xivo-base-config (0.1.1~svn723-2) etch; urgency=low
+
+  * Moved xivo config files in '/etc/asterisk/' in -extra package.
+
+ -- Marc Dequènes (Duck) <mdequenes@proformatique.com>  Fri, 25 May 2007 15:26:17 +0200
+
+pf-xivo-base-config (0.1.1~svn723-1) etch; urgency=low
+
+  * Added missing Replaces on pf-xivo-base-config for pf-xivo-base-
+    config-extra, needed after package split.
+  * Restart pf-xivo-provisioning service in -extra postinst.
+
+ -- Marc Dequènes (Duck) <mdequenes@proformatique.com>  Fri, 25 May 2007 11:36:30 +0200
+
+pf-xivo-base-config (0.1.1~svn723-1) etch; urgency=low
+
+  * New development snapshot.
+
+ -- Marc Dequènes (Duck) <mdequenes@proformatique.com>  Fri, 25 May 2007 11:32:58 +0200
+
+pf-xivo-base-config (0.1.1~svn717-1) etch; urgency=low
+
+  * New development snapshot.
+
+ -- Marc Dequènes (Duck) <mdequenes@proformatique.com>  Thu, 24 May 2007 19:58:24 +0200
+
+pf-xivo-base-config (0.1.1~svn693-5) etch; urgency=low
+
+  * Really fixed Replaces (forgot to regen control file).
+
+ -- Marc Dequènes (Duck) <mdequenes@proformatique.com>  Thu, 24 May 2007 12:58:04 +0200
+
+pf-xivo-base-config (0.1.1~svn693-4) etch; urgency=low
+
+  * Fixed Replaces.
+
+ -- Marc Dequènes (Duck) <mdequenes@proformatique.com>  Thu, 24 May 2007 12:10:22 +0200
+
+pf-xivo-base-config (0.1.1~svn693-3) etch; urgency=low
+
+  * Split package to separate extra modular config from basix asterisk-
+    related config.
+
+ -- Marc Dequènes (Duck) <mdequenes@proformatique.com>  Thu, 24 May 2007 11:47:03 +0200
+
+pf-xivo-base-config (0.1.1~svn693-2) etch; urgency=low
+
+  * Try adding some more Pre-Depends to solve conffiles installation
+    problems.
+
+ -- Marc Dequènes (Duck) <mdequenes@proformatique.com>  Thu, 24 May 2007 10:39:04 +0200
+
+pf-xivo-base-config (0.1.1~svn693-1) etch; urgency=low
+
+  * New development snapshot.
+  * Added missing replaces on pf-xivo-cti-server and pf-xivo-cti-
+    pushagi.
+  * Restart dhcp3-server in postinst, as a new configuration is now
+    shipped in.
+
+ -- Marc Dequènes (Duck) <mdequenes@proformatique.com>  Wed, 23 May 2007 12:11:29 +0200
+
+pf-xivo-base-config (0.1.1~svn689-1) etch; urgency=low
+
+  * New development snapshot.
+  * Added pf-xivo-provisioning and dhcp3-server configuration.
+
+ -- Marc Dequènes (Duck) <mdequenes@proformatique.com>  Tue, 22 May 2007 19:22:45 +0200
+
+pf-xivo-base-config (0.1.1~svn619-2) etch; urgency=low
+
+  * Added Replaces on new pf-xivo-agi package (AGI were moved out of
+    this one).
+
+ -- Marc Dequènes (Duck) <mdequenes@proformatique.com>  Wed, 16 May 2007 14:25:28 +0200
+
+pf-xivo-base-config (0.1.1~svn619-1) etch; urgency=low
+
+  * New development snapshot.
+  * Removed 'asterisk/usr/' which was removed upstream.
+
+ -- Marc Dequènes (Duck) <mdequenes@proformatique.com>  Wed, 16 May 2007 12:41:01 +0200
+
+pf-xivo-base-config (0.1.1~svn603-1) etch; urgency=low
+
+  * New development snapshot.
+
+ -- Marc Dequènes (Duck) <mdequenes@proformatique.com>  Tue, 15 May 2007 19:18:24 +0200
+
+pf-xivo-base-config (0.1.1~svn534-2) etch; urgency=low
+
+  * Added Pre-Depends on apache2.2-common to ensure 'ports.conf' is
+    created before preinst runs.
+
+ -- Marc Dequènes (Duck) <mdequenes@proformatique.com>  Fri, 11 May 2007 12:09:43 +0200
+
+pf-xivo-base-config (0.1.1~svn534-1) etch; urgency=low
+
+  * New development snapshot.
+  * Added preinst to work around a hard to overwrite conffile (see
+    script).
+
+ -- Marc Dequènes (Duck) <mdequenes@proformatique.com>  Thu, 10 May 2007 21:41:02 +0200
+
+pf-xivo-base-config (0.1~svn527-1) etch; urgency=low
+
+  * New development snapshot.
+
+ -- Marc Dequènes (Duck) <mdequenes@proformatique.com>  Thu, 10 May 2007 17:58:00 +0200
+
+pf-xivo-base-config (0.1~svn526-2) etch; urgency=low
+
+  * Ensure postinst won't fail (as several called scripts may return an
+    error which can safely be ignored).
+  * Fixed directory rights.
+
+ -- Marc Dequènes (Duck) <mdequenes@proformatique.com>  Thu, 10 May 2007 17:43:13 +0200
+
+pf-xivo-base-config (0.1~svn526-1) etch; urgency=low
+
+  * Apache configuration moved upstream.
+
+ -- Marc Dequènes (Duck) <mdequenes@proformatique.com>  Thu, 10 May 2007 17:15:25 +0200
+
+pf-xivo-base-config (0.1~svn524-1) etch; urgency=low
+
+  * New development snapshot.
+  * Fixed apache configuration.
+  * Removed erroneous web-interface config files which were caught into
+    .diff.gz.
+
+ -- Marc Dequènes (Duck) <mdequenes@proformatique.com>  Thu, 10 May 2007 16:06:47 +0200
+
+pf-xivo-base-config (0.1~svn498-3) etch; urgency=low
+
+  * Provides pf-xivo-web-interface-config-custom and removed the
+    remaining Pre-Dependency.
+
+ -- Marc Dequènes (Duck) <mdequenes@proformatique.com>  Thu, 10 May 2007 14:30:11 +0200
+
+pf-xivo-base-config (0.1~svn498-2) etch; urgency=low
+
+  * Provides asterisk-config-custom and avoid installing asterisk-config
+    (not to install examples in '/etc/asterisk').
+
+ -- Marc Dequènes (Duck) <mdequenes@proformatique.com>  Thu, 10 May 2007 11:00:20 +0200
+
+pf-xivo-base-config (0.1~svn498-1) etch; urgency=low
+
+  * New development snapshot.
+  * Package should be archall.
+  * fixed typo in description.
+
+ -- Marc Dequènes (Duck) <mdequenes@proformatique.com>  Wed, 09 May 2007 11:15:26 +0200
+
+pf-xivo-base-config (0.1~svn482-2) etch; urgency=low
+
+  * Pre-depends on asterisk to avoid asterisk-config postinst failure.
+
+ -- Marc Dequènes (Duck) <mdequenes@proformatique.com>  Mon, 07 May 2007 18:02:55 +0200
+
+pf-xivo-base-config (0.1~svn482-1) etch; urgency=low
+
+  * Fixed apache restart in postinst hanging around (improved invocation
+    and removed useless debconf load which is responsible for the
+    hangup).
+
+ -- Marc Dequènes (Duck) <mdequenes@proformatique.com>  Mon, 07 May 2007 16:31:00 +0200
+
+pf-xivo-base-config (0.1~svn470-1) etch; urgency=low
+
+  * New development snapshot.
+  * Restarting apache2, not apache.
+
+ -- Marc Dequènes (Duck) <mdequenes@proformatique.com>  Thu, 03 May 2007 00:19:14 +0200
+
+pf-xivo-base-config (0.1~svn450-3) etch; urgency=low
+
+  * Regenerated 'debian/control' (forgot in latest upload).
+
+ -- Marc Dequènes (Duck) <mdequenes@proformatique.com>  Wed, 02 May 2007 22:49:09 +0200
+
+pf-xivo-base-config (0.1~svn450-2) etch; urgency=low
+
+  * Fixed rights.
+  * Restarting apache in postinst to activate XIVO vhost.
+  * Fixed 'php.ini' symlink.
+  * Added missing Replaces with pf-asterisk-res-sqlite2.
+
+ -- Marc Dequènes (Duck) <mdequenes@proformatique.com>  Wed, 02 May 2007 22:06:36 +0200
+
+pf-xivo-base-config (0.1~svn450-1) etch; urgency=low
+
+  * New development snapshot.
+
+ -- Marc Dequènes (Duck) <mdequenes@proformatique.com>  Fri, 27 Apr 2007 19:06:00 +0200
+
+pf-xivo-base-config (0.1~svn448-1) etch; urgency=low
+
+  * New development snapshot.
+  * Fixed DB generation (was always overwriting).
+  * Fixed Replaces.
+
+ -- Marc Dequènes (Duck) <mdequenes@proformatique.com>  Fri, 27 Apr 2007 18:52:17 +0200
+
+pf-xivo-base-config (0.1~svn440-1) etch; urgency=low
+
+  * Initial development snapshot.
+
+ -- Marc Dequènes (Duck) <mdequenes@proformatique.com>  Wed, 25 Apr 2007 17:40:31 +0200
+

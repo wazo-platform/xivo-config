@@ -1,0 +1,8 @@
+#!/usr/bin/make -f
+# -*- mode: makefile; coding: utf-8 -*-
+
+include /usr/share/cdbs/1/rules/debhelper.mk
+
+configure/xivo--config::
+	dh install --before init
+	dh install --remaining
