@@ -9,7 +9,7 @@ Standards-Version: 3.7.2.2
 Package: xivo-config
 Architecture: all
 Pre-Depends: nginx, rabbitmq-server
-Depends: asterisk, fail2ban, ipcalc, xivo-dhcpd-update, xivo-utils, postgresql | postgresql-9.1
+Depends: fail2ban, ipcalc, xivo-dhcpd-update, xivo-utils
 Provides: pf-xivo-base-config, pf-sys-ca
 Conflicts: asterisk-config, pf-xivo-base-config, pf-sys-ca
 Replaces: pf-xivo-base-config, pf-sys-ca
