@@ -8,7 +8,7 @@ Standards-Version: 3.7.2.2
 
 Package: xivo-config
 Architecture: all
-Pre-Depends: nginx, rabbitmq-server, asterisk
+Pre-Depends: nginx, nginx-full, rabbitmq-server, asterisk
 Depends: fail2ban, ipcalc, xivo-dhcpd-update, xivo-utils
 Provides: pf-xivo-base-config, pf-sys-ca
 Conflicts: asterisk-config, pf-xivo-base-config, pf-sys-ca
