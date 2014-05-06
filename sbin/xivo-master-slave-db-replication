@@ -30,7 +30,7 @@ EXCLUDE_TABLES='\
     -T resolvconf \
     -T resolvconf_id_seq \
 '
-PG_DUMP_OPTIONS="-a $EXCLUDE_TABLES"
+PG_DUMP_OPTIONS="--data-only $EXCLUDE_TABLES"
 
 if [ -z $SLAVE_IP ]; then
     echo "No IP specified"
