@@ -51,7 +51,7 @@ if [ $? -ne 0 ]; then
 fi
 
 su postgres -c "pg_dump $PG_DUMP_OPTIONS $DB_NAME -f out_master.sql"
-master_md5=$(cat out_master.sql | sort > out_master.sorted.sql &&  md5sum out_master.sorted.sql | awk '{print $1}')
+master_md5=$(sort out_master.sql | md5sum | awk '{print $1}')
 
 asterisk -rx "module reload cel_pgsql.so"
 
@@ -61,7 +61,7 @@ EOF
 su postgres -c "psql --host $SLAVE_IP $DB_NAME < out_master.sql > /dev/null"
 su postgres -c "pg_dump --host $SLAVE_IP $PG_DUMP_OPTIONS $DB_NAME -f out_slave.sql"
 
-slave_md5=$(cat out_slave.sql | sort > out_slave.sorted.sql && md5sum out_slave.sorted.sql | awk '{print $1}')
+slave_md5=$(sort out_slave.sql | md5sum | awk '{print $1}')
 
 if [ "$master_md5" != "$slave_md5" ]; then
     su postgres -c "psql --host $SLAVE_IP $DB_NAME < $SLAVE_BACKUP > /dev/null"
