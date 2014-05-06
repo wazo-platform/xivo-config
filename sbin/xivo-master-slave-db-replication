@@ -52,11 +52,12 @@ fi
 
 su postgres -c "pg_dump $PG_DUMP_OPTIONS $DB_NAME -f out_master.sql"
 master_md5=$(sort out_master.sql | md5sum | awk '{print $1}')
+truncate_cmd="TRUNCATE $(grep '^COPY' out_master.sql | cut -f2 -d\  | paste -sd ',');"
 
 asterisk -rx "module reload cel_pgsql.so"
 
 su postgres -c "psql --host $SLAVE_IP $DB_NAME > /dev/null" <<EOF
-TRUNCATE $(grep '^COPY' out_master.sql | cut -f2 -d\  | paste -sd ',');
+$truncate_cmd
 EOF
 su postgres -c "psql --host $SLAVE_IP $DB_NAME < out_master.sql > /dev/null"
 su postgres -c "pg_dump --host $SLAVE_IP $PG_DUMP_OPTIONS $DB_NAME -f out_slave.sql"
@@ -64,6 +65,9 @@ su postgres -c "pg_dump --host $SLAVE_IP $PG_DUMP_OPTIONS $DB_NAME -f out_slave.
 slave_md5=$(sort out_slave.sql | md5sum | awk '{print $1}')
 
 if [ "$master_md5" != "$slave_md5" ]; then
+    su postgres -c "psql --host $SLAVE_IP $DB_NAME > /dev/null" <<EOF
+$truncate_cmd
+EOF
     su postgres -c "psql --host $SLAVE_IP $DB_NAME < $SLAVE_BACKUP > /dev/null"
     panic "md5sum didnt match"
 else
