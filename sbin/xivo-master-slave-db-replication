@@ -9,6 +9,7 @@ EXCLUDE_TABLES='\
     -T cel \
     -T cel_id_seq \
     -T queue_log \
+    -T queue_log_id_seq \
     -T stat_agent \
     -T stat_agent_id_seq \
     -T stat_agent_periodic \
