@@ -2,10 +2,8 @@
 
 SLAVE_IP=$1
 DB_NAME='asterisk'
-SLAVE_BACKUP='out_slave_backup.sql'
 MASTER_BACKUP='out_master_backup.sql'
 DUMP='replication.sql'
-SLAVE_CHECK='out_slave_check.sql'
 EXCLUDE_TABLES='\
     -T call_log \
     -T call_log_id_seq \
@@ -43,16 +41,6 @@ panic() {
     exit 1
 }
 
-backup_slave() {
-    slave_backup=$1
-    slave_ip=$2
-
-    su postgres -c "pg_dump --host $slave_ip $PG_DUMP_OPTIONS $DB_NAME -f $slave_backup"
-    if [ $? -ne 0 ]; then
-        panic "Slave down"
-    fi
-}
-
 backup_master() {
     master_backup=$1
 
@@ -80,35 +68,15 @@ import_dump() {
     su postgres -c "psql --host $SLAVE_IP $DB_NAME -f $dump > /dev/null"
 }
 
-database_replicated() {
-    master_dump=$1
-    slave_dump=$2
-
-    master_md5=$(sort $master_dump | md5sum | awk '{print $1}')
-    slave_md5=$(sort $slave_dump | md5sum | awk '{print $1}')
-    if [ "$master_md5" != "$slave_md5" ]; then
-        return 1
-    fi
-    return 0
-}
-
 main() {
     cd /tmp
-    backup_slave $SLAVE_BACKUP $SLAVE_IP
     backup_master $MASTER_BACKUP
     generate_dump $MASTER_BACKUP $DUMP
     import_dump $DUMP $SLAVE_IP
 
-    backup_slave $SLAVE_CHECK $SLAVE_IP
-    if ! database_replicated $MASTER_BACKUP $SLAVE_CHECK; then
-        import_dump $SLAVE_BACKUP $SLAVE_IP
-        panic "md5sum didnt match"
-    fi
-
     echo "Slave replication completed succesfully"
 
     rm -f $DUMP
-    rm -f $SLAVE_CHECK
 }
 
 if [ -z $SLAVE_IP ]; then
