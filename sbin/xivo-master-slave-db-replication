@@ -65,7 +65,11 @@ import_dump() {
     dump=$1
     slave_ip=$2
 
-    su postgres -c "psql --host $SLAVE_IP $DB_NAME -f $dump > /dev/null"
+    psql -U postgres -h $SLAVE_IP -f $dump -v ON_ERROR_STOP= $DB_NAME > /dev/null
+    psql_status=$?
+    if [ $psql_status -ne 0 ]; then
+	panic "psql returned $psql_status while importing data into the slave"
+    fi
 }
 
 main() {
