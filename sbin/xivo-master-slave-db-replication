@@ -104,9 +104,9 @@ main() {
     if ! database_replicated $MASTER_BACKUP $SLAVE_CHECK; then
         import_dump $SLAVE_BACKUP $SLAVE_IP
         panic "md5sum didnt match"
-    else
-        echo "Slave replication completed succesfully"
     fi
+
+    echo "Slave replication completed succesfully"
 
     rm -f $DUMP
     rm -f $SLAVE_CHECK
