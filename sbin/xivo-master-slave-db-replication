@@ -78,7 +78,7 @@ import_dump() {
     dump=$1
     slave_ip=$2
 
-    su postgres -c "psql --host $SLAVE_IP $DB_NAME < $dump > /dev/null"
+    su postgres -c "psql --host $SLAVE_IP $DB_NAME -f $dump > /dev/null"
 }
 
 database_replicated() {
