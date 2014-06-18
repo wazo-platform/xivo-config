@@ -60,7 +60,6 @@ backup_master() {
     if [ $? -ne 0 ]; then
         panic "Could not dump master"
     fi
-    asterisk -rx "module reload cel_pgsql.so"
 }
 
 generate_dump() {
