@@ -68,7 +68,7 @@ import_dump() {
     psql -U postgres -h $SLAVE_IP -f $dump -v ON_ERROR_STOP= $DB_NAME > /dev/null
     psql_status=$?
     if [ $psql_status -ne 0 ]; then
-	panic "psql returned $psql_status while importing data into the slave"
+        panic "psql returned $psql_status while importing data into the slave"
     fi
 }
 
