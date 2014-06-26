@@ -2,7 +2,7 @@ Source: xivo-config
 Section: comm
 Priority: extra
 Maintainer: XiVO Dev Team <dev@avencall.com>
-Uploaders: XiVO Builder Team <release@xivo.fr>
+Uploaders: XiVO Builder Team <release@xivo.io>
 Build-Depends: cdbs, debhelper
 Standards-Version: 3.7.2.2
 
@@ -20,5 +20,5 @@ Description: XIVO complete telephony solution -- base configuration
  This package contains asterisk-related specific configurations for
  the XIVO solution.
  .
-  Homepage: http://xivo.fr/
+  Homepage: http://xivo.io/
 
