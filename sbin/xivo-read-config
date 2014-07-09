@@ -34,7 +34,7 @@ echo "Generating configuration"
 
 #### Set and check general variables ####
 
-if [ -z "${XIVO_NET4_IP}" -o -z "${XIVO_NET4_NETMASK}" -o -z "${XIVO_NET4_SUBNET}" ]; then
+if [ -z "${XIVO_NET4_IP}" -o -z "${XIVO_NET4_NETMASK}" ]; then
   echo "ERROR: Network badly configured" >&2
   exit 1
 fi
