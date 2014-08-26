@@ -1,0 +1,6 @@
+[xivo]
+Description         = Connection to the database used by XiVO
+Driver              = PostgreSQL ANSI
+Trace               = No
+Database            = asterisk
+Servername          = 127.0.0.1
