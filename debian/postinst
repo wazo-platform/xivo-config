@@ -23,6 +23,10 @@ case "$1" in
             chmod 640 /etc/nginx/ssl/$file
         done
 
+        # ODBC configuration
+        sed -i '/^CommLog/c\CommLog\t\t= 0' /etc/odbcinst.ini
+        odbcinst -i -s -f /usr/share/xivo-config/templates/odbc/odbc.ini.template -l
+
         # run asterisk configuration
         /usr/share/asterisk/bin/asterisk_fix
 
@@ -39,6 +43,7 @@ case "$1" in
             cp $spawn_dir/init /etc/init.d/spawn-fcgi
             insserv -f /etc/init.d/spawn-fcgi
         fi
+
         # remove nginx default
         nginx_default='/etc/nginx/sites-enabled/default'
         if [ -f $nginx_default ]; then
