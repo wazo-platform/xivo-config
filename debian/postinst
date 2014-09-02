@@ -27,6 +27,10 @@ case "$1" in
         sed -i '/^CommLog/c\CommLog\t\t= 0' /etc/odbcinst.ini
         odbcinst -i -s -f /usr/share/xivo-config/templates/odbc/odbc.ini.template -l
 
+        if [ -f "/etc/nginx/sites-available/xivo-restapi" ]; then
+            rm -f "/etc/nginx/sites-available/xivo-restapi"
+        fi
+
         # run asterisk configuration
         /usr/share/asterisk/bin/asterisk_fix
 
