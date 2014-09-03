@@ -33,7 +33,7 @@ EXCLUDE_TABLES='\
     -T resolvconf \
     -T resolvconf_id_seq \
 '
-PG_DUMP_OPTIONS="--data-only $EXCLUDE_TABLES"
+PG_DUMP_OPTIONS="--data-only --schema=public $EXCLUDE_TABLES"
 
 panic() {
     echo "Slave replication failed: $*" | mutt root@localhost
