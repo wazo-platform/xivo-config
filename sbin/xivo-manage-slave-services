@@ -21,7 +21,7 @@ enable_service() {
     set_berofos_to_slave_state
     xivo-service enable
     xivo-service start
-    xivo-agentctl -c 'relog all'
+    xivo-agentdctl -c 'relog all'
 }
 
 disable_service() {
