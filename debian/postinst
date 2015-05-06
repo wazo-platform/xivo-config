@@ -74,6 +74,10 @@ case "$1" in
         find /etc/sysctl.d -type f -name '*.conf' -exec sysctl -q -p {} \;
 
         /usr/sbin/xivo-fix-paths-rights
+
+        if [ -x /etc/init.d/rabbitmq-server ]; then
+            invoke-rc.d rabbitmq-server reload
+        fi
     ;;
     abort-upgrade|abort-remove|abort-deconfigure)
 

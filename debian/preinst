@@ -4,14 +4,6 @@ set -e
 
 case "$1" in
 	install|upgrade)
-		# stop rabbitmq-server before updating rabbitmq-env.conf
-		if [ -x "/etc/init.d/rabbitmq-server" ]; then
-			if [ -x "`which invoke-rc.d 2>/dev/null`" ]; then
-				invoke-rc.d rabbitmq-server stop || true
-			else
-				/etc/init.d/rabbitmq-server stop || true
-			fi
-		fi
 	;;
 	abort-upgrade)
 	;;
