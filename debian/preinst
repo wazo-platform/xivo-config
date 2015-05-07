@@ -4,6 +4,17 @@ set -e
 
 case "$1" in
 	install|upgrade)
+		# stop rabbitmq-server before updating rabbitmq-env.conf: this
+		# must be done since we are changing the NODENAME in rabbitmq-env.conf,
+		# and if we don't stop rabbitmq-server before changing the NODENAME, then
+		# it's not possible to actually stop the already running rabbitmq-server
+		if [ -x "/etc/init.d/rabbitmq-server" ]; then
+			if [ -x "`which invoke-rc.d 2>/dev/null`" ]; then
+				invoke-rc.d rabbitmq-server stop || true
+			else
+				/etc/init.d/rabbitmq-server stop || true
+			fi
+		fi
 	;;
 	abort-upgrade)
 	;;
