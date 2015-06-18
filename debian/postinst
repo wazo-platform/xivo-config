@@ -17,11 +17,29 @@ case "$1" in
             rm -rf /usr/share/xivo-config/datastorage
         fi
 
-        ## protect server certificate
-        for file in server.key server.crt; do
-            chown root:www-data /etc/nginx/ssl/$file
-            chmod 640 /etc/nginx/ssl/$file
-        done
+        # keep cert/private key only if they changed. We don't want to keep the one
+        # whose private key has been published.
+        # *.dpkg-backup only exist if the conffile was modified
+        # We use cp because old_key and old_cert may be symlinks
+
+        old_key=/etc/nginx/ssl/server.key.dpkg-backup
+        old_cert=/etc/nginx/ssl/server.crt.dpkg-backup
+        new_key=/usr/share/xivo-certs/server.key
+        new_cert=/usr/share/xivo-certs/server.crt
+        [ -e "$old_key" ] && cp "$old_key" "$new_key"
+        [ -e "$old_cert" ] && cp "$old_cert" "$new_cert"
+        rm -f "$old_key" "$old_cert"
+        rmdir --ignore-fail-on-non-empty /etc/nginx/ssl
+
+        # generate X.509 certificates if necessary. Valid for 10 years.
+        config=/usr/share/xivo-config/templates/x509/openssl-x509.conf
+        if [ ! -e "$new_key" -o ! -e "$new_cert" ] ; then
+            openssl req -x509 -nodes -days 3650 -newkey rsa:2048 -config "$config" -keyout "$new_key" -out "$new_cert"
+        fi
+
+        # ensure ownership and permissions
+        chown root:www-data "$new_key" "$new_cert"
+        chmod 640 "$new_key" "$new_cert"
 
         # ODBC configuration
         sed -i '/^CommLog/c\CommLog\t\t= 0' /etc/odbcinst.ini
