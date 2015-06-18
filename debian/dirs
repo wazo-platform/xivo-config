@@ -1,3 +1,4 @@
 etc/xivo/custom-templates
+usr/share/xivo-certs
 var/lib/xivo-config
 var/spool/asterisk/fax

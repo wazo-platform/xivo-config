@@ -10,3 +10,5 @@ mv_conffile /etc/pf-xivo/asterisk/xivo_ring.conf /etc/xivo/asterisk/xivo_ring.co
 
 rm_conffile /etc/asterisk/res_pgsql.conf 14.17
 rm_conffile /etc/asterisk/cel_pgsql.conf 14.17
+rm_conffile /etc/nginx/ssl/server.key
+rm_conffile /etc/nginx/ssl/server.crt
