@@ -1,3 +1,9 @@
+xivo-config (15.15~20150814.112007.162cf40-wheezy-1) xivo-dev; urgency=medium
+
+  * Force rebuild
+
+ -- Sylvain Boily <sboily@avencall.com>  Mon, 24 Aug 2015 11:18:39 -0400
+
 xivo-config (14.01~20140114.181228.739b439-wheezy-2) xivo-dev; urgency=low
 
   * add conffile to be moved from pf-xivo to xivo
