@@ -25,7 +25,7 @@ get_full_email_alerts()
   else
     EXTRA_EMAIL_ALERTS=
   fi
-  echo "${ALERT_EMAILS} ${EXTRA_EMAIL_ALERTS}"
+  echo "${XIVO_ALERT_EMAILS} ${EXTRA_EMAIL_ALERTS}"
 }
 
 PRODUCT="XiVO"
