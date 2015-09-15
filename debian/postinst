@@ -22,11 +22,11 @@ case "$1" in
         # *.dpkg-backup only exist if the conffile was modified
         # We use cp because old_key and old_cert may be symlinks
 
+        old_key=/etc/nginx/ssl/server.key.dpkg-backup
+        old_cert=/etc/nginx/ssl/server.crt.dpkg-backup
+        new_key=/usr/share/xivo-certs/server.key
+        new_cert=/usr/share/xivo-certs/server.crt
         if [ -d /etc/nginx/ssl ] ; then
-            old_key=/etc/nginx/ssl/server.key.dpkg-backup
-            old_cert=/etc/nginx/ssl/server.crt.dpkg-backup
-            new_key=/usr/share/xivo-certs/server.key
-            new_cert=/usr/share/xivo-certs/server.crt
             [ -e "$old_key" ] && cp "$old_key" "$new_key"
             [ -e "$old_cert" ] && cp "$old_cert" "$new_cert"
             rm -f "$old_key" "$old_cert"
