@@ -17,7 +17,25 @@ set_berofos_to_master_state() {
     xivo-berofos -q --syslog master
 }
 
+start_dhcp() {
+    # apply replicated configuration
+    xivo-create-config
+    xivo-update-config
+
+    # fetch updated phone MAC prefixes
+    dhcpd-update -dr
+
+    service isc-dhcp-server start
+    update-rc.d isc-dhcp-server defaults
+}
+
+stop_dhcp() {
+    update-rc.d isc-dhcp-server remove
+    service isc-dhcp-server stop
+}
+
 enable_service() {
+    start_dhcp
     set_berofos_to_slave_state
     xivo-service enable
     xivo-service start
@@ -28,6 +46,7 @@ disable_service() {
     xivo-service stop xivo
     xivo-service disable
     set_berofos_to_master_state
+    stop_dhcp
     xivo-service start
 }
 
