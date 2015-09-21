@@ -22,8 +22,6 @@ EXCLUDE_TABLES='\
     -T stat_queue_id_seq \
     -T stat_queue_periodic \
     -T stat_queue_periodic_id_seq \
-    -T dhcp \
-    -T dhcp_id_seq \
     -T mail \
     -T mail_id_seq \
     -T monitoring \
