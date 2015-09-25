@@ -25,6 +25,12 @@ get_full_email_alerts()
   else
     EXTRA_EMAIL_ALERTS=
   fi
+
+  # xivo-sysconfd < 15.16 could generate a "None" XIVO_ALERT_EMAILS
+  if [ "${XIVO_ALERT_EMAILS}"  = "None" ]; then
+      XIVO_ALERT_EMAILS=""
+  fi
+
   echo "${XIVO_ALERT_EMAILS} ${EXTRA_EMAIL_ALERTS}"
 }
 
