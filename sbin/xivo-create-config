@@ -20,7 +20,7 @@ import netaddr
 import sys
 
 from jinja2 import Template
-from xivo_dao.helpers.db_manager import daosession
+from xivo_dao.helpers.db_utils import session_scope
 from xivo_dao.alchemy.dhcp import Dhcp
 from xivo_dao.alchemy.mail import Mail
 from xivo_dao.alchemy.provisioning import Provisioning
@@ -52,16 +52,16 @@ def main():
         output.write(XIVO_COMMON_CONF_TEMPLATE.render(config=config))
 
 
-@daosession
-def load_config(session):
-    result = {}
-    result.update(load_config_dhcp(session))
-    result.update(load_config_smtp(session))
-    result.update(load_config_provisioning(session))
-    result.update(load_config_monitoring(session))
-    result.update(load_config_resolvconf(session))
-    result.update(load_config_netiface(session))
-    return result
+def load_config():
+    with session_scope() as session:
+        result = {}
+        result.update(load_config_dhcp(session))
+        result.update(load_config_smtp(session))
+        result.update(load_config_provisioning(session))
+        result.update(load_config_monitoring(session))
+        result.update(load_config_resolvconf(session))
+        result.update(load_config_netiface(session))
+        return result
 
 
 def load_config_dhcp(session):
