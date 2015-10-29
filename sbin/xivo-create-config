@@ -20,6 +20,7 @@ import netaddr
 import sys
 
 from jinja2 import Template
+from xivo_dao import init_db_from_config, default_config
 from xivo_dao.helpers.db_utils import session_scope
 from xivo_dao.alchemy.dhcp import Dhcp
 from xivo_dao.alchemy.mail import Mail
@@ -47,6 +48,7 @@ def main():
                         default='/etc/xivo/common.conf',
                         help="File where to write the output. Use '-' for stdout. Default: %(default)s")
     args = parser.parse_args()
+    init_db_from_config(default_config())
     config = load_config()
     with (sys.stdout if args.output == '-' else open(args.output, 'w')) as output:
         output.write(XIVO_COMMON_CONF_TEMPLATE.render(config=config))
