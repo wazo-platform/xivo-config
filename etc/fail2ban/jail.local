@@ -1,8 +1,8 @@
-[asterisk-iptables]
+[asterisk-xivo]
 
 enabled  = true
-filter   = asterisk
+filter   = asterisk-xivo
 action   = iptables-allports[name=ASTERISK, protocol=all]
 logpath  = /var/log/asterisk/fail2ban
 maxretry = 5
-bantime = 600
+bantime  = 600

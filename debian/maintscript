@@ -7,6 +7,7 @@ mv_conffile /etc/pf-xivo/asterisk/xivo_fax.conf /etc/xivo/asterisk/xivo_fax.conf
 mv_conffile /etc/pf-xivo/asterisk/xivo_globals.conf /etc/xivo/asterisk/xivo_globals.conf 14.02
 mv_conffile /etc/pf-xivo/asterisk/xivo_in_callerid.conf /etc/xivo/asterisk/xivo_in_callerid.conf 14.02
 mv_conffile /etc/pf-xivo/asterisk/xivo_ring.conf /etc/xivo/asterisk/xivo_ring.conf 14.02
+mv_conffile /etc/fail2ban/filter.d/asterisk.conf /etc/fail2ban/filter.d/asterisk-xivo.conf 15.19~20151203.183042.507edd5-1
 
 rm_conffile /etc/asterisk/res_pgsql.conf 14.17
 rm_conffile /etc/asterisk/cel_pgsql.conf 14.17
