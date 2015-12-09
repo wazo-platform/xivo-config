@@ -1,4 +1,4 @@
-xivo-config (14.01~20140114.181228.739b439-wheezy-2) xivo-dev; urgency=low
+xivo-config (14.01~20140114.181228.739b439) xivo-dev; urgency=low
 
   * add conffile to be moved from pf-xivo to xivo
 
