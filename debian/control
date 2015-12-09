@@ -3,7 +3,7 @@ Section: comm
 Priority: extra
 Maintainer: XiVO Dev Team <dev@avencall.com>
 Uploaders: XiVO Builder Team <release@xivo.io>
-Build-Depends: cdbs, debhelper
+Build-Depends: cdbs, debhelper (>= 9)
 Standards-Version: 3.7.2.2
 
 Package: xivo-config
