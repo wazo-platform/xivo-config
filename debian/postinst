@@ -95,9 +95,9 @@ case "$1" in
 
         /usr/sbin/xivo-fix-paths-rights
 
-#        if [ -x /etc/init.d/rabbitmq-server ]; then
-#            invoke-rc.d rabbitmq-server restart
-#        fi
+        if [ -x /etc/init.d/rabbitmq-server ]; then
+            invoke-rc.d rabbitmq-server restart
+        fi
     ;;
     abort-upgrade|abort-remove|abort-deconfigure)
 
