@@ -86,9 +86,14 @@ case "$1" in
         if [ -x /etc/init.d/rsyslog ]; then
             invoke-rc.d rsyslog restart
         fi
-        if [ -x /etc/init.d/fail2ban ]; then
-            invoke-rc.d fail2ban reload
+
+        # prevent an error from being displayed at installation
+        if [ ! -f /var/log/asterisk/fail2ban ]; then
+            touch /var/log/asterisk/fail2ban
+            chown asterisk:asterisk /var/log/asterisk/fail2ban
+            chmod 660 /var/log/asterisk/fail2ban
         fi
+        invoke-rc.d fail2ban reload
 
         # load sysctl rules if exist
         find /etc/sysctl.d -type f -name '*.conf' -exec sysctl -q -p {} \;
