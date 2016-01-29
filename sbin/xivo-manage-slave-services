@@ -38,6 +38,7 @@ enable_service() {
     start_dhcp
     set_berofos_to_slave_state
     service consul start
+    xivo-update-keys
     xivo-service enable
     xivo-service start
     xivo-agentd-cli -c 'relog all'
