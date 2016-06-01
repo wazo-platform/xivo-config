@@ -1,0 +1,21 @@
+#!/usr/bin/python3
+# Copyright 2016 Avencall
+# SPDX-License-Identifier: GPL-3.0+
+
+import configparser
+
+FILENAME = '/etc/odbcinst.ini'
+
+
+c = configparser.ConfigParser(interpolation=None)
+c.optionxform = str
+
+with open(FILENAME) as fobj:
+    c.read_file(fobj)
+
+if 'ODBC' not in c:
+    c['ODBC'] = {}
+c['ODBC']['Pooling'] = 'Yes'
+
+with open(FILENAME, 'w') as fobj:
+    c.write(fobj)
