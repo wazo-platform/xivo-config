@@ -44,7 +44,6 @@ case "$1" in
         chmod 640 "$new_key" "$new_cert"
 
         # ODBC configuration
-        odbcinst -u -d -n xivo -v
         odbcinst -i -d -f /usr/share/xivo-config/templates/odbc/odbcinst.ini.template -v
         odbcinst -i -s -f /usr/share/xivo-config/templates/odbc/odbc.ini.template -l -v
         xivo-update-odbcinst-config
