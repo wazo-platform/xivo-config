@@ -47,7 +47,7 @@ case "$1" in
         odbcinst -u -d -n xivo -v
         odbcinst -i -d -f /usr/share/xivo-config/templates/odbc/odbcinst.ini.template -v
         odbcinst -i -s -f /usr/share/xivo-config/templates/odbc/odbc.ini.template -l -v
-        sed -i -e '$a\[ODBC]\nPooling = Yes' -e '/^\[ODBC\]$/,/^\[/d' -i /etc/odbcinst.ini
+        xivo-update-odbcinst-config
 
         if [ -f "/etc/nginx/sites-available/xivo-restapi" ]; then
             rm -f "/etc/nginx/sites-available/xivo-restapi"
