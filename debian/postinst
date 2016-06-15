@@ -88,11 +88,14 @@ case "$1" in
             invoke-rc.d rsyslog restart
         fi
 
-        # prevent an error from being displayed at installation
+        # prevent errors from being displayed at installation or upgrade
         if [ ! -f /var/log/asterisk/fail2ban ]; then
             touch /var/log/asterisk/fail2ban
             chown asterisk:asterisk /var/log/asterisk/fail2ban
             chmod 660 /var/log/asterisk/fail2ban
+        fi
+        if [ ! -f /var/log/xivo-provd-fail2ban.log ]; then
+            touch /var/log/xivo-provd-fail2ban.log
         fi
         invoke-rc.d fail2ban reload
 
