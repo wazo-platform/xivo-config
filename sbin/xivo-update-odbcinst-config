@@ -13,9 +13,8 @@ c.optionxform = str
 with open(FILENAME) as fobj:
     c.read_file(fobj)
 
-if 'ODBC' not in c:
-    c['ODBC'] = {}
-c['ODBC']['Pooling'] = 'Yes'
+if 'ODBC' in c and 'Pooling' in c['ODBC']:
+    del c['ODBC']['Pooling']
 
-with open(FILENAME, 'w') as fobj:
-    c.write(fobj)
+    with open(FILENAME, 'w') as fobj:
+        c.write(fobj)
