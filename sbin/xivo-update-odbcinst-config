@@ -13,8 +13,17 @@ c.optionxform = str
 with open(FILENAME) as fobj:
     c.read_file(fobj)
 
-if 'ODBC' in c and 'Pooling' in c['ODBC']:
-    del c['ODBC']['Pooling']
+modified = False
 
+if 'ODBC' in c:
+    if 'Pooling' in c['ODBC']:
+        del c['ODBC']['Pooling']
+        modified = True
+
+    if not c['ODBC']:
+        del c['ODBC']
+        modified = True
+
+if modified:
     with open(FILENAME, 'w') as fobj:
         c.write(fobj)
