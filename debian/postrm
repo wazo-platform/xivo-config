@@ -17,9 +17,6 @@ case "$1" in
             ;;
 
         remove|upgrade)
-            if test -x /usr/bin/odbcinst ; then
-                odbcinst -u -d -n xivo -v
-            fi
             ;;
 
         failed-upgrade|abort-install|abort-upgrade|disappear) ;;

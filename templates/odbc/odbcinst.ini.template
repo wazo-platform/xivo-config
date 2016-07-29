@@ -1,6 +1,0 @@
-[xivo]
-Description	= ODBC driver used by XiVO (PostgreSQL ANSI)
-Driver		= psqlodbca.so
-Setup		= libodbcpsqlS.so
-Debug		= 0
-CommLog		= 0
