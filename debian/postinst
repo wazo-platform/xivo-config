@@ -44,9 +44,12 @@ case "$1" in
         chmod 640 "$new_key" "$new_cert"
 
         # ODBC configuration
-        odbcinst -i -d -f /usr/share/xivo-config/templates/odbc/odbcinst.ini.template -v
         odbcinst -i -s -f /usr/share/xivo-config/templates/odbc/odbc.ini.template -l -v
         xivo-update-odbcinst-config
+        if dpkg --compare-versions "$2" "le-nl" "16.10~20160725.191447.46342d0" && [ -d /var/spool/asterisk ]; then
+            # remove files created by erroneous odbc configuration
+            find /var/spool/asterisk -maxdepth 1 -type f -regex '/var/spool/asterisk/[0-9]+\.log' -delete
+        fi
 
         if [ -f "/etc/nginx/sites-available/xivo-restapi" ]; then
             rm -f "/etc/nginx/sites-available/xivo-restapi"

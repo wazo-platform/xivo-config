@@ -16,12 +16,19 @@ with open(FILENAME) as fobj:
 modified = False
 
 if 'ODBC' in c:
-    if 'Pooling' in c['ODBC']:
-        del c['ODBC']['Pooling']
+    odbc_section = c['ODBC']
+    if 'Pooling' in odbc_section:
+        del odbc_section['Pooling']
         modified = True
 
-    if not c['ODBC']:
+    if not odbc_section:
         del c['ODBC']
+        modified = True
+
+if 'PostgreSQL ANSI' in c:
+    psqla_section = c['PostgreSQL ANSI']
+    if psqla_section.get('CommLog') != '0':
+        psqla_section['CommLog'] = '0'
         modified = True
 
 if modified:
