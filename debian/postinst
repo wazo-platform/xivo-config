@@ -17,6 +17,11 @@ case "$1" in
             rm -rf /usr/share/xivo-config/datastorage
         fi
 
+        if dpkg --compare-versions "$2" "le-nl" "16.10~20160801.134640.fb558cc"; then
+            # remove files that should never have been created
+            rm -f /default /init /odbc.ini.template /odbcinst.ini.template /openssl-x509.conf
+        fi
+
         # keep cert/private key only if they changed. We don't want to keep the one
         # whose private key has been published.
         # *.dpkg-backup only exist if the conffile was modified
@@ -34,7 +39,7 @@ case "$1" in
         fi
 
         # generate X.509 certificates if necessary. Valid for 10 years.
-        config=/usr/share/xivo-config/templates/x509/openssl-x509.conf
+        config=/usr/share/xivo-config/x509/openssl-x509.conf
         if [ ! -e "$new_key" -o ! -e "$new_cert" ] ; then
             openssl req -x509 -sha256 -nodes -days 3650 -newkey rsa:2048 -config "$config" -keyout "$new_key" -out "$new_cert"
         fi
@@ -44,7 +49,7 @@ case "$1" in
         chmod 640 "$new_key" "$new_cert"
 
         # ODBC configuration
-        odbcinst -i -s -f /usr/share/xivo-config/templates/odbc/odbc.ini.template -l -v
+        odbcinst -i -s -f /usr/share/xivo-config/odbc/odbc.ini.template -l -v
         xivo-update-odbcinst-config
         if dpkg --compare-versions "$2" "le-nl" "16.10~20160725.191447.46342d0" && [ -d /var/spool/asterisk ]; then
             # remove files created by erroneous odbc configuration
@@ -63,7 +68,7 @@ case "$1" in
         usermod -a -G asterisk www-data
 
         # add spawn-fcgi init and default file
-        spawn_dir="/usr/share/xivo-config/templates/spawn-fcgi"
+        spawn_dir="/usr/share/xivo-config/spawn-fcgi"
         if [ ! -f /etc/default/spawn-fcgi ]; then
             cp $spawn_dir/default /etc/default/spawn-fcgi
         fi
