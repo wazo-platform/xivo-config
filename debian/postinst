@@ -38,16 +38,6 @@ case "$1" in
             rmdir --ignore-fail-on-non-empty /etc/nginx/ssl
         fi
 
-        # generate X.509 certificates if necessary. Valid for 10 years.
-        config=/usr/share/xivo-config/x509/openssl-x509.conf
-        if [ ! -e "$new_key" -o ! -e "$new_cert" ] ; then
-            openssl req -x509 -sha256 -nodes -days 3650 -newkey rsa:2048 -config "$config" -keyout "$new_key" -out "$new_cert"
-        fi
-
-        # ensure ownership and permissions
-        chown root:www-data "$new_key" "$new_cert"
-        chmod 640 "$new_key" "$new_cert"
-
         # ODBC configuration
         odbcinst -i -s -f /usr/share/xivo-config/odbc/odbc.ini.template -l -v
         xivo-update-odbcinst-config

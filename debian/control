@@ -1,7 +1,7 @@
 Source: xivo-config
 Section: comm
 Priority: extra
-Maintainer: XiVO Dev Team <dev@avencall.com>
+Maintainer: XiVO Dev Team <dev+pkg@proformatique.com>
 Uploaders: XiVO Builder Team <release@xivo.io>
 Build-Depends: cdbs, debhelper (>= 9)
 Standards-Version: 3.7.2.2
@@ -9,7 +9,7 @@ Standards-Version: 3.7.2.2
 Package: xivo-config
 Architecture: all
 Pre-Depends: nginx, nginx-full, rabbitmq-server, asterisk
-Depends: fail2ban, ipcalc, odbc-postgresql, odbcinst, python3, xivo-dhcpd-update, xivo-utils
+Depends: fail2ban, ipcalc, odbc-postgresql, odbcinst, python3, xivo-certs, xivo-dhcpd-update, xivo-utils
 Provides: pf-xivo-base-config, pf-sys-ca
 Conflicts: asterisk-config, pf-xivo-base-config, pf-sys-ca
 Replaces: pf-xivo-base-config, pf-sys-ca
