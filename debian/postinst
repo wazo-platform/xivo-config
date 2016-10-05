@@ -67,14 +67,6 @@ case "$1" in
             insserv -f /etc/init.d/spawn-fcgi
         fi
 
-        # remove nginx default
-        nginx_default='/etc/nginx/sites-enabled/default'
-        if [ -f $nginx_default ]; then
-            rm -f $nginx_default
-        fi
-
-        invoke-rc.d nginx reload
-
         # ensure /dev/dahdi is owned by asterisk
         if [ -x /etc/init.d/dahdi ]; then
             invoke-rc.d asterisk stop
