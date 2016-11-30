@@ -1,3 +1,9 @@
+xivo-config (14.01~20140114.181228.739b440) wazo-dev; urgency=medium
+
+  * test
+
+ -- Wazo Maintainers <dev.wazo@gmail.com>  Wed, 30 Nov 2016 11:18:35 -0500
+
 xivo-config (14.01~20140114.181228.739b439) xivo-dev; urgency=low
 
   * add conffile to be moved from pf-xivo to xivo
