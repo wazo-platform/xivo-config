@@ -16,3 +16,4 @@ rm_conffile /etc/nginx/ssl/server.crt
 rm_conffile /etc/fail2ban/jail.local 15.20~20151211.192750.395b598
 rm_conffile /etc/asterisk/extensions_extra.d/callme.conf 16.08
 rm_conffile /etc/nginx/xivo_params 16.13
+rm_conffile /etc/ssl/certs/proformatique.crt 17.01
