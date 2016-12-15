@@ -30,7 +30,7 @@ def _build_sql_query(oldest_time):
 
 
 def _execute_sql_query(sql_query):
-    command = ['psql -d asterisk -c "%s"' % sql_query]
+    command = ['psql', '-d', 'asterisk', '-c', sql_query]
     subprocess.check_call(command)
 
 
