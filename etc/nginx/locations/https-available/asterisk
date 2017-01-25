@@ -1,6 +1,5 @@
 location = /api/asterisk/ws {
-
-    if ($http_sec_websocket_protocol = 'echo') {
+    if ($http_sec_websocket_protocol != 'sip') {
         return 403;
     }
 
