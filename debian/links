@@ -2,4 +2,3 @@ var/lib/asterisk/sounds/custom                                  var/lib/xivo/sou
 var/lib/asterisk/sounds/meetme                                  var/lib/xivo/sounds/recordings-meetme
 var/lib/asterisk/moh                                            var/lib/xivo/moh
 var/spool/asterisk/monitor                                      var/lib/xivo/sounds/monitor
-etc/nginx/locations/https-available/asterisk                    /etc/nginx/locations/https-enabled/asterisk
