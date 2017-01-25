@@ -98,9 +98,9 @@ case "$1" in
             invoke-rc.d rabbitmq-server restart
         fi
 
-        if dpkg --compare-versions "$2" lt '17.03'; then
-            ln -sf  /etc/nginx/locations/https-available/xivo-config \
-                    /etc/nginx/locations/https-enabled/xivo-config
+        if dpkg --compare-versions "$2" lt '17.02'; then
+            ln -sf  /etc/nginx/locations/https-available/asterisk \
+                    /etc/nginx/locations/https-enabled/asterisk
         fi
     ;;
     abort-upgrade|abort-remove|abort-deconfigure)
