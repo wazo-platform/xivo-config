@@ -9,9 +9,7 @@ Package: xivo-config
 Architecture: all
 Pre-Depends: rabbitmq-server, asterisk
 Depends: fail2ban, ipcalc, odbc-postgresql, odbcinst, python3, xivo-certs, xivo-dhcpd-update, xivo-utils
-Provides: pf-xivo-base-config, pf-sys-ca
-Conflicts: asterisk-config, pf-xivo-base-config, pf-sys-ca
-Replaces: pf-xivo-base-config, pf-sys-ca
+Conflicts: asterisk-config
 Description: Wazo complete telephony solution -- base configuration
  Wazo is a system based on a powerful IPBX, to bring an easy to
  install solution for telephony and related services.
