@@ -1,4 +1,6 @@
 #!/bin/sh
+# Copyright 2017 The Wazo Authors  (see the AUTHORS file)
+# SPDX-License-Identifier: GPL-3.0+
 
 SLAVE_IP=$1
 DB_NAME='asterisk'
@@ -7,6 +9,7 @@ DUMP='replication.sql'
 EXCLUDE_TABLES='\
     -T call_log \
     -T call_log_id_seq \
+    -T call_log_participant \
     -T cel \
     -T cel_id_seq \
     -T queue_log \
