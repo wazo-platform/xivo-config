@@ -7,7 +7,7 @@ Standards-Version: 3.9.6
 
 Package: xivo-config
 Architecture: all
-Pre-Depends: rabbitmq-server, asterisk
+Pre-Depends: rabbitmq-server, asterisk | asterisk-virtual
 Depends: fail2ban, ipcalc, odbc-postgresql, odbcinst, python3, xivo-certs, xivo-dhcpd-update, xivo-utils
 Conflicts: asterisk-config
 Description: Wazo complete telephony solution -- base configuration
