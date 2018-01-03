@@ -22,7 +22,7 @@ ADDRESS=127.0.0.1
 PORT=9000
 USER=www-data
 GROUP=www-data
-PHP_CGI="/usr/bin/php5-cgi"
+PHP_CGI="/usr/bin/php-cgi"
 
 # Exit if the package is not installed
 [ -x "$DAEMON" ] || exit -1
