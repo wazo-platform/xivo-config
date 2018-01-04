@@ -62,12 +62,9 @@ case "$1" in
         if [ ! -f /etc/default/spawn-fcgi ]; then
             cp $spawn_dir/default /etc/default/spawn-fcgi
         fi
-        if [ ! -f /etc/init.d/spawn-fcgi ]; then
-            cp $spawn_dir/init /etc/init.d/spawn-fcgi
-            insserv -f /etc/init.d/spawn-fcgi
-        else
-            cp $spawn_dir/init /etc/init.d/spawn-fcgi
-        fi
+
+        cp $spawn_dir/init /etc/init.d/spawn-fcgi
+        insserv -f /etc/init.d/spawn-fcgi
 
         # ensure /dev/dahdi is owned by asterisk
         if [ -x /etc/init.d/dahdi ]; then
