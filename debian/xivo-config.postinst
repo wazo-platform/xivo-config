@@ -93,8 +93,14 @@ case "$1" in
 
         /usr/sbin/xivo-fix-paths-rights
 
-        if [ -x /etc/init.d/rabbitmq-server ]; then
-            invoke-rc.d rabbitmq-server restart
+        # update systemd with drop-in files
+        if [ -d /run/systemd/system ] ; then
+            systemctl daemon-reload
+        fi
+
+        # the rabbitmq drop-in changes the node name of rabbitmq, so restart to apply change
+        if systemctl is-active rabbitmq-server; then
+            systemctl restart rabbitmq-server
         fi
 
         if dpkg --compare-versions "$2" lt '17.02'; then
