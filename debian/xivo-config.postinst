@@ -64,7 +64,9 @@ case "$1" in
         fi
 
         cp $spawn_dir/init /etc/init.d/spawn-fcgi
-        systemctl enable spawn-fcgi
+        if [ -d /run/systemd/system ] ; then
+            systemctl enable spawn-fcgi
+        fi
 
         # ensure /dev/dahdi is owned by asterisk
         if [ -x /etc/init.d/dahdi ]; then
