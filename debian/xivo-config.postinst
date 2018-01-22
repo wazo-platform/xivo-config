@@ -93,6 +93,10 @@ case "$1" in
 
         /usr/sbin/xivo-fix-paths-rights
 
+        if ! grep -q '^NODENAME=' /etc/default/rabbitmq-server ; then
+            echo 'NODENAME=rabbit@localhost' >> /etc/default/rabbitmq-server
+        fi
+
         # update systemd with drop-in files
         if [ -d /run/systemd/system ] ; then
             systemctl daemon-reload
