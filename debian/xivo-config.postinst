@@ -93,19 +93,19 @@ case "$1" in
 
         /usr/sbin/xivo-fix-paths-rights
 
+        if [ -d /run/systemd/system ] ; then
+            systemctl stop rabbitmq-server
+            systemctl daemon-reload  # load rabbitmq-server drop-in
+        fi
+
         if ! grep -q '^NODENAME=' /etc/default/rabbitmq-server ; then
             echo 'NODENAME=rabbit@localhost' >> /etc/default/rabbitmq-server
         fi
 
-        # update systemd with drop-in files
         if [ -d /run/systemd/system ] ; then
-            systemctl daemon-reload
+            systemctl start rabbitmq-server
         fi
 
-        # the rabbitmq drop-in changes the node name of rabbitmq, so restart to apply change
-        if systemctl is-active rabbitmq-server; then
-            systemctl restart rabbitmq-server
-        fi
 
         if dpkg --compare-versions "$2" lt '17.02'; then
             ln -sf  /etc/nginx/locations/https-available/asterisk \
