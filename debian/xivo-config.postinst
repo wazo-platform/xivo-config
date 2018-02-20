@@ -98,8 +98,14 @@ case "$1" in
             systemctl daemon-reload  # load rabbitmq-server drop-in
         fi
 
-        if ! grep -q '^NODENAME=' /etc/default/rabbitmq-server ; then
-            echo 'NODENAME=rabbit@localhost' >> /etc/default/rabbitmq-server
+        # wrong config in 18.01 and 18.02
+        if grep -q '^NODENAME=rabbit@localhost$' /etc/default/rabbitmq-server ; then
+            sed -i '/^NODENAME=rabbit@localhost$/d' /etc/default/rabbitmq-server
+        fi
+
+        # read by logrotate
+        if ! grep -qE '^export +RABBITMQ_NODENAME=' /etc/default/rabbitmq-server ; then
+            echo 'export RABBITMQ_NODENAME=rabbit@localhost' >> /etc/default/rabbitmq-server
         fi
 
         if [ -d /run/systemd/system ] ; then
