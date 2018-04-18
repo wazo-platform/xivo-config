@@ -1,5 +1,5 @@
 #!/bin/sh
-# Copyright 2017 The Wazo Authors  (see the AUTHORS file)
+# Copyright 2017-2018 The Wazo Authors  (see the AUTHORS file)
 # SPDX-License-Identifier: GPL-3.0+
 
 SLAVE_IP=$1
@@ -56,10 +56,12 @@ generate_dump() {
     dump=$2
     truncate_cmd="TRUNCATE $(grep '^COPY' $master_backup | cut -f2 -d\  | paste -sd ',');"
 
-    echo "BEGIN;" > $dump
+    echo "SET session_replication_role = replica;" > $dump
+    echo "BEGIN;" >> $dump
     echo $truncate_cmd >> $dump
     cat $master_backup >> $dump
     echo "COMMIT;" >> $dump
+    echo "SET session_replication_role = DEFAULT;" >> $dump
 }
 
 import_dump() {
