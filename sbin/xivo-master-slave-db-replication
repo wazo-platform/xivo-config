@@ -45,7 +45,7 @@ panic() {
 backup_master() {
     master_backup=$1
 
-    su postgres -c "pg_dump $PG_DUMP_OPTIONS $DB_NAME -f $master_backup"
+    su postgres -c "pg_dump $PG_DUMP_OPTIONS $DB_NAME -f $master_backup" 2>/dev/null
     if [ $? -ne 0 ]; then
         panic "Could not dump master"
     fi
