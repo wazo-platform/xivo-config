@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # postinst script for xivo-config
 #
 # see: dh_installdeb(1)
@@ -7,48 +7,9 @@ LIBDIR="/var/lib/xivo-config"
 
 case "$1" in
     configure)
-        # remove old file, replaced in the new version
-        old_modprobe_xivo_file="/etc/modprobe.d/xivo"
-        if [ -f $old_modprobe_xivo_file ]; then
-            rm $old_modprobe_xivo_file
-        fi
-
-        if [ -d /usr/share/xivo-config/datastorage ]; then
-            rm -rf /usr/share/xivo-config/datastorage
-        fi
-
-        if dpkg --compare-versions "$2" "le-nl" "16.10~20160801.134640.fb558cc"; then
-            # remove files that should never have been created
-            rm -f /default /init /odbc.ini.template /odbcinst.ini.template /openssl-x509.conf
-        fi
-
-        # keep cert/private key only if they changed. We don't want to keep the one
-        # whose private key has been published.
-        # *.dpkg-backup only exist if the conffile was modified
-        # We use cp because old_key and old_cert may be symlinks
-
-        old_key=/etc/nginx/ssl/server.key.dpkg-backup
-        old_cert=/etc/nginx/ssl/server.crt.dpkg-backup
-        new_key=/usr/share/xivo-certs/server.key
-        new_cert=/usr/share/xivo-certs/server.crt
-        if [ -d /etc/nginx/ssl ] ; then
-            [ -e "$old_key" ] && cp "$old_key" "$new_key"
-            [ -e "$old_cert" ] && cp "$old_cert" "$new_cert"
-            rm -f "$old_key" "$old_cert"
-            rmdir --ignore-fail-on-non-empty /etc/nginx/ssl
-        fi
-
         # ODBC configuration
         odbcinst -i -s -f /usr/share/xivo-config/odbc/odbc.ini.template -l -v
         xivo-update-odbcinst-config
-        if dpkg --compare-versions "$2" "le-nl" "16.10~20160725.191447.46342d0" && [ -d /var/spool/asterisk ]; then
-            # remove files created by erroneous odbc configuration
-            find /var/spool/asterisk -maxdepth 1 -type f -regex '/var/spool/asterisk/[0-9]+\.log' -delete
-        fi
-
-        if [ -f "/etc/nginx/sites-available/xivo-restapi" ]; then
-            rm -f "/etc/nginx/sites-available/xivo-restapi"
-        fi
 
         # run asterisk configuration
         /usr/share/asterisk/bin/asterisk_fix
@@ -112,8 +73,9 @@ case "$1" in
             systemctl start rabbitmq-server
         fi
 
+        previous_version="$2"
+        if [[ -z "${previous_version}" ]]; then
 
-        if dpkg --compare-versions "$2" lt '17.02'; then
             ln -sf  /etc/nginx/locations/https-available/asterisk \
                     /etc/nginx/locations/https-enabled/asterisk
         fi
