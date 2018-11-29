@@ -8,6 +8,8 @@ mv_conffile /etc/pf-xivo/asterisk/xivo_globals.conf /etc/xivo/asterisk/xivo_glob
 mv_conffile /etc/pf-xivo/asterisk/xivo_in_callerid.conf /etc/xivo/asterisk/xivo_in_callerid.conf 14.02
 mv_conffile /etc/pf-xivo/asterisk/xivo_ring.conf /etc/xivo/asterisk/xivo_ring.conf 14.02
 mv_conffile /etc/fail2ban/filter.d/asterisk.conf /etc/fail2ban/filter.d/asterisk-xivo.conf 15.19~20151203.183042.507edd5-1
+mv_conffile /etc/fail2ban/filter.d/asterisk-xivo.conf /etc/fail2ban/filter.d/asterisk-wazo.conf 18.12~20181023.151231.85e68fe.deb9
+mv_conffile /etc/fail2ban/jail.d/xivo.conf /etc/fail2ban/jail.d/wazo.conf 18.12~20181023.151231.85e68fe.deb9
 
 rm_conffile /etc/asterisk/res_pgsql.conf 14.17
 rm_conffile /etc/asterisk/cel_pgsql.conf 14.17
