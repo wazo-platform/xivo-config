@@ -1,22 +1,6 @@
 # see: dh_installdeb(1)
 
-mv_conffile /etc/pf-xivo/datastorage.conf /etc/xivo/datastorage.conf 14.02
-mv_conffile /etc/pf-xivo/mail.txt /etc/xivo/mail.txt 14.02
-mv_conffile /etc/pf-xivo/asterisk/xivo_callback_on_congestion.conf /etc/xivo/asterisk/xivo_callback_on_congestion.conf 14.02
-mv_conffile /etc/pf-xivo/asterisk/xivo_fax.conf /etc/xivo/asterisk/xivo_fax.conf 14.02
-mv_conffile /etc/pf-xivo/asterisk/xivo_globals.conf /etc/xivo/asterisk/xivo_globals.conf 14.02
-mv_conffile /etc/pf-xivo/asterisk/xivo_in_callerid.conf /etc/xivo/asterisk/xivo_in_callerid.conf 14.02
-mv_conffile /etc/pf-xivo/asterisk/xivo_ring.conf /etc/xivo/asterisk/xivo_ring.conf 14.02
-mv_conffile /etc/fail2ban/filter.d/asterisk.conf /etc/fail2ban/filter.d/asterisk-xivo.conf 15.19~20151203.183042.507edd5-1
 mv_conffile /etc/fail2ban/filter.d/asterisk-xivo.conf /etc/fail2ban/filter.d/asterisk-wazo.conf 18.14~20181129.180223.6dacdfe.deb9
 mv_conffile /etc/fail2ban/jail.d/xivo.conf /etc/fail2ban/jail.d/wazo.conf 18.12~20181023.151231.85e68fe.deb9
 
-rm_conffile /etc/asterisk/res_pgsql.conf 14.17
-rm_conffile /etc/asterisk/cel_pgsql.conf 14.17
-rm_conffile /etc/nginx/ssl/server.key
-rm_conffile /etc/nginx/ssl/server.crt
-rm_conffile /etc/fail2ban/jail.local 15.20~20151211.192750.395b598
-rm_conffile /etc/asterisk/extensions_extra.d/callme.conf 16.08
-rm_conffile /etc/nginx/xivo_params 16.13
-rm_conffile /etc/ssl/certs/proformatique.crt 17.01
 rm_conffile /etc/rabbitmq/rabbitmq-env.conf 18.01
