@@ -1,4 +1,6 @@
 #!/bin/sh
+# Copyright 2019 The Wazo Authors  (see the AUTHORS file)
+# SPDX-License-Identifier: GPL-3.0+
 
 PATH=/bin:/usr/bin:/sbin:/usr/sbin
 
@@ -35,6 +37,7 @@ stop_dhcp() {
 }
 
 enable_service() {
+    systemctl restart wazo-auth
     start_dhcp
     set_berofos_to_slave_state
     wazo-service enable
