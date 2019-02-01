@@ -1,4 +1,0 @@
-#!/bin/sh
-
-invoke-rc.d xivo-provd restart
-invoke-rc.d xivo-dxtora restart

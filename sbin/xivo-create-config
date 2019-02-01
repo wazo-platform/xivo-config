@@ -1,6 +1,6 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-# Copyright (C) 2015 Avencall
+# Copyright 2015-2019 The Wazo Authors  (see the AUTHORS file)
 # SPDX-License-Identifier: GPL-3.0+
 
 import argparse
@@ -12,7 +12,6 @@ from xivo_dao import init_db_from_config, default_config
 from xivo_dao.helpers.db_utils import session_scope
 from xivo_dao.alchemy.dhcp import Dhcp
 from xivo_dao.alchemy.mail import Mail
-from xivo_dao.alchemy.provisioning import Provisioning
 from xivo_dao.alchemy.monitoring import Monitoring
 from xivo_dao.alchemy.resolvconf import Resolvconf
 from xivo_dao.alchemy.netiface import Netiface
@@ -47,7 +46,6 @@ def load_config():
         result = {}
         result.update(load_config_dhcp(session))
         result.update(load_config_smtp(session))
-        result.update(load_config_provisioning(session))
         result.update(load_config_monitoring(session))
         result.update(load_config_resolvconf(session))
         result.update(load_config_netiface(session))
@@ -84,32 +82,6 @@ def load_config_smtp(session):
         'smtp_relayhost': smtp.relayhost,
         'smtp_fallback_relayhost': smtp.fallback_relayhost,
         'smtp_canonical': smtp.canonical,
-    }
-
-
-def load_config_provisioning(session):
-    provd = session.query(
-        Provisioning.net4_ip,
-        Provisioning.http_port,
-        Provisioning.username,
-        Provisioning.password,
-        Provisioning.net4_ip_rest,
-        Provisioning.rest_port,
-        Provisioning.private,
-        Provisioning.secure,
-        Provisioning.dhcp_integration
-    ).first()
-
-    return {
-        'provd_net4_ip': provd.net4_ip,
-        'provd_http_port': str(provd.http_port),
-        'provd_username': provd.username,
-        'provd_password': provd.password,
-        'provd_rest_port': str(provd.rest_port),
-        'provd_rest_net4_ip': provd.net4_ip_rest,
-        'provd_rest_authentication': provd.private,
-        'provd_rest_ssl': provd.secure,
-        'provd_dhcp_integration': provd.dhcp_integration,
     }
 
 
