@@ -15,7 +15,8 @@ XIVO_WEBI_MAKE_DIRS="${AST_SPOOL_PATH}/monitor
                 ${AST_VARLIB_PATH}/sounds/custom
                 ${XIVO_VARLIB_PATH}/sounds/acd
                 ${XIVO_VARLIB_PATH}/sounds/features
-                ${XIVO_VARLIB_PATH}/sounds/playback"
+                ${XIVO_VARLIB_PATH}/sounds/playback
+                ${XIVO_VARLIB_PATH}/sounds/tenants"
 
 XIVO_WEBI_FIX_PATH_RIGHTS="${AST_ETC_PATH}
                ${AST_USR_PATH}/moh
@@ -24,7 +25,8 @@ XIVO_WEBI_FIX_PATH_RIGHTS="${AST_ETC_PATH}
                ${AST_VARLIB_MOH_PATH}
                ${AST_VARLIB_PATH}/sounds/custom
                ${XIVO_VARLIB_PATH}
-               ${XIVO_VARLIB_PATH}/sounds"
+               ${XIVO_VARLIB_PATH}/sounds
+               ${XIVO_VARLIB_PATH}/sounds/tenants"
 
 echo "${XIVO_WEBI_MAKE_DIRS}"|while read XIVO_WEBI_DIR;
 do
