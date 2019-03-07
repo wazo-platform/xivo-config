@@ -109,7 +109,7 @@ def load_config_provisioning(session):
         'provd_rest_net4_ip': provd.net4_ip_rest,
         'provd_rest_authentication': provd.private,
         'provd_rest_ssl': provd.secure,
-        'provd_dhcp_integration': provd.dhcp_integration,
+        'provd_dhcp_integration': '1',
     }
 
 
