@@ -91,24 +91,16 @@ def load_config_provisioning(session):
     provd = session.query(
         Provisioning.net4_ip,
         Provisioning.http_port,
-        Provisioning.username,
-        Provisioning.password,
         Provisioning.net4_ip_rest,
         Provisioning.rest_port,
-        Provisioning.private,
-        Provisioning.secure,
         Provisioning.dhcp_integration
     ).first()
 
     return {
-        'provd_net4_ip': provd.net4_ip,
+        'provd_net4_ip': provd.net4_ip or '',
         'provd_http_port': str(provd.http_port),
-        'provd_username': provd.username,
-        'provd_password': provd.password,
         'provd_rest_port': str(provd.rest_port),
-        'provd_rest_net4_ip': provd.net4_ip_rest,
-        'provd_rest_authentication': provd.private,
-        'provd_rest_ssl': provd.secure,
+        'provd_rest_net4_ip': provd.net4_ip_rest or '',
         'provd_dhcp_integration': '1',
     }
 
