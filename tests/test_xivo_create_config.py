@@ -1,10 +1,12 @@
 # -*- coding: utf-8 -*-
-# Copyright (C) 2015 Avencall
+# Copyright 2015-2019 The Wazo Authors  (see the AUTHORS file)
 # SPDX-License-Identifier: GPL-3.0+
+
+import netifaces
 
 from hamcrest import assert_that
 from hamcrest import equal_to
-from mock import Mock
+from mock import Mock, patch
 from unittest import TestCase
 
 from . import xivo_create_config
@@ -12,21 +14,34 @@ from . import xivo_create_config
 
 class TestCreateConfig(TestCase):
 
-    def test_load_config_dhcp(self):
+    @patch('netifaces.ifaddresses')
+    def test_load_config_dhcp(self, ifaddresses):
 
         class MockSession(Mock):
             active = 1
             pool_start = '10.0.0.1'
-            pool_end = '10.0.0.254'
+            pool_end = '10.0.0.250'
             extra_ifaces = 'eth0'
 
         session = MockSession()
+        ifaddresses.return_value = {
+            netifaces.AF_INET: [
+                {
+                    'addr': '10.0.0.254',
+                    'netmask': '255.255.255.0',
+                }
+            ]
+        }
+
         result = xivo_create_config.load_config_dhcp(session)
 
         assert_that(result, equal_to({
             'dhcp_active': 1,
             'dhcp_extra_ifaces': 'eth0',
-            'dhcp_pool': '10.0.0.1 10.0.0.254'
+            'dhcp_pool': '10.0.0.1 10.0.0.250',
+            'dhcp_net4_ip': '10.0.0.254',
+            'dhcp_net4_netmask': '255.255.255.0',
+            'dhcp_net4_subnet': '10.0.0.0',
         }))
 
     def test_load_config_smtp(self):
