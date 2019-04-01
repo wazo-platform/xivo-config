@@ -1,10 +1,10 @@
 # Declaration for subnet
-subnet #XIVO_NET4_SUBNET# netmask #XIVO_NET4_NETMASK# {
+subnet #XIVO_DHCP_NET4_SUBNET# netmask #XIVO_DHCP_NET4_NETMASK# {
     # DHCP server is authoritative on the VoIP network segment
     authoritative;
     
-    option subnet-mask #XIVO_NET4_NETMASK#;
-    option routers #XIVO_NET4_IP#;
+    option subnet-mask #XIVO_DHCP_NET4_NETMASK#;
+    option routers #XIVO_DHCP_NET4_IP#;
 
     pool {
         log(concat("[", binary-to-ascii(16, 8, ":", hardware), "] POOL VoIP"));

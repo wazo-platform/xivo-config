@@ -5,6 +5,7 @@
 
 import argparse
 import netaddr
+import netifaces
 import sys
 
 from jinja2 import Template
@@ -62,10 +63,34 @@ def load_config_dhcp(session):
         Dhcp.extra_ifaces,
     ).first()
 
+    net4_ip = ''
+    net4_netmask = ''
+    net4_subnet = ''
+
+    try:
+        main_iface = dhcp.extra_ifaces.split(' ')[0]
+    except IndexError:
+        main_iface = None
+
+    if main_iface:
+        try:
+            address = netifaces.ifaddresses(main_iface)[netifaces.AF_INET][0]
+        except (KeyError, IndexError):
+            address = None
+
+        if address:
+            ip_network = netaddr.IPNetwork('{address}/{netmask}'.format(address=address['addr'], netmask=address['netmask']))
+            net4_ip = str(ip_network.ip)
+            net4_netmask = str(ip_network.netmask)
+            net4_subnet = str(ip_network.network)
+
     return {
         'dhcp_active': dhcp.active,
         'dhcp_extra_ifaces': dhcp.extra_ifaces,
         'dhcp_pool': '{start} {end}'.format(start=dhcp.pool_start, end=dhcp.pool_end),
+        'dhcp_net4_ip': net4_ip,
+        'dhcp_net4_netmask': net4_netmask,
+        'dhcp_net4_subnet': net4_subnet,
     }
 
 

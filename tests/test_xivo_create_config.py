@@ -1,10 +1,12 @@
 # -*- coding: utf-8 -*-
-# Copyright (C) 2015 Avencall
+# Copyright 2015-2019 The Wazo Authors  (see the AUTHORS file)
 # SPDX-License-Identifier: GPL-3.0+
+
+import netifaces
 
 from hamcrest import assert_that
 from hamcrest import equal_to
-from mock import Mock
+from mock import Mock, patch
 from unittest import TestCase
 
 from . import xivo_create_config
@@ -12,21 +14,34 @@ from . import xivo_create_config
 
 class TestCreateConfig(TestCase):
 
-    def test_load_config_dhcp(self):
+    @patch('netifaces.ifaddresses')
+    def test_load_config_dhcp(self, ifaddresses):
 
         class MockSession(Mock):
             active = 1
             pool_start = '10.0.0.1'
-            pool_end = '10.0.0.254'
+            pool_end = '10.0.0.250'
             extra_ifaces = 'eth0'
 
         session = MockSession()
+        ifaddresses.return_value = {
+            netifaces.AF_INET: [
+                {
+                    'addr': '10.0.0.254',
+                    'netmask': '255.255.255.0',
+                }
+            ]
+        }
+
         result = xivo_create_config.load_config_dhcp(session)
 
         assert_that(result, equal_to({
             'dhcp_active': 1,
             'dhcp_extra_ifaces': 'eth0',
-            'dhcp_pool': '10.0.0.1 10.0.0.254'
+            'dhcp_pool': '10.0.0.1 10.0.0.250',
+            'dhcp_net4_ip': '10.0.0.254',
+            'dhcp_net4_netmask': '255.255.255.0',
+            'dhcp_net4_subnet': '10.0.0.0',
         }))
 
     def test_load_config_smtp(self):
@@ -74,12 +89,8 @@ class TestCreateConfig(TestCase):
         class MockSession(Mock):
             net4_ip = '127.0.0.1'
             http_port = 8667
-            username = 'xivo_provd'
-            password = 'opensesame'
             net4_ip_rest = '0.0.0.0'
             rest_port = 8667
-            private = 0
-            secure = 1
             dhcp_integration = 1
 
         session = MockSession()
@@ -88,13 +99,9 @@ class TestCreateConfig(TestCase):
         assert_that(result, equal_to({
             'provd_net4_ip': '127.0.0.1',
             'provd_http_port': '8667',
-            'provd_username': 'xivo_provd',
-            'provd_password': 'opensesame',
             'provd_rest_port': '8667',
             'provd_rest_net4_ip': '0.0.0.0',
-            'provd_rest_authentication': 0,
-            'provd_rest_ssl': 1,
-            'provd_dhcp_integration': 1,
+            'provd_dhcp_integration': '1',
         }))
 
     def test_load_config_monitoring(self):
