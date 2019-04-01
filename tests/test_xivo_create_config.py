@@ -89,12 +89,8 @@ class TestCreateConfig(TestCase):
         class MockSession(Mock):
             net4_ip = '127.0.0.1'
             http_port = 8667
-            username = 'xivo_provd'
-            password = 'opensesame'
             net4_ip_rest = '0.0.0.0'
             rest_port = 8667
-            private = 0
-            secure = 1
             dhcp_integration = 1
 
         session = MockSession()
@@ -103,13 +99,9 @@ class TestCreateConfig(TestCase):
         assert_that(result, equal_to({
             'provd_net4_ip': '127.0.0.1',
             'provd_http_port': '8667',
-            'provd_username': 'xivo_provd',
-            'provd_password': 'opensesame',
             'provd_rest_port': '8667',
             'provd_rest_net4_ip': '0.0.0.0',
-            'provd_rest_authentication': 0,
-            'provd_rest_ssl': 1,
-            'provd_dhcp_integration': 1,
+            'provd_dhcp_integration': '1',
         }))
 
     def test_load_config_monitoring(self):
