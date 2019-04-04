@@ -56,9 +56,8 @@ if [ -n "${XIVO_NAMESERVERS}" ]; then
   done
 fi
 
-XIVO_DHCP_IFACES=""
-if [ "${XIVO_DHCP_ACTIVE}" = "1" ]; then
-    XIVO_DHCP_IFACES="${XIVO_DHCP_EXTRA_IFACES}"
+if [ "${XIVO_DHCP_ACTIVE}" = "0" ]; then
+   XIVO_DHCP_NETWORK_INTERFACES=""
 fi
 
 if [[ "${XIVO_DHCP_ACTIVE}" = "1" && -n "${XIVO_DHCP_POOL}" ]]; then

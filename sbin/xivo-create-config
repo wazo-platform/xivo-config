@@ -60,7 +60,7 @@ def load_config_dhcp(session):
         Dhcp.active,
         Dhcp.pool_start,
         Dhcp.pool_end,
-        Dhcp.extra_ifaces,
+        Dhcp.network_interfaces,
     ).first()
 
     net4_ip = ''
@@ -68,7 +68,7 @@ def load_config_dhcp(session):
     net4_subnet = ''
 
     try:
-        main_iface = dhcp.extra_ifaces.split(' ')[0]
+        main_iface = dhcp.network_interfaces.split(' ')[0]
     except IndexError:
         main_iface = None
 
@@ -86,7 +86,7 @@ def load_config_dhcp(session):
 
     return {
         'dhcp_active': dhcp.active,
-        'dhcp_extra_ifaces': dhcp.extra_ifaces,
+        'dhcp_network_interfaces': dhcp.network_interfaces,
         'dhcp_pool': '{start} {end}'.format(start=dhcp.pool_start, end=dhcp.pool_end),
         'dhcp_net4_ip': net4_ip,
         'dhcp_net4_netmask': net4_netmask,
