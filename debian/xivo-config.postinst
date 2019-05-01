@@ -78,6 +78,9 @@ case "$1" in
             ln -sf /etc/nginx/locations/https-available/asterisk \
                    /etc/nginx/locations/https-enabled/asterisk
         fi
+
+        # removed postgres pinning in 19.07
+        rm -f /etc/apt/preferences.d/postgresql.pref
     ;;
     abort-upgrade|abort-remove|abort-deconfigure)
 
