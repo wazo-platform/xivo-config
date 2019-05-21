@@ -1,1 +1,1 @@
-var/lib/asterisk/moh                                            var/lib/xivo/moh
+var/lib/asterisk/moh var/lib/wazo/moh
