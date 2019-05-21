@@ -1,4 +1,1 @@
-var/lib/asterisk/sounds/custom                                  var/lib/xivo/sounds/recordings
-var/lib/asterisk/sounds/meetme                                  var/lib/xivo/sounds/recordings-meetme
 var/lib/asterisk/moh                                            var/lib/xivo/moh
-var/spool/asterisk/monitor                                      var/lib/xivo/sounds/monitor
