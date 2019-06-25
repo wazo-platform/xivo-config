@@ -43,7 +43,7 @@ enable_service() {
     xivo-confgen asterisk/pjsip.conf --invalidate
     wazo-service enable
     wazo-service start
-    xivo-agentd-cli -c 'relog all'
+    wazo-agentd-cli -c 'relog all'
 }
 
 disable_service() {
