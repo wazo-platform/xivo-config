@@ -18,4 +18,4 @@ rm_conffile /etc/asterisk/extensions_extra.d/callme.conf 16.08
 rm_conffile /etc/nginx/xivo_params 16.13
 rm_conffile /etc/ssl/certs/proformatique.crt 17.01
 rm_conffile /etc/rabbitmq/rabbitmq-env.conf 18.01
-rm_conffile /etc/apt/preferences.d/postgresql.pref 19.07
+rm_conffile /etc/apt/preferences.d/postgresql.pref 18.03
