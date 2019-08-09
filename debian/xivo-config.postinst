@@ -44,8 +44,13 @@ case "$1" in
             chown asterisk:asterisk /var/log/asterisk/fail2ban
             chmod 660 /var/log/asterisk/fail2ban
         fi
-        if [ ! -f /var/log/xivo-provd-fail2ban.log ]; then
-            touch /var/log/xivo-provd-fail2ban.log
+        # Rename xixo-provd to wazo-provd
+        if [ -f /var/log/xivo-provd-fail2ban.log ] ; then
+			rename 's/xivo-provd/wazo-provd/g' /var/log/xivo-provd-fail2ban.log*
+		fi
+        # End rename xivo-provd to wazo-provd
+        if [ ! -f /var/log/wazo-provd-fail2ban.log ]; then
+            touch /var/log/wazo-provd-fail2ban.log
         fi
         invoke-rc.d fail2ban reload
 
