@@ -17,7 +17,7 @@ Depends: fail2ban,
          python3,
          rename,
          xivo-certs,
-         xivo-dhcpd-update,
+         wazo-dhcpd-update,
          xivo-utils
 Conflicts: asterisk-config
 Description: Wazo complete telephony solution -- base configuration
