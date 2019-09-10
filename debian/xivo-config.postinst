@@ -18,15 +18,6 @@ case "$1" in
         usermod -a -G www-data asterisk
         usermod -a -G asterisk www-data
 
-        # add spawn-fcgi init and default file
-        spawn_dir="/usr/share/xivo-config/spawn-fcgi"
-        if [ ! -f /etc/default/spawn-fcgi ]; then
-            cp $spawn_dir/default /etc/default/spawn-fcgi
-        fi
-
-        cp $spawn_dir/init /etc/init.d/spawn-fcgi
-        systemctl enable spawn-fcgi
-
         # ensure /dev/dahdi is owned by asterisk
         if [ -x /etc/init.d/dahdi ]; then
             invoke-rc.d asterisk stop
@@ -79,6 +70,13 @@ case "$1" in
         fi
 
         previous_version="$2"
+
+        # remove old config files
+        if dpkg --compare-versions "${previous_version}" lt '19.13'; then
+            rm -f /etc/default/spawn-fcgi
+            rm -f /etc/init.d/spawn-fcgi
+        fi
+
         if [[ -z "${previous_version}" ]]; then
             ln -sf /etc/nginx/locations/https-available/asterisk \
                    /etc/nginx/locations/https-enabled/asterisk
