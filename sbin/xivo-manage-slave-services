@@ -11,19 +11,6 @@ usage() {
 	EOF
 }
 
-wait_until_agentd_ready() {
-    WAIT_TIMEOUT=120
-    WAIT_INTERVAL=1
-    while ! ss --listening --tcp '( sport = :9493 )' | grep -q LISTEN; do
-        sleep ${WAIT_INTERVAL}
-        WAIT_TIMEOUT=$((WAIT_TIMEOUT - WAIT_INTERVAL))
-        if [ "$WAIT_TIMEOUT" -eq 0 ]; then
-            echo "wazo-agentd is not ready"
-            return 1
-        fi
-    done
-}
-
 set_berofos_to_slave_state() {
     xivo-berofos -q --syslog slave
 }
@@ -55,7 +42,6 @@ enable_service() {
     wazo-confgen asterisk/pjsip.conf --invalidate
     wazo-service enable
     wazo-service start
-    wait_until_agentd_ready
     wazo-agentd-cli -c 'relog all'
 }
 
