@@ -1,6 +1,6 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-# Copyright 2015-2019 The Wazo Authors  (see the AUTHORS file)
+# Copyright 2015-2020 The Wazo Authors  (see the AUTHORS file)
 # SPDX-License-Identifier: GPL-3.0+
 
 import argparse
@@ -116,16 +116,12 @@ def load_config_provisioning(session):
     provd = session.query(
         Provisioning.net4_ip,
         Provisioning.http_port,
-        Provisioning.net4_ip_rest,
-        Provisioning.rest_port,
         Provisioning.dhcp_integration
     ).first()
 
     return {
         'provd_net4_ip': provd.net4_ip or '',
         'provd_http_port': str(provd.http_port),
-        'provd_rest_port': str(provd.rest_port),
-        'provd_rest_net4_ip': provd.net4_ip_rest or '',
         'provd_dhcp_integration': '1',
     }
 
