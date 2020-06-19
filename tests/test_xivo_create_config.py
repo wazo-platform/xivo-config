@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2015-2019 The Wazo Authors  (see the AUTHORS file)
+# Copyright 2015-2020 The Wazo Authors  (see the AUTHORS file)
 # SPDX-License-Identifier: GPL-3.0+
 
 import netifaces
@@ -89,8 +89,6 @@ class TestCreateConfig(TestCase):
         class MockSession(Mock):
             net4_ip = '127.0.0.1'
             http_port = 8667
-            net4_ip_rest = '0.0.0.0'
-            rest_port = 8667
             dhcp_integration = 1
 
         session = MockSession()
@@ -99,8 +97,6 @@ class TestCreateConfig(TestCase):
         assert_that(result, equal_to({
             'provd_net4_ip': '127.0.0.1',
             'provd_http_port': '8667',
-            'provd_rest_port': '8667',
-            'provd_rest_net4_ip': '0.0.0.0',
             'provd_dhcp_integration': '1',
         }))
 
