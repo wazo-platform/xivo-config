@@ -46,7 +46,7 @@ enable_service() {
 }
 
 disable_service() {
-    wazo-service stop xivo
+    wazo-service stop wazo
     wazo-service disable
     set_berofos_to_master_state
     stop_dhcp
