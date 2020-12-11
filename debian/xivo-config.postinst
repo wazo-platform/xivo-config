@@ -20,7 +20,7 @@ case "$1" in
 
         # ensure /dev/dahdi is owned by asterisk
         if [ -x /etc/init.d/dahdi ]; then
-            invoke-rc.d asterisk stop
+            deb-systemd-invoke stop asterisk
             invoke-rc.d dahdi stop
             udevadm control --reload-rules
         fi
