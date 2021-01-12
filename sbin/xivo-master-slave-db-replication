@@ -1,5 +1,5 @@
 #!/bin/sh
-# Copyright 2017-2018 The Wazo Authors  (see the AUTHORS file)
+# Copyright 2017-2021 The Wazo Authors  (see the AUTHORS file)
 # SPDX-License-Identifier: GPL-3.0+
 
 SLAVE_IP=$1
@@ -12,6 +12,8 @@ EXCLUDE_TABLES='\
     -T call_log_participant \
     -T cel \
     -T cel_id_seq \
+    -T dhcp \
+    -T dhcp_id_seq \
     -T queue_log \
     -T queue_log_id_seq \
     -T session \
