@@ -137,7 +137,7 @@ BASE_RESULT_DIR=$(mktemp -d)
 
 LIST1=$(cd ${BASE_TEMPLATE_DIR}; find . -mindepth 1 -maxdepth 1 -type d -printf "%P\n")
 LIST2=$(cd ${CUSTOM_TEMPLATE_DIR}; find . -mindepth 1 -maxdepth 1 -type d -printf "%P\n")
-LIST=$(echo "${LIST1} ${LIST2}" | sort | uniq)
+LIST=$(echo -e "${LIST1}\n${LIST2}" | sort | uniq)
 
 for P in ${LIST}; do
   if [ -f ${BASE_TEMPLATE_DIR}/${P}.skip -o -f ${CUSTOM_TEMPLATE_DIR}/${P}.skip ]; then
