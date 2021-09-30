@@ -43,7 +43,7 @@ enable_service() {
     wazo-confgen asterisk/pjsip.conf --invalidate
     wazo-service enable
     wazo-service start
-    wazo-agentd-cli -c 'relog all'
+    wazo-agentd-cli -c 'relog all --timeout 60'
 }
 
 disable_service() {
