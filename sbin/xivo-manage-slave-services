@@ -1,5 +1,5 @@
 #!/bin/sh
-# Copyright 2019-2021 The Wazo Authors  (see the AUTHORS file)
+# Copyright 2019-2022 The Wazo Authors  (see the AUTHORS file)
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 PATH=/bin:/usr/bin:/sbin:/usr/sbin
@@ -9,14 +9,6 @@ usage() {
 	usage: $(basename $0) action
 	    action: start or stop to enable/disable slave services
 	EOF
-}
-
-set_berofos_to_slave_state() {
-    xivo-berofos -q --syslog slave
-}
-
-set_berofos_to_master_state() {
-    xivo-berofos -q --syslog master
 }
 
 start_dhcp() {
@@ -39,7 +31,6 @@ stop_dhcp() {
 enable_service() {
     wazo-service status all >/dev/null && exit 0
     start_dhcp
-    set_berofos_to_slave_state
     wazo-confgen asterisk/pjsip.conf --invalidate
     wazo-service enable
     wazo-service start
@@ -49,7 +40,6 @@ enable_service() {
 disable_service() {
     wazo-service stop wazo
     wazo-service disable
-    set_berofos_to_master_state
     stop_dhcp
     wazo-service start
 }
