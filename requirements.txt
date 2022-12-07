@@ -1,6 +1,8 @@
 https://github.com/wazo-platform/xivo-lib-python/archive/master.zip  # from xivo-dao
 https://github.com/wazo-platform/xivo-dao/archive/master.zip
 jinja2==2.10
+markupsafe==1.1.0  # from jinja2
+six  # from xivo-dao
 netaddr==0.7.19
 netifaces==0.10.4
 pyyaml==3.13  # from xivo-lib-python

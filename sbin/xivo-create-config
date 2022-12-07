@@ -1,6 +1,5 @@
-#!/usr/bin/python
-# -*- coding: utf-8 -*-
-# Copyright 2015-2020 The Wazo Authors  (see the AUTHORS file)
+#!/usr/bin/env python3
+# Copyright 2015-2022 The Wazo Authors  (see the AUTHORS file)
 # SPDX-License-Identifier: GPL-3.0+
 
 import argparse
@@ -159,11 +158,15 @@ def load_config_resolvconf(session):
         'hostname': resolvconf.hostname,
         'domain': resolvconf.domain,
         'extra_dns_search': '',
-        'nameservers': ' '.join(nameserver
-                                for nameserver in (resolvconf.nameserver1,
-                                                   resolvconf.nameserver2,
-                                                   resolvconf.nameserver3)
-                                if nameserver)
+        'nameservers': ' '.join(
+            nameserver
+            for nameserver in (
+                resolvconf.nameserver1,
+                resolvconf.nameserver2,
+                resolvconf.nameserver3,
+            )
+            if nameserver
+        )
     }
 
 
