@@ -137,13 +137,17 @@ def load_config_monitoring(session):
 
     return {
         'maintenance': bool(monitoring.maintenance),
-        'alert_emails': (monitoring.alert_emails.replace('\r\n', ' ')
-                         if monitoring.alert_emails
-                         else None),
+        'alert_emails': (
+            monitoring.alert_emails.replace('\r\n', ' ')
+            if monitoring.alert_emails
+            else None
+        ),
         'dahdi_monitor_ports': monitoring.dahdi_monitor_ports or None,
-        'max_call_duration': (str(monitoring.max_call_duration)
-                              if monitoring.max_call_duration > 0
-                              else None),
+        'max_call_duration': (
+            str(monitoring.max_call_duration)
+            if monitoring.max_call_duration and monitoring.max_call_duration > 0
+            else None
+        ),
     }
 
 
