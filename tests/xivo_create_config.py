@@ -1,1 +1,0 @@
-../sbin/xivo-create-config

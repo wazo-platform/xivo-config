@@ -2,35 +2,40 @@
 # Copyright 2016-2022 The Wazo Authors  (see the AUTHORS file)
 # SPDX-License-Identifier: GPL-3.0+
 
-import configparser
+from configparser import ConfigParser
 
 FILENAME = '/etc/odbcinst.ini'
 
 
-c = configparser.ConfigParser(interpolation=None)
-c.optionxform = str
+def main():
+    config = ConfigParser(interpolation=None)
+    config.optionxform = str
 
-with open(FILENAME) as fobj:
-    c.read_file(fobj)
+    with open(FILENAME) as f:
+        config.read_file(f)
 
-modified = False
+    modified = False
 
-if 'ODBC' in c:
-    odbc_section = c['ODBC']
-    if 'Pooling' in odbc_section:
-        del odbc_section['Pooling']
-        modified = True
+    if 'ODBC' in config:
+        odbc_section = config['ODBC']
+        if 'Pooling' in odbc_section:
+            del odbc_section['Pooling']
+            modified = True
 
-    if not odbc_section:
-        del c['ODBC']
-        modified = True
+        if not odbc_section:
+            del config['ODBC']
+            modified = True
 
-if 'PostgreSQL ANSI' in c:
-    psqla_section = c['PostgreSQL ANSI']
-    if psqla_section.get('CommLog') != '0':
-        psqla_section['CommLog'] = '0'
-        modified = True
+    if 'PostgreSQL ANSI' in config:
+        psql_ansi_section = config['PostgreSQL ANSI']
+        if psql_ansi_section.get('CommLog') != '0':
+            psql_ansi_section['CommLog'] = '0'
+            modified = True
 
-if modified:
-    with open(FILENAME, 'w') as fobj:
-        c.write(fobj)
+    if modified:
+        with open(FILENAME, 'w') as f:
+            config.write(f)
+
+
+if __name__ == '__main__':
+    main()
