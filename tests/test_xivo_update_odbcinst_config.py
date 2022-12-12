@@ -1,5 +1,5 @@
 # Copyright 2015-2022 The Wazo Authors  (see the AUTHORS file)
-# SPDX-License-Identifier: GPL-3.0+
+# SPDX-License-Identifier: GPL-3.0-or-later
 from textwrap import dedent
 from unittest.mock import mock_open, call
 
