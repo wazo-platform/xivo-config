@@ -1,6 +1,5 @@
-#!/usr/bin/python
-# -*- coding: utf-8 -*-
-# Copyright 2015-2020 The Wazo Authors  (see the AUTHORS file)
+#!/usr/bin/env python3
+# Copyright 2015-2022 The Wazo Authors  (see the AUTHORS file)
 # SPDX-License-Identifier: GPL-3.0+
 
 import argparse
@@ -31,11 +30,13 @@ XIVO_{{ key.upper() }}="{{ value if value != None}}"
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument('-o',
-                        '--output',
-                        action='store',
-                        default='/etc/xivo/common.conf',
-                        help="File where to write the output. Use '-' for stdout. Default: %(default)s")
+    parser.add_argument(
+        '-o',
+        '--output',
+        action='store',
+        default='/etc/xivo/common.conf',
+        help="File where to write the output. Use '-' for stdout. Default: %(default)s"
+    )
     args = parser.parse_args()
     init_db_from_config(default_config())
     config = load_config()
@@ -79,7 +80,7 @@ def load_config_dhcp(session):
             address = None
 
         if address:
-            ip_network = netaddr.IPNetwork('{address}/{netmask}'.format(address=address['addr'], netmask=address['netmask']))
+            ip_network = netaddr.IPNetwork(f'{address["addr"]}/{address["netmask"]}')
             net4_ip = str(ip_network.ip)
             net4_netmask = str(ip_network.netmask)
             net4_subnet = str(ip_network.network)
@@ -87,7 +88,7 @@ def load_config_dhcp(session):
     return {
         'dhcp_active': dhcp.active,
         'dhcp_network_interfaces': dhcp.network_interfaces,
-        'dhcp_pool': '{start} {end}'.format(start=dhcp.pool_start, end=dhcp.pool_end),
+        'dhcp_pool': f'{dhcp.pool_start} {dhcp.pool_end}',
         'dhcp_net4_ip': net4_ip,
         'dhcp_net4_netmask': net4_netmask,
         'dhcp_net4_subnet': net4_subnet,
@@ -136,13 +137,17 @@ def load_config_monitoring(session):
 
     return {
         'maintenance': bool(monitoring.maintenance),
-        'alert_emails': (monitoring.alert_emails.replace('\r\n', ' ')
-                         if monitoring.alert_emails
-                         else None),
+        'alert_emails': (
+            monitoring.alert_emails.replace('\r\n', ' ')
+            if monitoring.alert_emails
+            else None
+        ),
         'dahdi_monitor_ports': monitoring.dahdi_monitor_ports or None,
-        'max_call_duration': (str(monitoring.max_call_duration)
-                              if monitoring.max_call_duration > 0
-                              else None),
+        'max_call_duration': (
+            str(monitoring.max_call_duration)
+            if monitoring.max_call_duration and monitoring.max_call_duration > 0
+            else None
+        ),
     }
 
 
@@ -159,11 +164,15 @@ def load_config_resolvconf(session):
         'hostname': resolvconf.hostname,
         'domain': resolvconf.domain,
         'extra_dns_search': '',
-        'nameservers': ' '.join(nameserver
-                                for nameserver in (resolvconf.nameserver1,
-                                                   resolvconf.nameserver2,
-                                                   resolvconf.nameserver3)
-                                if nameserver)
+        'nameservers': ' '.join(
+            nameserver
+            for nameserver in (
+                resolvconf.nameserver1,
+                resolvconf.nameserver2,
+                resolvconf.nameserver3,
+            )
+            if nameserver
+        )
     }
 
 
@@ -180,7 +189,7 @@ def load_config_netiface(session):
         'voip_ifaces': netiface.ifname,
         'net4_ip': netiface.address,
         'net4_netmask': netiface.netmask,
-        'net4_subnet': str(netaddr.IPNetwork('{n.address}/{n.netmask}'.format(n=netiface)).network)
+        'net4_subnet': str(netaddr.IPNetwork(f'{netiface.address}/{netiface.netmask}').network)
     }
 
 
