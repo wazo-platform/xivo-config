@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# Copyright 2015-2022 The Wazo Authors  (see the AUTHORS file)
+# Copyright 2015-2023 The Wazo Authors  (see the AUTHORS file)
 # SPDX-License-Identifier: GPL-3.0+
 
 import argparse
@@ -131,7 +131,6 @@ def load_config_monitoring(session):
     monitoring = session.query(
         Monitoring.maintenance,
         Monitoring.alert_emails,
-        Monitoring.dahdi_monitor_ports,
         Monitoring.max_call_duration,
     ).first()
 
@@ -142,7 +141,6 @@ def load_config_monitoring(session):
             if monitoring.alert_emails
             else None
         ),
-        'dahdi_monitor_ports': monitoring.dahdi_monitor_ports or None,
         'max_call_duration': (
             str(monitoring.max_call_duration)
             if monitoring.max_call_duration and monitoring.max_call_duration > 0

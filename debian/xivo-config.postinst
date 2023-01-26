@@ -18,12 +18,6 @@ case "$1" in
         usermod -a -G www-data asterisk
         usermod -a -G asterisk www-data
 
-        # ensure /dev/dahdi is owned by asterisk
-        if [ -x /etc/init.d/dahdi ]; then
-            deb-systemd-invoke stop asterisk
-            invoke-rc.d dahdi stop
-            udevadm control --reload-rules
-        fi
         # Need to restart this services for updating fail2ban configuration
         if [ -x /etc/init.d/rsyslog ]; then
             invoke-rc.d rsyslog restart
