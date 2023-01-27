@@ -144,7 +144,6 @@ def test_load_config_monitoring_when_empty():
     class MockSession(Mock):
         maintenance = 0
         alert_emails = ''
-        dahdi_monitor_ports = ''
         max_call_duration = 0
 
     session = MockSession()
@@ -156,7 +155,6 @@ def test_load_config_monitoring_when_empty():
             {
                 'maintenance': False,
                 'alert_emails': None,
-                'dahdi_monitor_ports': None,
                 'max_call_duration': None,
             }
         ),
