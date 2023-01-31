@@ -1,4 +1,4 @@
-# Copyright 2015-2022 The Wazo Authors  (see the AUTHORS file)
+# Copyright 2015-2023 The Wazo Authors  (see the AUTHORS file)
 # SPDX-License-Identifier: GPL-3.0+
 
 import netifaces
@@ -123,7 +123,6 @@ def test_load_config_monitoring():
     class MockSession(Mock):
         maintenance = 0
         alert_emails = 'alice@example.com\r\nbob@example.com\r\ncharlie@example.com'
-        dahdi_monitor_ports = '12'
         max_call_duration = 24
 
     session = MockSession()
@@ -135,7 +134,6 @@ def test_load_config_monitoring():
             {
                 'maintenance': False,
                 'alert_emails': 'alice@example.com bob@example.com charlie@example.com',
-                'dahdi_monitor_ports': '12',
                 'max_call_duration': '24',
             }
         ),
@@ -146,7 +144,6 @@ def test_load_config_monitoring_when_empty():
     class MockSession(Mock):
         maintenance = 0
         alert_emails = ''
-        dahdi_monitor_ports = ''
         max_call_duration = 0
 
     session = MockSession()
@@ -158,7 +155,6 @@ def test_load_config_monitoring_when_empty():
             {
                 'maintenance': False,
                 'alert_emails': None,
-                'dahdi_monitor_ports': None,
                 'max_call_duration': None,
             }
         ),

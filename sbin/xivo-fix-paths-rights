@@ -45,9 +45,3 @@ do
 	find "${XIVO_WEBI_PATH_RIGHTS}" -type d -exec chmod 2775 '{}' \; 
 	find "${XIVO_WEBI_PATH_RIGHTS}" -type f -exec chmod 660 '{}' \; 
 done;
-
-dahdi_channel_file="/etc/asterisk/dahdi-channels.conf"
-if [ -e "${dahdi_channel_file}" ]; then
-	chown asterisk:www-data ${dahdi_channel_file}
-	chmod 660 ${dahdi_channel_file}
-fi
