@@ -1,7 +1,0 @@
-# see: dh_installdeb(1)
-
-mv_conffile /etc/fail2ban/filter.d/asterisk-xivo.conf /etc/fail2ban/filter.d/asterisk-wazo.conf 18.14~20181129.201526.1ac1ddb.deb9
-mv_conffile /etc/fail2ban/jail.d/xivo.conf /etc/fail2ban/jail.d/wazo.conf 18.14~20181129.201526.1ac1ddb.deb9
-
-rm_conffile /etc/rabbitmq/rabbitmq-env.conf 18.01
-rm_conffile /etc/apt/preferences.d/postgresql.pref 19.07
