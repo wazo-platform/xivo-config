@@ -3,8 +3,6 @@
 #
 # see: dh_installdeb(1)
 
-LIBDIR="/var/lib/xivo-config"
-
 case "$1" in
     configure)
         # ODBC configuration
