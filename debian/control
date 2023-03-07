@@ -19,7 +19,7 @@ Depends: fail2ban,
          rename,
          xivo-certs,
          wazo-dhcpd-update,
-         xivo-utils
+         xivo-utils,
          jq
 
 Conflicts: asterisk-config
