@@ -2,28 +2,19 @@
 ip_addr=$1
 ping_count="3"
 ping_interval="10"
-confd_port=${CONFD_PORT:-9486}
-confd_version=${CONFD_API_VERSION:-1.1}
 
 if [ -z "$ip_addr" ]; then
     echo "usage: $(basename $0) ip_addr"
     exit 1
 fi
 
-check_ha_mode(){
-    local token=$(wazo-auth-cli token create --expiration 20)
-    curl -k -H "X-Auth-Token: $token" http://localhost:$confd_port/$confd_version/ha | jq -r .node_type
-}
-
-ping -c $ping_count -i $ping_interval $ip_addr
+ping -c $ping_count -i $ping_interval "$ip_addr"
 ping_status=$?
-if [ $(check_ha_mode) != "slave" ]; then
-    echo "HA mode changed, this slave has been freed!" >&2
+if [ ! -f /var/lib/wazo/is-secondary ]; then
+    echo "HA mode changed, this stack is no longer a secondary" >&2
     exit 0
+elif [ $ping_status -eq 0 ]; then
+    /usr/sbin/xivo-manage-slave-services stop
 else
-    if [ $ping_status -eq 0 ]; then
-        /usr/sbin/xivo-manage-slave-services stop
-    else
-        /usr/sbin/xivo-manage-slave-services start
-    fi
+    /usr/sbin/xivo-manage-slave-services start
 fi

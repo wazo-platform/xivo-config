@@ -19,9 +19,7 @@ Depends: fail2ban,
          rename,
          xivo-certs,
          wazo-dhcpd-update,
-         xivo-utils,
-         jq
-
+         xivo-utils
 Conflicts: asterisk-config
 Description: Wazo complete telephony solution -- base configuration
  Wazo is a system based on a powerful IPBX, to bring an easy to
