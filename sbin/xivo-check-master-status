@@ -11,7 +11,7 @@ fi
 ping -c $ping_count -i $ping_interval "$ip_addr"
 ping_status=$?
 if [ ! -f /var/lib/wazo/is-secondary ]; then
-    echo "HA mode changed, this stack is no longer a secondary" >&2
+    echo "HA mode changed, this stack is no longer a secondary"
     exit 0
 elif [ $ping_status -eq 0 ]; then
     /usr/sbin/xivo-manage-slave-services stop
