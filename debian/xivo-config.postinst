@@ -27,11 +27,7 @@ case "$1" in
             chown asterisk:asterisk /var/log/asterisk/fail2ban
             chmod 660 /var/log/asterisk/fail2ban
         fi
-        # Rename xixo-provd to wazo-provd
-        if [ -f /var/log/xivo-provd-fail2ban.log ] ; then
-			rename 's/xivo-provd/wazo-provd/g' /var/log/xivo-provd-fail2ban.log*
-		fi
-        # End rename xivo-provd to wazo-provd
+
         if [ ! -f /var/log/wazo-provd-fail2ban.log ]; then
             touch /var/log/wazo-provd-fail2ban.log
         fi
@@ -47,11 +43,6 @@ case "$1" in
             systemctl daemon-reload  # load rabbitmq-server drop-in
         fi
 
-        # wrong config in 18.01 and 18.02
-        if grep -q '^NODENAME=rabbit@localhost$' /etc/default/rabbitmq-server ; then
-            sed -i '/^NODENAME=rabbit@localhost$/d' /etc/default/rabbitmq-server
-        fi
-
         # read by logrotate
         if ! grep -qE '^export +RABBITMQ_NODENAME=' /etc/default/rabbitmq-server ; then
             echo 'export RABBITMQ_NODENAME=rabbit@localhost' >> /etc/default/rabbitmq-server
@@ -62,13 +53,6 @@ case "$1" in
         fi
 
         previous_version="$2"
-
-        # remove old config files
-        if dpkg --compare-versions "${previous_version}" lt '19.13'; then
-            rm -f /etc/default/spawn-fcgi
-            rm -f /etc/init.d/spawn-fcgi
-        fi
-
         if [[ -z "${previous_version}" ]]; then
             ln -sf /etc/nginx/locations/https-available/asterisk \
                    /etc/nginx/locations/https-enabled/asterisk
