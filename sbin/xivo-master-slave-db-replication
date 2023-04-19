@@ -14,6 +14,7 @@ EXCLUDE_TABLES='\
     -T cel_id_seq \
     -T dhcp \
     -T dhcp_id_seq \
+    -T infos \
     -T queue_log \
     -T queue_log_id_seq \
     -T session \
