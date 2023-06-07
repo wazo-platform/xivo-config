@@ -17,7 +17,7 @@ def test_load_config_dhcp(ifaddresses):
         active = 1
         pool_start = '10.0.0.1'
         pool_end = '10.0.0.250'
-        network_interfaces = 'eth0'
+        network_interfaces = 'eth0,eth1'
 
     session = MockSession()
     ifaddresses.return_value = {
@@ -31,12 +31,14 @@ def test_load_config_dhcp(ifaddresses):
 
     result = xivo_create_config.load_config_dhcp(session)
 
+    ifaddresses.assert_called_with('eth0')
+
     assert_that(
         result,
         equal_to(
             {
                 'dhcp_active': 1,
-                'dhcp_network_interfaces': 'eth0',
+                'dhcp_network_interfaces': 'eth0,eth1',
                 'dhcp_pool': '10.0.0.1 10.0.0.250',
                 'dhcp_net4_ip': '10.0.0.254',
                 'dhcp_net4_netmask': '255.255.255.0',
