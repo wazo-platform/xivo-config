@@ -117,12 +117,16 @@ def load_config_provisioning(session):
     provd = session.query(
         Provisioning.net4_ip,
         Provisioning.http_port,
+        Provisioning.http_base_url,
         Provisioning.dhcp_integration
     ).first()
+
+    provd_url = provd.http_base_url or f'http://{provd.net4_ip}:{provd.http_port}'
 
     return {
         'provd_net4_ip': provd.net4_ip or '',
         'provd_http_port': str(provd.http_port),
+        'provd_http_base_url': provd_url,
         'provd_dhcp_integration': '1',
     }
 
