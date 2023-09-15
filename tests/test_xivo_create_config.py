@@ -1,5 +1,5 @@
 # Copyright 2015-2023 The Wazo Authors  (see the AUTHORS file)
-# SPDX-License-Identifier: GPL-3.0+
+# SPDX-License-Identifier: GPL-3.0-or-later
 
 import netifaces
 
@@ -103,6 +103,7 @@ def test_load_config_smtp_when_empty():
 def test_load_config_provisioning():
     class MockSession(Mock):
         net4_ip = '127.0.0.1'
+        http_base_url = 'http://localhost:8667'
         http_port = 8667
         dhcp_integration = 1
 
@@ -114,6 +115,7 @@ def test_load_config_provisioning():
         equal_to(
             {
                 'provd_net4_ip': '127.0.0.1',
+                'provd_http_base_url': 'http://localhost:8667',
                 'provd_http_port': '8667',
                 'provd_dhcp_integration': '1',
             }
