@@ -120,11 +120,11 @@ def load_config_provisioning(session):
         Provisioning.http_base_url,
         Provisioning.dhcp_integration
     ).first()
-    provd_net4_ip = provd.net4_ip or '#XIVO_NET4_IP#'
-    provd_url = provd.http_base_url or f'http://#XIVO_PROVD_NET4_IP#:8667'
+    provd_net4_ip = provd.net4_ip or ''
+    provd_url = provd.http_base_url or ''
 
     return {
-        'provd_net4_ip': provd.net4_ip or '',
+        'provd_net4_ip': provd_net4_ip,
         'provd_http_port': str(provd.http_port),
         'provd_http_base_url': provd_url,
         'provd_dhcp_integration': '1',
