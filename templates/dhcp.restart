@@ -3,7 +3,7 @@
 dhcpd-update -nri
 
 if [ "${XIVO_DHCP_ACTIVE}" = "1" ]; then
-  invoke-rc.d isc-dhcp-server restart
+  systemctl restart isc-dhcp-server
 else
-  invoke-rc.d isc-dhcp-server stop
+  systemctl stop isc-dhcp-server
 fi
