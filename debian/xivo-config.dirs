@@ -1,4 +1,3 @@
 etc/nginx/locations/https-enabled
 etc/xivo/custom-templates
-usr/share/xivo-certs
 var/spool/asterisk/fax
