@@ -17,7 +17,6 @@ Depends: fail2ban,
          python3-netifaces,
          python3,
          rename,
-         wazo-certs,
          wazo-dhcpd-update,
          xivo-utils
 Conflicts: asterisk-config
