@@ -2,13 +2,13 @@
 subnet #XIVO_DHCP_NET4_SUBNET# netmask #XIVO_DHCP_NET4_NETMASK# {
     # DHCP server is authoritative on the VoIP network segment
     authoritative;
-    
+
     option subnet-mask #XIVO_DHCP_NET4_NETMASK#;
     option routers #XIVO_DHCP_NET4_IP#;
 
     pool {
         log(concat("[", binary-to-ascii(16, 8, ":", hardware), "] POOL VoIP"));
-        
+
         range #XIVO_DHCP_POOL#;
 
         #_XIVO_PROVD_DHCP_INTEGRATION#
