@@ -3,20 +3,19 @@
 # SPDX-License-Identifier: GPL-3.0+
 
 import argparse
-import netaddr
-import netifaces
 import sys
 
+import netaddr
+import netifaces
 from jinja2 import Template
-from xivo_dao import init_db_from_config, default_config
-from xivo_dao.helpers.db_utils import session_scope
+from xivo_dao import default_config, init_db_from_config
 from xivo_dao.alchemy.dhcp import Dhcp
 from xivo_dao.alchemy.mail import Mail
-from xivo_dao.alchemy.provisioning import Provisioning
 from xivo_dao.alchemy.monitoring import Monitoring
-from xivo_dao.alchemy.resolvconf import Resolvconf
 from xivo_dao.alchemy.netiface import Netiface
-
+from xivo_dao.alchemy.provisioning import Provisioning
+from xivo_dao.alchemy.resolvconf import Resolvconf
+from xivo_dao.helpers.db_utils import session_scope
 
 XIVO_COMMON_CONF_TEMPLATE = Template(
     """\

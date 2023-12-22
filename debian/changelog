@@ -36,7 +36,7 @@ xivo-config (14.01~20131216.174245.a5138a8-wheezy-2) xivo-dev; urgency=low
 
 xivo-config (13.18~20130822.155350.df70fa7-2) squeeze-xivo-skaro-dev; urgency=low
 
-  * add depends on postgresql-9.1 
+  * add depends on postgresql-9.1
 
  -- Nicolas HICHER <nhicher@avencall.com>  Thu, 05 Sep 2013 15:55:03 -0400
 
@@ -54,13 +54,13 @@ xivo-config (13.05~20130305.202248.c5b438b-3) squeeze-xivo-skaro-dev; urgency=lo
 
 xivo-config (13.05~20130305.202248.c5b438b-2) squeeze-xivo-skaro-dev; urgency=low
 
-  * add depends on xivo-utils 
+  * add depends on xivo-utils
 
  -- Nicolas HICHER <nhicher@avencall.com>  Tue, 12 Mar 2013 08:49:22 -0400
 
 xivo-config (13.04~20130220.204648.13f62a0-2) squeeze-xivo-skaro-dev; urgency=low
 
-  * add depends on asterisk11 
+  * add depends on asterisk11
 
  -- Nicolas HICHER <nhicher@avencall.com>  Fri, 22 Feb 2013 13:01:23 -0500
 
@@ -96,13 +96,13 @@ xivo-config (13.02~20130128.173355.93cbb26-2) squeeze-xivo-skaro-dev; urgency=lo
 
 xivo-config (13.02~20130115.174312.8032309-2) squeeze-xivo-skaro-dev; urgency=low
 
-  * add pre-depends on rabbitmq-server 
+  * add pre-depends on rabbitmq-server
 
  -- Nicolas HICHER (atarakt) <nhicher@proformatique.com>  Wed, 23 Jan 2013 10:37:54 -0500
 
 xivo-config (12.23~20121123.152712.66cdcc3-2) squeeze-xivo-skaro-dev; urgency=low
 
-  * add depends on xivo-provisionning 
+  * add depends on xivo-provisionning
 
  -- Nicolas HICHER (atarakt) <nhicher@proformatique.com>  Mon, 26 Nov 2012 15:03:55 -0500
 
@@ -114,31 +114,31 @@ xivo-config (12.20~20121016.123254.3a58d0b-2) squeeze-xivo-skaro-dev; urgency=lo
 
 xivo-config (12.19~20120925.182657.ef18b82-3) squeeze-xivo-skaro-dev; urgency=low
 
-  * fix postrm to allow purge 
+  * fix postrm to allow purge
 
  -- Nicolas HICHER (atarakt) <nhicher@proformatique.com>  Thu, 27 Sep 2012 09:43:51 -0400
 
 xivo-config (12.19~20120925.182657.ef18b82-2) squeeze-xivo-skaro-dev; urgency=low
 
-  * fix version 
+  * fix version
 
  -- Nicolas HICHER (atarakt) <nhicher@proformatique.com>  Tue, 25 Sep 2012 15:59:36 -0400
 
 xivo-config (12.18~20120823.151953.de589ea-4) squeeze-xivo-skaro-dev; urgency=low
 
-  * add replace for pf-sys-ca 
+  * add replace for pf-sys-ca
 
  -- Nicolas HICHER (atarakt) <nhicher@proformatique.com>  Tue, 25 Sep 2012 15:40:24 -0400
 
 xivo-config (12.18~20120823.151953.de589ea-3) squeeze-xivo-skaro-dev; urgency=low
 
-  * rename package 
+  * rename package
 
  -- Nicolas HICHER (atarakt) <nhicher@proformatique.com>  Tue, 25 Sep 2012 14:02:35 -0400
 
 pf-xivo-base-config (13:12.18~20120823.151953.de589ea-2) squeeze-xivo-skaro-dev; urgency=low
 
-  * fix postinst script 
+  * fix postinst script
 
  -- Nicolas HICHER (atarakt) <nhicher@proformatique.com>  Mon, 10 Sep 2012 14:36:08 -0400
 
@@ -150,7 +150,7 @@ pf-xivo-base-config (13:1.2.8~20120516.182233.b8166e4-2) squeeze-xivo-skaro-dev;
 
 pf-xivo-base-config (13:1.2.8~20120509.203843.4314abe-2) squeeze-xivo-skaro-dev; urgency=low
 
-  * fix version 
+  * fix version
 
  -- Nicolas HICHER (atarakt) <nhicher@proformatique.com>  Thu, 10 May 2012 16:57:06 -0400
 
@@ -198,7 +198,7 @@ pf-xivo-base-config (12:1.2-dev~20111129.194503.052cd01-2) squeeze-xivo-skaro-de
 
 pf-xivo-base-config (12:1.2-dev~20111123.152138.86bac98-1) squeeze-xivo-skaro-dev; urgency=low
 
-  * fix version 
+  * fix version
 
  -- Nicolas HICHER (atarakt) <nhicher@proformatique.com>  Mon, 28 Nov 2011 09:30:37 -0500
 
@@ -228,7 +228,7 @@ pf-xivo-base-config (11:1.2~20110817.155800.06ea074-1) squeeze-xivo-skaro-dev; u
 
 pf-xivo-base-config (10:1.2~svn10395-3) squeeze-xivo-skaro-dev; urgency=low
 
-  * delete depends on lighttpd, add depends on nginx 
+  * delete depends on lighttpd, add depends on nginx
 
  -- Nicolas HICHER (atarakt) <nhicher@proformatique.com>  Fri, 20 May 2011 09:51:28 +0200
 
@@ -261,13 +261,13 @@ pf-xivo-base-config (10:1.2~svn10183-0) squeeze-xivo-skaro-dev; urgency=low
 
 pf-xivo-base-config (10:1.2~svn10135-1) squeeze-xivo-skaro-dev; urgency=low
 
-  * rebuild for squeeze 
+  * rebuild for squeeze
 
  -- Nicolas HICHER (atarakt) <nhicher@proformatique.com>  Fri, 11 Feb 2011 16:42:34 +0100
 
 pf-xivo-base-config (8:1.2.0~svn9945-0) lenny-xivo-skaro-dev; urgency=low
 
-  * redirect http to https 
+  * redirect http to https
 
  -- Nicolas HICHER (atarakt) <nhicher@proformatique.com>  Thu, 13 Jan 2011 17:27:21 +0100
 
@@ -958,4 +958,3 @@ pf-xivo-base-config (0.1~svn440-1) etch; urgency=low
   * Initial development snapshot.
 
  -- Marc Dequènes (Duck) <mdequenes@proformatique.com>  Wed, 25 Apr 2007 17:40:31 +0200
-
