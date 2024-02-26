@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# Copyright 2015-2023 The Wazo Authors  (see the AUTHORS file)
+# Copyright 2015-2024 The Wazo Authors  (see the AUTHORS file)
 # SPDX-License-Identifier: GPL-3.0+
 
 import argparse
@@ -11,7 +11,6 @@ from jinja2 import Template
 from xivo_dao import default_config, init_db_from_config
 from xivo_dao.alchemy.dhcp import Dhcp
 from xivo_dao.alchemy.mail import Mail
-from xivo_dao.alchemy.monitoring import Monitoring
 from xivo_dao.alchemy.netiface import Netiface
 from xivo_dao.alchemy.provisioning import Provisioning
 from xivo_dao.alchemy.resolvconf import Resolvconf
@@ -51,7 +50,6 @@ def load_config():
         result.update(load_config_dhcp(session))
         result.update(load_config_smtp(session))
         result.update(load_config_provisioning(session))
-        result.update(load_config_monitoring(session))
         result.update(load_config_resolvconf(session))
         result.update(load_config_netiface(session))
         return result
@@ -129,28 +127,6 @@ def load_config_provisioning(session):
         'provd_http_port': str(provd.http_port),
         'provd_http_base_url': provd_url,
         'provd_dhcp_integration': '1',
-    }
-
-
-def load_config_monitoring(session):
-    monitoring = session.query(
-        Monitoring.maintenance,
-        Monitoring.alert_emails,
-        Monitoring.max_call_duration,
-    ).first()
-
-    return {
-        'maintenance': bool(monitoring.maintenance),
-        'alert_emails': (
-            monitoring.alert_emails.replace('\r\n', ' ')
-            if monitoring.alert_emails
-            else None
-        ),
-        'max_call_duration': (
-            str(monitoring.max_call_duration)
-            if monitoring.max_call_duration and monitoring.max_call_duration > 0
-            else None
-        ),
     }
 
 

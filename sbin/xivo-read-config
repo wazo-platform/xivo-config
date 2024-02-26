@@ -5,37 +5,6 @@
 [ -r /etc/xivo/common.conf ] && . /etc/xivo/common.conf
 
 
-_PF_EMAIL_ALERTS_LIST="pv-tech-client-alerts"
-
-
-create_pf_email_alerts()
-{
-  LIST_NAME=$1
-  SERVICE_NAME=$2
-
-  echo "${LIST_NAME}+${XIVO_HOSTNAME}+${SERVICE_NAME}@lists.proformatique.com"
-}
-
-get_full_email_alerts()
-{
-  SERVICE_NAME=$1
-
-  if [ "${PF_MAINTENANCE}" = "1" ]; then
-    EXTRA_EMAIL_ALERTS=$(create_pf_email_alerts ${_PF_EMAIL_ALERTS_LIST} ${SERVICE_NAME})
-  else
-    EXTRA_EMAIL_ALERTS=
-  fi
-
-  # xivo-sysconfd < 15.16 could generate a "None" XIVO_ALERT_EMAILS
-  if [ "${XIVO_ALERT_EMAILS}"  = "None" ]; then
-      XIVO_ALERT_EMAILS=""
-  fi
-
-  echo "${XIVO_ALERT_EMAILS} ${EXTRA_EMAIL_ALERTS}"
-}
-
-PRODUCT="XiVO"
-
 echo "Generating configuration"
 
 #### Set and check general variables ####
@@ -64,14 +33,6 @@ if [[ "${XIVO_DHCP_ACTIVE}" = "1" && -n "${XIVO_DHCP_POOL}" ]]; then
   _XIVO_DHCP_SUBNET="\# Include of the subnet declaration (DHCP is configured)\ninclude \"/etc/dhcp/dhcpd_subnet.conf\";"
 else
   _XIVO_DHCP_SUBNET="\# Subnet declaration not specified because DHCP is not configured\n\# Use dhcpd_extra.conf for custom configuration"
-fi
-
-if [ "${XIVO_MAINTENANCE}" = "1" ]; then
-  _PF_EMAIL_ALERTS_LIST="pv-tech-xivo-alerts"
-  _PF_EMAIL_ALERTS=$(create_pf_email_alerts ${_PF_EMAIL_ALERTS_LIST} "root")
-  _PF_EMAIL_REPORTS=$(create_pf_email_alerts "pv-tech-xivo-reports" "root")
-
-  XIVO_SMTP_CANONICAL="root\t${_PF_EMAIL_REPORTS}\nasterisk\t${_PF_EMAIL_REPORTS}"
 fi
 
 if [ -n "${XIVO_SMTP_MYDOMAIN}" ]; then

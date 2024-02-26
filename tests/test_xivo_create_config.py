@@ -1,4 +1,4 @@
-# Copyright 2015-2023 The Wazo Authors  (see the AUTHORS file)
+# Copyright 2015-2024 The Wazo Authors  (see the AUTHORS file)
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 from unittest.mock import Mock, patch
@@ -118,48 +118,6 @@ def test_load_config_provisioning():
                 'provd_http_base_url': 'http://localhost:8667',
                 'provd_http_port': '8667',
                 'provd_dhcp_integration': '1',
-            }
-        ),
-    )
-
-
-def test_load_config_monitoring():
-    class MockSession(Mock):
-        maintenance = 0
-        alert_emails = 'alice@example.com\r\nbob@example.com\r\ncharlie@example.com'
-        max_call_duration = 24
-
-    session = MockSession()
-    result = xivo_create_config.load_config_monitoring(session)
-
-    assert_that(
-        result,
-        equal_to(
-            {
-                'maintenance': False,
-                'alert_emails': 'alice@example.com bob@example.com charlie@example.com',
-                'max_call_duration': '24',
-            }
-        ),
-    )
-
-
-def test_load_config_monitoring_when_empty():
-    class MockSession(Mock):
-        maintenance = 0
-        alert_emails = ''
-        max_call_duration = 0
-
-    session = MockSession()
-    result = xivo_create_config.load_config_monitoring(session)
-
-    assert_that(
-        result,
-        equal_to(
-            {
-                'maintenance': False,
-                'alert_emails': None,
-                'max_call_duration': None,
             }
         ),
     )
