@@ -1,3 +1,9 @@
+xivo-config (24.04~20240313.181228.739b44) wazo-dev-bullseye; urgency=medium
+
+  * remove cron config file
+
+ -- Wazo Maintainers <dev+pkg@wazo.community>  Wed, 13 Mar 2024 14:26:31 -0400
+
 xivo-config (23.03~20230217.181228.739b440) wazo-dev-buster; urgency=medium
 
   * Use debhelper 12 and clean old/unused files
