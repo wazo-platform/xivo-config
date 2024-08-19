@@ -3,6 +3,8 @@
 #
 # see: dh_installdeb(1)
 
+previous_version="$2"
+
 case "$1" in
     configure)
         # ODBC configuration
@@ -47,9 +49,13 @@ case "$1" in
 
         if [ -d /run/systemd/system ] ; then
             systemctl start rabbitmq-server
+
+            # apply changes to postgresql max_connections
+            if dpkg --compare-versions "${previous_version}" lt '24.11'; then
+                systemctl restart postgresql@13-main
+            fi
         fi
 
-        previous_version="$2"
         if [[ -z "${previous_version}" ]]; then
             ln -sf /etc/nginx/locations/https-available/asterisk \
                    /etc/nginx/locations/https-enabled/asterisk
