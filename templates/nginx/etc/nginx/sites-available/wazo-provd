@@ -1,7 +1,7 @@
 server {
     listen #XIVO_PROVD_HTTP_PORT# default_server;
     listen [::]:#XIVO_PROVD_HTTP_PORT# default_server;
-    server_name $domain;
+    server_name _;
 
     access_log /var/log/nginx/wazo-provd.access.log main;
     error_log /var/log/nginx/wazo-provd.error.log;
