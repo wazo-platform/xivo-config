@@ -1,0 +1,4 @@
+# Fix fail2ban Debian 12 (Bookworm) packaging
+# Can be removed in Debian 13 (Trixie)
+[DEFAULT]
+sshd_backend = systemd
