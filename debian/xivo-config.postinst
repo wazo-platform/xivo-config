@@ -28,7 +28,7 @@ case "$1" in
         if [ ! -f /var/log/wazo-provd-fail2ban.log ]; then
             touch /var/log/wazo-provd-fail2ban.log
         fi
-        invoke-rc.d fail2ban reload
+        invoke-rc.d fail2ban restart
 
         # load sysctl rules if exist
         find /etc/sysctl.d -type f -name '*.conf' -exec sysctl -q -p {} \;
