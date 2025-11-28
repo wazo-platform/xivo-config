@@ -1,2 +1,0 @@
-rm_conffile /etc/xivo/datastorage.conf 24.02
-rm_conffile /etc/cron.d/xivo-config 24.04~20240313
