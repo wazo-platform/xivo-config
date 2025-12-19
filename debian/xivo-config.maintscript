@@ -1,0 +1,1 @@
+rm_conffile /etc/xivo/asterisk/xivo_callback_on_congestion.conf 26.01
