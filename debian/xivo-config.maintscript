@@ -1,1 +1,2 @@
+rm_conffile /etc/nginx/locations/https-available/asterisk 26.01
 rm_conffile /etc/xivo/asterisk/xivo_callback_on_congestion.conf 26.01

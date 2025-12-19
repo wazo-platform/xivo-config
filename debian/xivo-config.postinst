@@ -48,12 +48,6 @@ case "$1" in
         if [ -d /run/systemd/system ] ; then
             systemctl start rabbitmq-server
         fi
-
-        previous_version="$2"
-        if [[ -z "${previous_version}" ]]; then
-            ln -sf /etc/nginx/locations/https-available/asterisk \
-                   /etc/nginx/locations/https-enabled/asterisk
-        fi
     ;;
     abort-upgrade|abort-remove|abort-deconfigure)
 
