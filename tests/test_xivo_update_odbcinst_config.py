@@ -19,7 +19,7 @@ def update_odbcinst_config():
 def test_unmodified(update_odbcinst_config):
     config = """
         [xivo]
-        Description         = Connection to the database used by XiVO
+        Description = Connection to the database used by Wazo
     """
     update_odbcinst_config.open = mock_open(read_data=dedent(config))
     update_odbcinst_config.main()
