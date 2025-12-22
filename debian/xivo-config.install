@@ -1,3 +1,3 @@
 etc/* etc
 sbin usr
-odbc templates usr/share/xivo-config
+templates usr/share/xivo-config

@@ -5,10 +5,6 @@
 
 case "$1" in
     configure)
-        # ODBC configuration
-        odbcinst -i -s -f /usr/share/xivo-config/odbc/odbc.ini.template -l -v
-        xivo-update-odbcinst-config
-
         # interaction with asterisk
         usermod -a -G www-data asterisk
         usermod -a -G asterisk www-data
