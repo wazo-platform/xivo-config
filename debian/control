@@ -9,8 +9,6 @@ Package: xivo-config
 Architecture: all
 Pre-Depends: rabbitmq-server, asterisk | asterisk-virtual
 Depends: fail2ban,
-         odbc-postgresql,
-         odbcinst,
          python3-jinja2,
          python3-netaddr,
          python3-netifaces,
