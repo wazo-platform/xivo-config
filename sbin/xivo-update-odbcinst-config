@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# Copyright 2016-2022 The Wazo Authors  (see the AUTHORS file)
+# Copyright 2016-2025 The Wazo Authors  (see the AUTHORS file)
 # SPDX-License-Identifier: GPL-3.0+
 
 from configparser import ConfigParser
@@ -15,16 +15,6 @@ def main():
         config.read_file(f)
 
     modified = False
-
-    if 'ODBC' in config:
-        odbc_section = config['ODBC']
-        if 'Pooling' in odbc_section:
-            del odbc_section['Pooling']
-            modified = True
-
-        if not odbc_section:
-            del config['ODBC']
-            modified = True
 
     if 'PostgreSQL ANSI' in config:
         psql_ansi_section = config['PostgreSQL ANSI']
