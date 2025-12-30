@@ -14,8 +14,6 @@ XIVO_WEBI_FIX_PATH_RIGHTS="${AST_ETC_PATH}
                ${XIVO_VARLIB_PATH}/sounds
                ${XIVO_VARLIB_PATH}/sounds/tenants"
 
-mkdir -p "${XIVO_VARLIB_PATH}/sounds/tenants"
-
 echo "${XIVO_WEBI_FIX_PATH_RIGHTS}"|while read XIVO_WEBI_PATH_RIGHTS;
 do
 	chown -R asterisk:www-data "${XIVO_WEBI_PATH_RIGHTS}"
