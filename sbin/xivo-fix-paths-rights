@@ -1,14 +1,11 @@
 #!/bin/sh
 
 AST_ETC_PATH="/etc/asterisk"
-AST_USR_PATH="/usr/share/asterisk"
 AST_SPOOL_PATH="/var/spool/asterisk"
 AST_VARLIB_PATH="/var/lib/asterisk"
 XIVO_VARLIB_PATH="/var/lib/wazo"
 
 AST_VARLIB_MOH_PATH="${AST_VARLIB_PATH}/moh"
-AST_USR_MOH_PATH="${AST_USR_PATH}/moh"
-XIVO_MOH_PATH="${XIVO_VARLIB_PATH}/moh"
 
 XIVO_WEBI_MAKE_DIRS="${AST_SPOOL_PATH}/monitor
                 ${AST_VARLIB_MOH_PATH}/default
@@ -16,7 +13,6 @@ XIVO_WEBI_MAKE_DIRS="${AST_SPOOL_PATH}/monitor
                 ${XIVO_VARLIB_PATH}/sounds/tenants"
 
 XIVO_WEBI_FIX_PATH_RIGHTS="${AST_ETC_PATH}
-               ${AST_USR_PATH}/moh
                ${AST_SPOOL_PATH}/fax
                ${AST_SPOOL_PATH}/monitor
                ${AST_VARLIB_MOH_PATH}
@@ -29,15 +25,6 @@ echo "${XIVO_WEBI_MAKE_DIRS}"|while read XIVO_WEBI_DIR;
 do
 	mkdir -p "${XIVO_WEBI_DIR}";
 done;
-
-if [ ! -L "${AST_USR_MOH_PATH}" ]; then
-	if [ ! -L "${AST_USR_MOH_PATH}" ]; then
-		ln -s "${AST_VARLIB_MOH_PATH}" "${AST_USR_MOH_PATH}"
-	fi
-	if [ ! -L "${XIVO_MOH_PATH}" ]; then
-		ln -s "${AST_VARLIB_MOH_PATH}" "${XIVO_MOH_PATH}"
-	fi
-fi
 
 echo "${XIVO_WEBI_FIX_PATH_RIGHTS}"|while read XIVO_WEBI_PATH_RIGHTS;
 do
