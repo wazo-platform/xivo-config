@@ -1,3 +1,2 @@
 etc/xivo/custom-templates
 var/lib/wazo/sounds/tenants
-var/spool/asterisk/fax
