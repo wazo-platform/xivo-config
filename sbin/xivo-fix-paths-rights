@@ -1,47 +1,22 @@
 #!/bin/sh
 
 AST_ETC_PATH="/etc/asterisk"
-AST_USR_PATH="/usr/share/asterisk"
 AST_SPOOL_PATH="/var/spool/asterisk"
 AST_VARLIB_PATH="/var/lib/asterisk"
-XIVO_VARLIB_PATH="/var/lib/wazo"
+WAZO_VARLIB_PATH="/var/lib/wazo"
 
-AST_VARLIB_MOH_PATH="${AST_VARLIB_PATH}/moh"
-AST_USR_MOH_PATH="${AST_USR_PATH}/moh"
-XIVO_MOH_PATH="${XIVO_VARLIB_PATH}/moh"
+SHARED_PATHS="${AST_ETC_PATH}
+              ${AST_SPOOL_PATH}/fax
+              ${AST_SPOOL_PATH}/monitor
+              ${AST_VARLIB_PATH}/moh
+              ${AST_VARLIB_PATH}/sounds/custom
+              ${WAZO_VARLIB_PATH}
+              ${WAZO_VARLIB_PATH}/sounds
+              ${WAZO_VARLIB_PATH}/sounds/tenants"
 
-XIVO_WEBI_MAKE_DIRS="${AST_SPOOL_PATH}/monitor
-                ${AST_VARLIB_MOH_PATH}/default
-                ${AST_VARLIB_PATH}/sounds/custom
-                ${XIVO_VARLIB_PATH}/sounds/tenants"
-
-XIVO_WEBI_FIX_PATH_RIGHTS="${AST_ETC_PATH}
-               ${AST_USR_PATH}/moh
-               ${AST_SPOOL_PATH}/fax
-               ${AST_SPOOL_PATH}/monitor
-               ${AST_VARLIB_MOH_PATH}
-               ${AST_VARLIB_PATH}/sounds/custom
-               ${XIVO_VARLIB_PATH}
-               ${XIVO_VARLIB_PATH}/sounds
-               ${XIVO_VARLIB_PATH}/sounds/tenants"
-
-echo "${XIVO_WEBI_MAKE_DIRS}"|while read XIVO_WEBI_DIR;
+echo "${SHARED_PATHS}" | while read SHARED_PATH;
 do
-	mkdir -p "${XIVO_WEBI_DIR}";
-done;
-
-if [ ! -L "${AST_USR_MOH_PATH}" ]; then
-	if [ ! -L "${AST_USR_MOH_PATH}" ]; then
-		ln -s "${AST_VARLIB_MOH_PATH}" "${AST_USR_MOH_PATH}"
-	fi
-	if [ ! -L "${XIVO_MOH_PATH}" ]; then
-		ln -s "${AST_VARLIB_MOH_PATH}" "${XIVO_MOH_PATH}"
-	fi
-fi
-
-echo "${XIVO_WEBI_FIX_PATH_RIGHTS}"|while read XIVO_WEBI_PATH_RIGHTS;
-do
-	chown -R asterisk:www-data "${XIVO_WEBI_PATH_RIGHTS}"
-	find "${XIVO_WEBI_PATH_RIGHTS}" -type d -exec chmod 2775 '{}' \;
-	find "${XIVO_WEBI_PATH_RIGHTS}" -type f -exec chmod 660 '{}' \;
+    chown -R asterisk:www-data "${SHARED_PATH}"
+    find "${SHARED_PATH}" -type d -exec chmod 2775 '{}' \;
+    find "${SHARED_PATH}" -type f -exec chmod 660 '{}' \;
 done;

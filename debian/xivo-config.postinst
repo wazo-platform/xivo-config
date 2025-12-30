@@ -5,10 +5,6 @@
 
 case "$1" in
     configure)
-        # ODBC configuration
-        odbcinst -i -s -f /usr/share/xivo-config/odbc/odbc.ini.template -l -v
-        xivo-update-odbcinst-config
-
         # interaction with asterisk
         usermod -a -G www-data asterisk
         usermod -a -G asterisk www-data
@@ -47,12 +43,6 @@ case "$1" in
 
         if [ -d /run/systemd/system ] ; then
             systemctl start rabbitmq-server
-        fi
-
-        previous_version="$2"
-        if [[ -z "${previous_version}" ]]; then
-            ln -sf /etc/nginx/locations/https-available/asterisk \
-                   /etc/nginx/locations/https-enabled/asterisk
         fi
     ;;
     abort-upgrade|abort-remove|abort-deconfigure)
