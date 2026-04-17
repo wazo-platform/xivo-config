@@ -1,5 +1,5 @@
 #!/bin/sh
-# Copyright 2019-2022 The Wazo Authors  (see the AUTHORS file)
+# Copyright 2019-2026 The Wazo Authors  (see the AUTHORS file)
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 PATH=/bin:/usr/bin:/sbin:/usr/sbin
@@ -34,7 +34,7 @@ enable_service() {
     wazo-confgen asterisk/pjsip.conf --invalidate
     wazo-service enable
     wazo-service start
-    wazo-agentd-cli -c 'relog all --timeout 60'
+    wazo-agentd-cli relog all --timeout 60
 }
 
 disable_service() {
