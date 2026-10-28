@@ -15,9 +15,11 @@ Depends: fail2ban,
          python3-systemd,
          python3,
          wazo-dhcpd-update,
-         wazo-nginx (>= 26.11~),
-         wazo-provd (>= 26.11~),
          xivo-utils
+# the nginx template uses the provd log format (wazo-nginx) and the
+# provd_provisioning rate-limit zone (wazo-provd)
+Breaks: wazo-nginx (<< 26.11~),
+        wazo-provd (<< 26.11~)
 Conflicts: asterisk-config
 Description: Wazo complete telephony solution -- base configuration
  Wazo is a system based on a powerful IPBX, to bring an easy to
