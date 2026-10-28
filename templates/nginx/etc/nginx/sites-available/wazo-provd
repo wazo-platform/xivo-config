@@ -8,7 +8,7 @@ server {
     root /var/www/html;
 
     location ^~ / {
-        limit_req zone=provd_provisioning burst=50 nodelay;
+        limit_req zone=provd_provisioning burst=500 nodelay;
         limit_req_status 429;
         # rejections log the request line, which holds the provisioning key: keep
         # them out of the error log (they are still in the masked access log)
