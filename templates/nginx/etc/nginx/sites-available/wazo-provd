@@ -3,11 +3,17 @@ server {
     listen [::]:#XIVO_PROVD_HTTP_PORT# default_server;
     server_name _;
 
-    access_log /var/log/nginx/wazo-provd.access.log main;
+    access_log /var/log/nginx/wazo-provd.access.log provd;
     error_log /var/log/nginx/wazo-provd.error.log;
     root /var/www/html;
 
     location ^~ / {
+        limit_req zone=provd_provisioning burst=500 nodelay;
+        limit_req_status 429;
+        # rejections log the request line, which holds the provisioning key: keep
+        # them out of the error log (they are still in the masked access log)
+        limit_req_log_level info;
+
         proxy_pass http://127.0.0.1:18667/;
 
         proxy_set_header    Host                $http_host;
