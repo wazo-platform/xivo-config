@@ -9,6 +9,7 @@ DUMP='replication.sql'
 IMPORT_ERRORS='replication.err'
 IMPORT_ATTEMPTS=3
 IMPORT_RETRY_DELAY=10
+IMPORT_CONNECT_TIMEOUT=10
 EXCLUDE_TABLES='\
     -T call_log \
     -T call_log_id_seq \
@@ -77,7 +78,7 @@ import_dump() {
     attempt=1
     while true; do
         echo "Attempt $attempt:" >> $IMPORT_ERRORS
-        if psql -U postgres -h $SLAVE_IP -f $dump -v ON_ERROR_STOP= $DB_NAME > /dev/null 2>> $IMPORT_ERRORS; then
+        if PGCONNECT_TIMEOUT=$IMPORT_CONNECT_TIMEOUT psql -U postgres -h $SLAVE_IP -f $dump -v ON_ERROR_STOP= $DB_NAME > /dev/null 2>> $IMPORT_ERRORS; then
             break
         fi
         if [ $attempt -ge $IMPORT_ATTEMPTS ]; then
