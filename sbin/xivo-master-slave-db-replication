@@ -43,8 +43,8 @@ EXCLUDE_TABLES='\
 PG_DUMP_OPTIONS="--data-only --schema=public $EXCLUDE_TABLES"
 
 panic() {
-    echo "Slave replication failed: $*" | mutt -s "Slave replication failed on $(hostname)" root@localhost
-    echo "Slave replication failed: $*"
+    printf 'Slave replication failed: %s\n' "$*" | mutt -s "Slave replication failed on $(hostname)" root@localhost
+    printf 'Slave replication failed: %s\n' "$*"
     exit 1
 }
 
