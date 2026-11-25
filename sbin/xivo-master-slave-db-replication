@@ -6,7 +6,7 @@ SLAVE_IP=$1
 DB_NAME='asterisk'
 MASTER_BACKUP='out_master_backup.sql'
 DUMP='replication.sql'
-IMPORT_ERRORS='replication.err'
+LOG_TAG='xivo-master-slave-db-replication'
 IMPORT_ATTEMPTS=3
 IMPORT_RETRY_DELAY=10
 IMPORT_CONNECT_TIMEOUT=10
@@ -74,21 +74,25 @@ import_dump() {
     dump=$1
     slave_ip=$2
 
-    rm -f $IMPORT_ERRORS
+    import_errors=''
     attempt=1
     while true; do
-        echo "Attempt $attempt:" >> $IMPORT_ERRORS
-        if PGCONNECT_TIMEOUT=$IMPORT_CONNECT_TIMEOUT psql -U postgres -h $SLAVE_IP -f $dump -v ON_ERROR_STOP= $DB_NAME > /dev/null 2>> $IMPORT_ERRORS; then
+        if psql_errors=$(PGCONNECT_TIMEOUT=$IMPORT_CONNECT_TIMEOUT psql -U postgres -h $SLAVE_IP -f $dump -v ON_ERROR_STOP= $DB_NAME 2>&1 > /dev/null); then
             break
         fi
+        logger -t $LOG_TAG "psql import attempt $attempt failed"
+        import_errors="$import_errors
+Attempt $attempt:
+$psql_errors"
         if [ $attempt -ge $IMPORT_ATTEMPTS ]; then
-            panic "psql failed $attempt times while importing data into the slave
-$(cat $IMPORT_ERRORS)"
+            panic "psql failed $attempt times while importing data into the slave$import_errors"
         fi
         attempt=$((attempt + 1))
         sleep $IMPORT_RETRY_DELAY
     done
-    rm -f $IMPORT_ERRORS
+    if [ -n "$psql_errors" ]; then
+        printf '%s\n' "$psql_errors" | logger -t $LOG_TAG
+    fi
 }
 
 main() {
