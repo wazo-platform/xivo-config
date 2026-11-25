@@ -78,7 +78,7 @@ import_dump() {
     import_errors=''
     attempt=1
     while true; do
-        if psql_errors=$(PGOPTIONS="-c lock_timeout=$IMPORT_LOCK_TIMEOUT" PGCONNECT_TIMEOUT=$IMPORT_CONNECT_TIMEOUT psql -U postgres -h $SLAVE_IP -f $dump -v ON_ERROR_STOP= $DB_NAME 2>&1 > /dev/null); then
+        if psql_errors=$(PGOPTIONS="-c lock_timeout=$IMPORT_LOCK_TIMEOUT" PGCONNECT_TIMEOUT=$IMPORT_CONNECT_TIMEOUT psql -U postgres -h $slave_ip -f $dump -v ON_ERROR_STOP= $DB_NAME 2>&1 > /dev/null); then
             break
         fi
         logger -t $LOG_TAG "psql import attempt $attempt failed"
