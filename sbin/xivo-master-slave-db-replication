@@ -1,11 +1,16 @@
 #!/bin/sh
-# Copyright 2017-2021 The Wazo Authors  (see the AUTHORS file)
+# Copyright 2017-2026 The Wazo Authors  (see the AUTHORS file)
 # SPDX-License-Identifier: GPL-3.0+
 
 SLAVE_IP=$1
 DB_NAME='asterisk'
 MASTER_BACKUP='out_master_backup.sql'
 DUMP='replication.sql'
+LOG_TAG='xivo-master-slave-db-replication'
+IMPORT_ATTEMPTS=3
+IMPORT_RETRY_DELAY=10
+IMPORT_CONNECT_TIMEOUT=10
+IMPORT_LOCK_TIMEOUT='60s'
 EXCLUDE_TABLES='\
     -T call_log \
     -T call_log_id_seq \
@@ -39,8 +44,8 @@ EXCLUDE_TABLES='\
 PG_DUMP_OPTIONS="--data-only --schema=public $EXCLUDE_TABLES"
 
 panic() {
-    echo "Slave replication failed: $*" | mutt root@localhost
-    echo "Slave replication failed: $*"
+    printf 'Slave replication failed: %s\n' "$*" | mutt -s "Slave replication failed on $(hostname)" root@localhost
+    printf 'Slave replication failed: %s\n' "$*"
     exit 1
 }
 
@@ -70,10 +75,24 @@ import_dump() {
     dump=$1
     slave_ip=$2
 
-    psql -U postgres -h $SLAVE_IP -f $dump -v ON_ERROR_STOP= $DB_NAME > /dev/null
-    psql_status=$?
-    if [ $psql_status -ne 0 ]; then
-        panic "psql returned $psql_status while importing data into the slave"
+    import_errors=''
+    attempt=1
+    while true; do
+        if psql_errors=$(PGOPTIONS="-c lock_timeout=$IMPORT_LOCK_TIMEOUT" PGCONNECT_TIMEOUT=$IMPORT_CONNECT_TIMEOUT psql -U postgres -h $slave_ip -f $dump -v ON_ERROR_STOP= $DB_NAME 2>&1 > /dev/null); then
+            break
+        fi
+        logger -t $LOG_TAG "psql import attempt $attempt failed"
+        import_errors="$import_errors
+Attempt $attempt:
+$psql_errors"
+        if [ $attempt -ge $IMPORT_ATTEMPTS ]; then
+            panic "psql failed $attempt times while importing data into the slave$import_errors"
+        fi
+        attempt=$((attempt + 1))
+        sleep $IMPORT_RETRY_DELAY
+    done
+    if [ -n "$psql_errors" ]; then
+        printf '%s\n' "$psql_errors" | logger -t $LOG_TAG
     fi
 }
 
