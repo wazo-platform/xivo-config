@@ -82,7 +82,6 @@ import_dump() {
             break
         fi
         if [ $attempt -ge $IMPORT_ATTEMPTS ]; then
-            cat $IMPORT_ERRORS >&2
             panic "psql failed $attempt times while importing data into the slave
 $(cat $IMPORT_ERRORS)"
         fi
